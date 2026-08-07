@@ -1,0 +1,23 @@
+[project]
+name = "ai-student-support-chatbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "bcrypt==4.0.1",
+    "email-validator>=2.3.0",
+    "faiss-cpu>=1.14.3",
+    "fastapi>=0.139.2",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.4.9",
+    "langchain-huggingface>=1.2.2",
+    "langchain-ollama>=1.1.0",
+    "langchain-text-splitters>=1.1.2",
+    "pandas>=3.0.3",
+    "passlib[bcrypt]>=1.7.4",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.32",
+    "sentence-transformers>=5.6.0",
+    "uvicorn>=0.51.0",
+]

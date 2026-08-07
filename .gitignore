@@ -1,0 +1,25 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual Environment
+.venv/
+
+# Database
+student_chatbot.db
+
+# Vector DB
+storage/vector_db/
+
+# Node
+node_modules/
+
+# VS Code
+.vscode/
+
+# IDE
+.idea/
