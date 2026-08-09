@@ -4,7 +4,7 @@
   "terminals": [
     {
       "name": "backend",
-      "command": "cd \"$(git rev-parse --show-toplevel)\" && export PATH=\"${HOME}/.local/bin:${PATH}\" && uv run uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload"
+      "command": "cd \"$(git rev-parse --show-toplevel)\" && export PATH=\"${HOME}/.local/bin:${PATH}\" && set -a && [ -f .env ] && source .env; set +a && uv run uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload"
     },
     {
       "name": "frontend",
