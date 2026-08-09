@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GraduationCap, Eye, EyeOff } from "lucide-react";
+import { API_BASE_URL } from "../config";
 
 export default function Register({ onRegister, onGoToLogin }) {
   const [name, setName] = useState("");
@@ -33,7 +34,7 @@ export default function Register({ onRegister, onGoToLogin }) {
       setLoading(true);
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/auth/register",
+        `${API_BASE_URL}/api/auth/register`,
         {
           method: "POST",
           headers: {
