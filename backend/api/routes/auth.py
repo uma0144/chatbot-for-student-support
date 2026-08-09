@@ -77,20 +77,14 @@ def register(
         )
 
     # ---------------------------------------
-    # Hash Password
-    # ---------------------------------------
-
-    hashed_password = hash_password(payload.password)
-
-    # ---------------------------------------
-    # Create User
+    # Create User (crud.create_user hashes the password)
     # ---------------------------------------
 
     new_user = crud.create_user(
         db=db,
         name=payload.name,
         email=payload.email,
-        password=hashed_password,
+        password=payload.password,
     )
 
     return RegisterResponse(
