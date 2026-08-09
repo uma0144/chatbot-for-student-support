@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GraduationCap, Eye, EyeOff } from "lucide-react";
+import { API_BASE_URL } from "../config";
 
 export default function Login({ onLogin, onGoToRegister }) {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ export default function Login({ onLogin, onGoToRegister }) {
 
       // Send login request to FastAPI
       const response = await fetch(
-        "http://127.0.0.1:8000/api/auth/login",
+        `${API_BASE_URL}/api/auth/login`,
         {
           method: "POST",
           headers: {

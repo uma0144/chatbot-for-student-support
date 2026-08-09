@@ -359,6 +359,33 @@ http://localhost:5173
 
 ---
 
+# 🐳 Run with Docker
+
+Requires [Docker](https://docs.docker.com/get-docker/) and Docker Compose.
+
+```bash
+cp .env.example .env
+# Edit .env and set GROQ_API_KEY
+
+docker compose up --build
+```
+
+| Service | URL |
+| --- | --- |
+| Frontend | http://localhost:5173 |
+| Backend API | http://localhost:8000 |
+| Health check | http://localhost:8000/health |
+
+Stop containers:
+
+```bash
+docker compose down
+```
+
+Data is persisted in Docker volumes (`chatbot-data` for SQLite, `vector-db` for FAISS).
+
+---
+
 # 📚 Knowledge Base
 
 The chatbot retrieves information from:

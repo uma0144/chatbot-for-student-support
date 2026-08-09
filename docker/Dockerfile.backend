@@ -1,0 +1,31 @@
+FROM ghcr.io/astral-sh/uv:python3.14-bookworm-slim
+
+WORKDIR /app
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
+
+COPY backend ./backend
+COPY ai_engine ./ai_engine
+COPY config ./config
+COPY knowledge-base ./knowledge-base
+COPY .cursor/scripts ./.cursor/scripts
+
+RUN mkdir -p storage/vector_db data
+
+COPY docker/backend-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENV PYTHONUNBUFFERED=1 \
+    PORT=8000 \
+    DATABASE_URL=sqlite:///data/student_chatbot.db \
+    FAISS_PATH=storage/vector_db \
+    DATA_PATH=knowledge-base
+
+EXPOSE 8000
+
+ENTRYPOINT ["/entrypoint.sh"]

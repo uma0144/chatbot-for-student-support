@@ -1,0 +1,14 @@
+.git
+.gitignore
+.env
+.venv
+__pycache__
+*.pyc
+node_modules
+frontend/node_modules
+student_chatbot.db
+storage/vector_db
+.idea
+.vscode
+*.md
+!README.md
