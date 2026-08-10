@@ -73,15 +73,7 @@ function EmptyState({ onSuggestion }) {
             key={s}
             type="button"
             onClick={() => onSuggestion(s)}
-            style={{
-              padding: "10px 16px",
-              background: "#f1f5f9",
-              border: `1px solid ${ITM.border}`,
-              borderRadius: "4px",
-              fontSize: "13px",
-              color: ITM.navy,
-              cursor: "pointer",
-            }}
+            className="itm-chip"
           >
             {s}
           </button>

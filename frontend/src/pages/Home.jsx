@@ -2,7 +2,6 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import ChatBox from "../components/ChatBox";
 import MessageInput from "../components/MessageInput";
-import ITMLogo from "../components/ITMLogo";
 import { sendMessage } from "../services/api";
 import { ITM } from "../theme";
 
@@ -67,60 +66,51 @@ export default function Home({ user, onLogout }) {
   };
 
   return (
-    <div
-      className="flex flex-col h-screen w-full"
-      style={{ background: ITM.bg }}
-    >
-      <header
-        style={{
-          background: ITM.navy,
-          color: ITM.white,
-          padding: "12px 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexShrink: 0,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <div
-            style={{
-              background: ITM.white,
-              padding: "6px 12px",
-              borderRadius: "6px",
-            }}
-          >
-            <ITMLogo variant="vertical" height={44} />
-          </div>
-          <div>
-            <div style={{ fontWeight: 700, fontSize: "15px" }}>ITM Student Support</div>
-            <div style={{ fontSize: "12px", color: ITM.goldLight }}>AI Assistant</div>
-          </div>
-        </div>
-        {user?.email && (
-          <span style={{ fontSize: "13px", opacity: 0.9 }}>{user.email}</span>
-        )}
-      </header>
+    <div className="flex h-screen w-full" style={{ background: ITM.bg }}>
+      <Sidebar
+        chats={chats}
+        activeChatId={activeChatId}
+        onNewChat={handleNewChat}
+        onSelectChat={handleSelectChat}
+        onClearChats={handleClearChats}
+        user={user}
+        onLogout={onLogout}
+      />
 
-      <div className="flex flex-1 min-h-0" style={{ padding: "12px", gap: "12px" }}>
-        <Sidebar
-          chats={chats}
-          activeChatId={activeChatId}
-          onNewChat={handleNewChat}
-          onSelectChat={handleSelectChat}
-          onClearChats={handleClearChats}
-          user={user}
-          onLogout={onLogout}
-        />
-
-        <main
-          className="flex flex-col flex-1 min-w-0"
+      <div className="flex flex-col flex-1 min-w-0">
+        <header
           style={{
             background: ITM.white,
-            borderRadius: "6px",
-            borderTop: `3px solid ${ITM.navy}`,
-            overflow: "hidden",
+            borderBottom: `1px solid ${ITM.border}`,
+            padding: "14px 24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexShrink: 0,
           }}
+        >
+          <div>
+            <div style={{ fontWeight: 700, fontSize: "16px", color: ITM.navy }}>
+              ITM Student Support
+            </div>
+            <div style={{ fontSize: "12px", color: ITM.muted }}>AI-powered student assistant</div>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                background: "#22c55e",
+              }}
+            />
+            <span style={{ fontSize: "13px", color: ITM.muted, fontWeight: 500 }}>Online</span>
+          </div>
+        </header>
+
+        <main
+          className="flex flex-col flex-1 min-h-0"
+          style={{ background: "#f8fafc" }}
         >
           <ChatBox
             messages={activeChat?.messages ?? []}

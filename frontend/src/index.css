@@ -82,3 +82,42 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.itm-btn-gold-login {
+  width: 100%;
+  padding: 14px;
+  background: #f59e0b;
+  color: #1e3a5f;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.itm-btn-gold-login:hover:not(:disabled) {
+  background: #fbbf24;
+}
+
+.itm-btn-gold-login:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.itm-chip {
+  padding: 10px 18px;
+  background: white;
+  border: 1.5px solid #f59e0b;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e3a5f;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.itm-chip:hover {
+  background: #fffbeb;
+  border-color: #fbbf24;
+}

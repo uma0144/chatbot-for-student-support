@@ -176,8 +176,8 @@ export default function Register({ onRegister, onGoToLogin }) {
           </p>
         )}
 
-        <button type="submit" disabled={loading} className="itm-btn-primary">
-          {loading ? "Creating account..." : "Create account"}
+        <button type="submit" disabled={loading} className="itm-btn-gold-login">
+          {loading ? "Creating account..." : "Sign up"}
         </button>
       </form>
     </AuthLayout>

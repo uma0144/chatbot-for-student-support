@@ -129,8 +129,8 @@ export default function Login({ onLogin, onGoToRegister }) {
           </p>
         )}
 
-        <button type="submit" disabled={loading} className="itm-btn-primary">
-          {loading ? "Signing in..." : "Login to Portal"}
+        <button type="submit" disabled={loading} className="itm-btn-gold-login">
+          {loading ? "Signing in..." : "Log In"}
         </button>
       </form>
     </AuthLayout>

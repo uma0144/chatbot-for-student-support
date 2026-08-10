@@ -1,4 +1,4 @@
-import { ArrowUp } from "lucide-react";
+import { Send } from "lucide-react";
 import { useRef, useState } from "react";
 import { ITM } from "../theme";
 
@@ -23,23 +23,29 @@ export default function MessageInput({ onSend, disabled }) {
   };
 
   return (
-    <div style={{ padding: "16px 20px", borderTop: `1px solid ${ITM.border}` }}>
+    <div
+      style={{
+        padding: "16px 24px 20px",
+        background: ITM.white,
+        borderTop: `1px solid ${ITM.border}`,
+      }}
+    >
       <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         <div
           style={{
             display: "flex",
             alignItems: "flex-end",
-            gap: "10px",
+            gap: "12px",
+            background: ITM.white,
             border: `1px solid ${ITM.border}`,
-            borderRadius: "6px",
-            padding: "10px 12px",
-            background: "#fafafa",
+            borderRadius: "999px",
+            padding: "8px 8px 8px 20px",
           }}
         >
           <textarea
             ref={textareaRef}
             rows={1}
-            placeholder="Enter your query..."
+            placeholder="Type your message..."
             value={message}
             disabled={disabled}
             onChange={handleInput}
@@ -55,7 +61,7 @@ export default function MessageInput({ onSend, disabled }) {
               outline: "none",
               background: "transparent",
               fontSize: "14px",
-              padding: "6px 0",
+              padding: "8px 0",
               maxHeight: "160px",
               border: "none",
               color: ITM.text,
@@ -66,30 +72,34 @@ export default function MessageInput({ onSend, disabled }) {
             type="button"
             onClick={handleSend}
             disabled={disabled || !message.trim()}
-            className="itm-btn-gold"
             style={{
-              padding: "10px 18px",
-              borderRadius: "6px",
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              border: "none",
               display: "flex",
               alignItems: "center",
-              gap: "6px",
-              fontSize: "14px",
+              justifyContent: "center",
+              cursor: disabled || !message.trim() ? "not-allowed" : "pointer",
+              background: disabled || !message.trim() ? ITM.border : ITM.gold,
+              color: ITM.navy,
+              flexShrink: 0,
+              transition: "background 0.15s",
             }}
           >
-            Submit
-            <ArrowUp size={16} />
+            <Send size={18} />
           </button>
         </div>
 
         <p
           style={{
             textAlign: "center",
-            fontSize: "12px",
+            fontSize: "11px",
             color: ITM.muted,
             marginTop: "10px",
           }}
         >
-          AI responses are generated from the official knowledge base. Verify important details.
+          Answers are generated from the ITM knowledge base. Verify important details.
         </p>
       </div>
     </div>
