@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import ChatBox from "../components/ChatBox";
 import MessageInput from "../components/MessageInput";
 import { sendMessage } from "../services/api";
-import { ITM } from "../theme";
+import { ITM, formatMessageTime } from "../theme";
 
 let idCounter = 100;
 const nextId = () => idCounter++;
@@ -23,7 +23,8 @@ export default function Home({ user, onLogout }) {
   };
 
   const handleSend = async (text) => {
-    const userMessage = { id: nextId(), sender: "user", text };
+    const now = formatMessageTime();
+    const userMessage = { id: nextId(), sender: "user", text, time: now };
     let chatId = activeChatId;
 
     setChats((prev) => {
@@ -42,7 +43,12 @@ export default function Home({ user, onLogout }) {
 
     try {
       const response = await sendMessage(text);
-      const botMessage = { id: nextId(), sender: "bot", text: response.answer };
+      const botMessage = {
+        id: nextId(),
+        sender: "bot",
+        text: response.answer,
+        time: formatMessageTime(),
+      };
       setChats((prev) =>
         prev.map((c) =>
           c.id === chatId ? { ...c, messages: [...c.messages, botMessage] } : c
@@ -54,6 +60,7 @@ export default function Home({ user, onLogout }) {
         id: nextId(),
         sender: "bot",
         text: "Unable to connect to the server. Please try again.",
+        time: formatMessageTime(),
       };
       setChats((prev) =>
         prev.map((c) =>
@@ -82,35 +89,49 @@ export default function Home({ user, onLogout }) {
           style={{
             background: ITM.white,
             borderBottom: `1px solid ${ITM.border}`,
-            padding: "14px 24px",
+            padding: "16px 28px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             flexShrink: 0,
+            boxShadow: ITM.shadowSm,
           }}
         >
           <div>
-            <div style={{ fontWeight: 700, fontSize: "16px", color: ITM.navy }}>
+            <div style={{ fontWeight: 800, fontSize: "17px", color: ITM.navy }}>
               ITM Student Support
             </div>
-            <div style={{ fontSize: "12px", color: ITM.muted }}>AI-powered student assistant</div>
+            <div style={{ fontSize: "13px", color: ITM.muted, marginTop: "2px" }}>
+              AI-powered student assistant
+            </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "8px 14px",
+              borderRadius: ITM.radiusFull,
+              background: ITM.surface,
+              border: `1px solid ${ITM.border}`,
+            }}
+          >
             <span
+              className="itm-online-dot"
               style={{
                 width: "8px",
                 height: "8px",
                 borderRadius: "50%",
-                background: "#22c55e",
+                background: ITM.success,
               }}
             />
-            <span style={{ fontSize: "13px", color: ITM.muted, fontWeight: 500 }}>Online</span>
+            <span style={{ fontSize: "13px", color: ITM.text, fontWeight: 600 }}>Online</span>
           </div>
         </header>
 
         <main
           className="flex flex-col flex-1 min-h-0"
-          style={{ background: "#f8fafc" }}
+          style={{ background: ITM.surface }}
         >
           <ChatBox
             messages={activeChat?.messages ?? []}

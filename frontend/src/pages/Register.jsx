@@ -69,22 +69,12 @@ export default function Register({ onRegister, onGoToLogin }) {
 
   return (
     <AuthLayout
-      title="Create Student Account"
-      subtitle="Register for the support portal"
+      title="Create account"
+      subtitle="Register for the student support portal"
       footer={
         <>
           Already have an account?{" "}
-          <button
-            type="button"
-            onClick={onGoToLogin}
-            style={{
-              color: ITM.navy,
-              fontWeight: 600,
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
+          <button type="button" className="itm-link" onClick={onGoToLogin}>
             Log in
           </button>
         </>
@@ -100,14 +90,14 @@ export default function Register({ onRegister, onGoToLogin }) {
               setName(e.target.value);
               setError("");
             }}
-            placeholder="Your name"
+            placeholder="Your full name"
             autoComplete="name"
             className="itm-input"
           />
         </div>
 
         <div style={{ marginBottom: "16px" }}>
-          <label className="itm-label">Email ID</label>
+          <label className="itm-label">Email</label>
           <input
             type="email"
             value={email}
@@ -134,14 +124,14 @@ export default function Register({ onRegister, onGoToLogin }) {
               placeholder="At least 6 characters"
               autoComplete="new-password"
               className="itm-input"
-              style={{ paddingRight: "44px" }}
+              style={{ paddingRight: "48px" }}
             />
             <button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
               style={{
                 position: "absolute",
-                right: "12px",
+                right: "14px",
                 top: "50%",
                 transform: "translateY(-50%)",
                 background: "none",
@@ -149,13 +139,14 @@ export default function Register({ onRegister, onGoToLogin }) {
                 color: ITM.muted,
                 cursor: "pointer",
               }}
+              aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
         </div>
 
-        <div style={{ marginBottom: "16px" }}>
+        <div style={{ marginBottom: "20px" }}>
           <label className="itm-label">Confirm password</label>
           <input
             type={showPassword ? "text" : "password"}
@@ -171,7 +162,17 @@ export default function Register({ onRegister, onGoToLogin }) {
         </div>
 
         {error && (
-          <p style={{ color: "#dc2626", fontSize: "13px", marginBottom: "12px" }}>
+          <p
+            style={{
+              color: ITM.error,
+              fontSize: "13px",
+              marginBottom: "16px",
+              padding: "10px 14px",
+              background: "#fef2f2",
+              borderRadius: ITM.radiusSm,
+              border: "1px solid #fecaca",
+            }}
+          >
             {error}
           </p>
         )}

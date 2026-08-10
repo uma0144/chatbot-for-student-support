@@ -6,6 +6,8 @@ export default function MessageInput({ onSend, disabled }) {
   const [message, setMessage] = useState("");
   const textareaRef = useRef(null);
 
+  const canSend = message.trim() && !disabled;
+
   const handleInput = (e) => {
     setMessage(e.target.value);
     const el = textareaRef.current;
@@ -16,7 +18,7 @@ export default function MessageInput({ onSend, disabled }) {
   };
 
   const handleSend = () => {
-    if (!message.trim() || disabled) return;
+    if (!canSend) return;
     onSend(message.trim());
     setMessage("");
     if (textareaRef.current) textareaRef.current.style.height = "auto";
@@ -25,21 +27,23 @@ export default function MessageInput({ onSend, disabled }) {
   return (
     <div
       style={{
-        padding: "16px 24px 20px",
+        padding: "16px 24px 24px",
         background: ITM.white,
         borderTop: `1px solid ${ITM.border}`,
       }}
     >
-      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "800px", margin: "0 auto" }}>
         <div
           style={{
             display: "flex",
             alignItems: "flex-end",
             gap: "12px",
-            background: ITM.white,
+            background: ITM.surface,
             border: `1px solid ${ITM.border}`,
-            borderRadius: "999px",
-            padding: "8px 8px 8px 20px",
+            borderRadius: ITM.radiusFull,
+            padding: "6px 6px 6px 22px",
+            boxShadow: ITM.shadowSm,
+            transition: "border-color 0.2s, box-shadow 0.2s",
           }}
         >
           <textarea
@@ -61,7 +65,8 @@ export default function MessageInput({ onSend, disabled }) {
               outline: "none",
               background: "transparent",
               fontSize: "14px",
-              padding: "8px 0",
+              fontFamily: "inherit",
+              padding: "10px 0",
               maxHeight: "160px",
               border: "none",
               color: ITM.text,
@@ -71,23 +76,11 @@ export default function MessageInput({ onSend, disabled }) {
           <button
             type="button"
             onClick={handleSend}
-            disabled={disabled || !message.trim()}
-            style={{
-              width: "44px",
-              height: "44px",
-              borderRadius: "50%",
-              border: "none",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: disabled || !message.trim() ? "not-allowed" : "pointer",
-              background: disabled || !message.trim() ? ITM.border : ITM.gold,
-              color: ITM.navy,
-              flexShrink: 0,
-              transition: "background 0.15s",
-            }}
+            disabled={!canSend}
+            className={`itm-send-btn ${canSend ? "itm-send-btn--active" : "itm-send-btn--disabled"}`}
+            aria-label="Send message"
           >
-            <Send size={18} />
+            <Send size={18} strokeWidth={2.25} />
           </button>
         </div>
 
@@ -96,10 +89,12 @@ export default function MessageInput({ onSend, disabled }) {
             textAlign: "center",
             fontSize: "11px",
             color: ITM.muted,
-            marginTop: "10px",
+            marginTop: "12px",
+            lineHeight: 1.4,
           }}
         >
-          Answers are generated from the ITM knowledge base. Verify important details.
+          AI-generated answers from the ITM knowledge base. Verify important details with official
+          notices.
         </p>
       </div>
     </div>
