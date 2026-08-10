@@ -5,27 +5,37 @@ import Home from "./pages/Home";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [view, setView] = useState("login"); // "login" | "register"
+  const [view, setView] = useState("login");
 
-  if (!user) {
-    if (view === "register") {
-      return (
-        <Register
-          onRegister={(newUser) => setUser(newUser)}
-          onGoToLogin={() => setView("login")}
-        />
-      );
-    }
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("token_type");
+    localStorage.removeItem("user_email");
+    setUser(null);
+    setView("login");
+  };
 
+  // Step 2: chatbot only after successful login/register
+  if (user) {
+    return <Home user={user} onLogout={handleLogout} />;
+  }
+
+  // Step 1: login (or register) — no chat UI
+  if (view === "register") {
     return (
-      <Login
-        onLogin={(email) => setUser({ email })}
-        onGoToRegister={() => setView("register")}
+      <Register
+        onRegister={(newUser) => setUser(newUser)}
+        onGoToLogin={() => setView("login")}
       />
     );
   }
 
-  return <Home user={user} onLogout={() => { setUser(null); setView("login"); }} />;
+  return (
+    <Login
+      onLogin={(email) => setUser({ email })}
+      onGoToRegister={() => setView("register")}
+    />
+  );
 }
 
 export default App;
