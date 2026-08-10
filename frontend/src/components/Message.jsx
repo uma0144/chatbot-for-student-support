@@ -1,4 +1,5 @@
-import { GraduationCap } from "lucide-react";
+import ITMLogo from "./ITMLogo";
+import { ITM } from "../theme";
 
 export default function Message({ message }) {
   const isUser = message.sender === "user";
@@ -7,14 +8,15 @@ export default function Message({ message }) {
     return (
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <div
-          className="bg-indigo-600 text-white shadow-sm shadow-indigo-200"
           style={{
             maxWidth: "75%",
-            borderRadius: "20px",
-            padding: "14px 22px",
-            fontSize: "16px",
-            lineHeight: "1.6",
+            borderRadius: "6px",
+            padding: "12px 18px",
+            fontSize: "15px",
+            lineHeight: 1.6,
             whiteSpace: "pre-wrap",
+            background: ITM.navy,
+            color: ITM.white,
           }}
         >
           {message.text}
@@ -24,22 +26,33 @@ export default function Message({ message }) {
   }
 
   return (
-    <div style={{ display: "flex", gap: "14px" }}>
+    <div style={{ display: "flex", gap: "12px" }}>
       <div
-        className="bg-indigo-600"
-        style={{ width: "40px", height: "40px", borderRadius: "14px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
+        style={{
+          width: "36px",
+          height: "36px",
+          borderRadius: "6px",
+          background: ITM.navy,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+          padding: "4px",
+        }}
       >
-        <GraduationCap size={19} className="text-white" />
+        <ITMLogo height={28} />
       </div>
       <div
-        className="bg-white border border-gray-100 text-gray-800 shadow-sm"
         style={{
           maxWidth: "75%",
-          borderRadius: "20px",
-          padding: "14px 22px",
-          fontSize: "16px",
-          lineHeight: "1.6",
+          borderRadius: "6px",
+          padding: "12px 18px",
+          fontSize: "15px",
+          lineHeight: 1.6,
           whiteSpace: "pre-wrap",
+          background: "#f8fafc",
+          border: `1px solid ${ITM.border}`,
+          color: ITM.text,
         }}
       >
         {message.text}

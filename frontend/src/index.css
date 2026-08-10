@@ -14,6 +14,71 @@ body,
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f7fb;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: #f0f4f8;
+  color: #334155;
+}
+
+.itm-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.itm-input:focus {
+  border-color: #1e3a5f;
+  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+}
+
+.itm-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.itm-btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: #1e3a5f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 3px solid #f59e0b;
+  transition: background 0.15s;
+}
+
+.itm-btn-primary:hover:not(:disabled) {
+  background: #152a45;
+}
+
+.itm-btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.itm-btn-gold {
+  background: #f59e0b;
+  color: #1e3a5f;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.itm-btn-gold:hover:not(:disabled) {
+  background: #fbbf24;
+}
+
+.itm-btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

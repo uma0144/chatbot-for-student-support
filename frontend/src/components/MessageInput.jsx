@@ -1,5 +1,6 @@
-import { ArrowUp, Paperclip } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { useRef, useState } from "react";
+import { ITM } from "../theme";
 
 export default function MessageInput({ onSend, disabled }) {
   const [message, setMessage] = useState("");
@@ -10,7 +11,7 @@ export default function MessageInput({ onSend, disabled }) {
     const el = textareaRef.current;
     if (el) {
       el.style.height = "auto";
-      el.style.height = Math.min(el.scrollHeight, 200) + "px";
+      el.style.height = Math.min(el.scrollHeight, 160) + "px";
     }
   };
 
@@ -22,23 +23,23 @@ export default function MessageInput({ onSend, disabled }) {
   };
 
   return (
-    <div style={{ padding: "8px 28px 32px" }}>
+    <div style={{ padding: "16px 20px", borderTop: `1px solid ${ITM.border}` }}>
       <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         <div
-          className="bg-white shadow-lg shadow-gray-200/60"
-          style={{ display: "flex", alignItems: "flex-end", gap: "10px", borderRadius: "26px", padding: "16px 20px" }}
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            gap: "10px",
+            border: `1px solid ${ITM.border}`,
+            borderRadius: "6px",
+            padding: "10px 12px",
+            background: "#fafafa",
+          }}
         >
-          <button
-            className="text-gray-400 hover:bg-gray-100"
-            style={{ padding: "8px", borderRadius: "999px", border: "none", background: "transparent", cursor: "default", flexShrink: 0 }}
-          >
-            <Paperclip size={22} />
-          </button>
-
           <textarea
             ref={textareaRef}
             rows={1}
-            placeholder="Message Student AI..."
+            placeholder="Enter your query..."
             value={message}
             disabled={disabled}
             onChange={handleInput}
@@ -48,22 +49,47 @@ export default function MessageInput({ onSend, disabled }) {
                 handleSend();
               }
             }}
-            className="disabled:text-gray-400"
-            style={{ flex: 1, resize: "none", outline: "none", background: "transparent", fontSize: "16px", padding: "8px 0", maxHeight: "200px", border: "none" }}
+            style={{
+              flex: 1,
+              resize: "none",
+              outline: "none",
+              background: "transparent",
+              fontSize: "14px",
+              padding: "6px 0",
+              maxHeight: "160px",
+              border: "none",
+              color: ITM.text,
+            }}
           />
 
           <button
+            type="button"
             onClick={handleSend}
             disabled={disabled || !message.trim()}
-            className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-200 text-white disabled:text-gray-400"
-            style={{ padding: "13px", borderRadius: "18px", border: "none", cursor: "pointer", flexShrink: 0 }}
+            className="itm-btn-gold"
+            style={{
+              padding: "10px 18px",
+              borderRadius: "6px",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              fontSize: "14px",
+            }}
           >
-            <ArrowUp size={20} />
+            Submit
+            <ArrowUp size={16} />
           </button>
         </div>
 
-        <p className="text-gray-400" style={{ textAlign: "center", fontSize: "13px", marginTop: "14px" }}>
-          Student AI can make mistakes. Check important info.
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "12px",
+            color: ITM.muted,
+            marginTop: "10px",
+          }}
+        >
+          AI responses are generated from the official knowledge base. Verify important details.
         </p>
       </div>
     </div>
