@@ -1,120 +1,157 @@
-import { Plus, MessageSquare, Search, Settings, Trash2, GraduationCap, LogOut } from "lucide-react";
+import { Plus, MessageSquare, Trash2, LogOut } from "lucide-react";
+import { ITM } from "../theme";
 
-export default function Sidebar({ chats, activeChatId, onNewChat, onSelectChat, onClearChats, user, onLogout }) {
+export default function Sidebar({
+  chats,
+  activeChatId,
+  onNewChat,
+  onSelectChat,
+  onClearChats,
+  user,
+  onLogout,
+}) {
   return (
-    <div style={{ width: "280px", flexShrink: 0, padding: "16px" }}>
+    <div style={{ width: "260px", flexShrink: 0 }}>
       <div
-        className="bg-white shadow-sm"
         style={{
           height: "100%",
-          borderRadius: "24px",
+          background: ITM.white,
+          borderRadius: "6px",
+          borderTop: `3px solid ${ITM.gold}`,
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
         }}
       >
-        <div style={{ padding: "20px", display: "flex", alignItems: "center", gap: "12px" }}>
-          <div
-            className="bg-indigo-50"
-            style={{ width: "40px", height: "40px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
-          >
-            <GraduationCap size={20} className="text-indigo-600" />
-          </div>
-          <span className="text-gray-800" style={{ fontSize: "15px", fontWeight: 700 }}>Student AI</span>
-        </div>
-
-        <div style={{ padding: "0 16px 16px", display: "flex", flexDirection: "column", gap: "8px" }}>
+        <div style={{ padding: "16px" }}>
           <button
+            type="button"
             onClick={onNewChat}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-100"
-            style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", padding: "13px", borderRadius: "16px", fontSize: "15px", fontWeight: 600, border: "none", cursor: "pointer" }}
+            className="itm-btn-primary"
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              padding: "11px",
+            }}
           >
             <Plus size={18} />
-            New chat
-          </button>
-
-          <button
-            className="text-gray-500 hover:bg-gray-50"
-            style={{ width: "100%", display: "flex", alignItems: "center", gap: "10px", padding: "11px 14px", borderRadius: "12px", fontSize: "14px", border: "none", background: "transparent", cursor: "default", textAlign: "left" }}
-          >
-            <Search size={17} />
-            Search chats
+            New session
           </button>
         </div>
 
-        <div style={{ flex: 1, padding: "0 16px", overflowY: "auto" }}>
-          <h2 className="text-gray-400" style={{ fontSize: "11px", fontWeight: 700, padding: "8px 10px", marginTop: "8px", letterSpacing: "0.4px" }}>
-            CHATS
+        <div style={{ flex: 1, padding: "0 12px", overflowY: "auto" }}>
+          <h2
+            style={{
+              fontSize: "11px",
+              fontWeight: 700,
+              color: ITM.muted,
+              padding: "8px 8px",
+              letterSpacing: "0.5px",
+            }}
+          >
+            SESSIONS
           </h2>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            {chats.length === 0 && (
-              <p className="text-gray-400" style={{ fontSize: "14px", padding: "8px 10px" }}>No chats yet.</p>
-            )}
+          {chats.length === 0 && (
+            <p style={{ fontSize: "13px", color: ITM.muted, padding: "8px" }}>
+              No chats yet.
+            </p>
+          )}
 
-            {chats.map((chat) => (
+          {chats.map((chat) => {
+            const active = chat.id === activeChatId;
+            return (
               <button
                 key={chat.id}
+                type="button"
                 onClick={() => onSelectChat(chat.id)}
-                className={chat.id === activeChatId ? "bg-indigo-50 text-indigo-700" : "hover:bg-gray-50 text-gray-600"}
                 style={{
                   width: "100%",
                   display: "flex",
                   alignItems: "center",
                   gap: "10px",
-                  padding: "11px 14px",
-                  borderRadius: "14px",
-                  fontSize: "14.5px",
+                  padding: "10px 12px",
+                  marginBottom: "4px",
+                  borderRadius: "4px",
+                  fontSize: "13px",
                   fontWeight: 500,
                   border: "none",
                   cursor: "pointer",
                   textAlign: "left",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  textOverflow: "ellipsis",
+                  background: active ? "#f8fafc" : "transparent",
+                  color: active ? ITM.navy : ITM.text,
+                  borderLeft: active ? `3px solid ${ITM.gold}` : "3px solid transparent",
                 }}
               >
-                <MessageSquare
-                  size={16}
-                  className={chat.id === activeChatId ? "text-indigo-500" : "text-gray-400"}
-                  style={{ flexShrink: 0 }}
-                />
-                <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{chat.title}</span>
+                <MessageSquare size={15} style={{ flexShrink: 0, color: ITM.gold }} />
+                <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  {chat.title}
+                </span>
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        <div className="border-t border-gray-100" style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "4px" }}>
+        <div
+          style={{
+            padding: "12px",
+            borderTop: `1px solid ${ITM.border}`,
+            display: "flex",
+            flexDirection: "column",
+            gap: "4px",
+          }}
+        >
           {user && (
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 14px", borderRadius: "12px" }}>
-              <span className="text-gray-600" style={{ fontSize: "14px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{user.email}</span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "8px 10px",
+                fontSize: "12px",
+                color: ITM.muted,
+              }}
+            >
+              <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{user.email}</span>
               <button
+                type="button"
                 onClick={onLogout}
-                className="text-gray-400 hover:text-gray-700"
-                style={{ flexShrink: 0, marginLeft: "10px", background: "transparent", border: "none", cursor: "pointer" }}
                 title="Log out"
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: ITM.muted,
+                  flexShrink: 0,
+                }}
               >
-                <LogOut size={17} />
+                <LogOut size={16} />
               </button>
             </div>
           )}
 
           <button
-            className="text-gray-600 hover:bg-gray-50"
-            style={{ width: "100%", display: "flex", alignItems: "center", gap: "10px", padding: "11px 14px", borderRadius: "12px", fontSize: "14.5px", border: "none", background: "transparent", cursor: "default", textAlign: "left" }}
-          >
-            <Settings size={17} />
-            Settings
-          </button>
-
-          <button
+            type="button"
             onClick={onClearChats}
-            className="text-gray-600 hover:bg-gray-50"
-            style={{ width: "100%", display: "flex", alignItems: "center", gap: "10px", padding: "11px 14px", borderRadius: "12px", fontSize: "14.5px", border: "none", background: "transparent", cursor: "pointer", textAlign: "left" }}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "10px 12px",
+              fontSize: "13px",
+              border: "none",
+              background: "transparent",
+              cursor: "pointer",
+              color: ITM.text,
+              borderRadius: "4px",
+            }}
           >
-            <Trash2 size={17} />
-            Clear chats
+            <Trash2 size={16} />
+            Clear sessions
           </button>
         </div>
       </div>
