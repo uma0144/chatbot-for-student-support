@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" role="img" aria-label="ITM University Gwalior">
+  <defs>
+    <pattern id="itmStripes" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="4.2" fill="#9B1B30"/>
+    </pattern>
+  </defs>
+  <text
+    x="200"
+    y="82"
+    text-anchor="middle"
+    font-family="Arial Black, Helvetica Neue, Arial, sans-serif"
+    font-size="86"
+    font-weight="900"
+    fill="url(#itmStripes)"
+  >ITM</text>
+  <text
+    x="200"
+    y="122"
+    text-anchor="middle"
+    font-family="Arial, Helvetica Neue, sans-serif"
+    font-size="20"
+    font-weight="600"
+    letter-spacing="10"
+    fill="#9B1B30"
+  >UNIVERSITY</text>
+  <text
+    x="200"
+    y="152"
+    text-anchor="middle"
+    font-family="Arial, Helvetica Neue, sans-serif"
+    font-size="11"
+    font-weight="500"
+    letter-spacing="4"
+    fill="#9B1B30"
+  >GWALIOR " MP " INDIA</text>
+</svg>

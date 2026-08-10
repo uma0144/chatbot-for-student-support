@@ -18,7 +18,8 @@ function TypingRow() {
           width: "36px",
           height: "36px",
           borderRadius: "6px",
-          background: ITM.navy,
+          background: ITM.white,
+          border: `1px solid ${ITM.border}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -26,7 +27,7 @@ function TypingRow() {
           padding: "4px",
         }}
       >
-        <ITMLogo height={28} />
+        <ITMLogo variant="vertical" height={28} />
       </div>
       <div
         style={{
@@ -59,7 +60,7 @@ function EmptyState({ onSuggestion }) {
         padding: "24px",
       }}
     >
-      <ITMLogo height={56} style={{ marginBottom: "20px" }} />
+      <ITMLogo variant="vertical" height={100} style={{ marginBottom: "20px" }} />
       <h1 style={{ fontSize: "26px", fontWeight: 700, color: ITM.navy, marginBottom: "8px" }}>
         Student Support Chatbot
       </h1>

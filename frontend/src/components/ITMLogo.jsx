@@ -1,9 +1,21 @@
-import { ITM, ITM_LOGO_SRC } from "../theme";
+import { ITM, ITM_LOGO_BANNER_SRC, ITM_LOGO_VERTICAL_SRC } from "../theme";
 
-export default function ITMLogo({ height = 48, className = "", style = {} }) {
+/**
+ * Official ITM University branding.
+ * - vertical: stacked maroon logo (ITM stripes + UNIVERSITY + GWALIOR)
+ * - banner: horizontal logo for compact headers
+ */
+export default function ITMLogo({
+  variant = "vertical",
+  height = 48,
+  className = "",
+  style = {},
+}) {
+  const src = variant === "banner" ? ITM_LOGO_BANNER_SRC : ITM_LOGO_VERTICAL_SRC;
+
   return (
     <img
-      src={ITM_LOGO_SRC}
+      src={src}
       alt="ITM University Gwalior"
       className={className}
       style={{
