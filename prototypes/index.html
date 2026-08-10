@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Prototypes — Student Support Chatbot</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #0f1419;
+      color: #e7e9ea;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    .sub { color: #8b98a5; margin-bottom: 40px; max-width: 640px; line-height: 1.5; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+    }
+    .card {
+      background: #1a2332;
+      border: 1px solid #2f3b4a;
+      border-radius: 20px;
+      padding: 24px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #6366f1;
+    }
+    .preview {
+      height: 160px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .card h2 { font-size: 18px; margin-bottom: 8px; }
+    .card p { color: #8b98a5; font-size: 14px; line-height: 1.5; margin-bottom: 16px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #2f3b4a;
+      color: #94a3b8;
+    }
+    a.btn {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      background: #6366f1;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    a.btn:hover { background: #4f46e5; }
+    .current { border-color: #6366f1; opacity: 0.85; }
+    .current .tag.highlight { background: #6366f133; color: #a5b4fc; }
+  </style>
+</head>
+<body>
+  <h1>Choose a UI prototype</h1>
+  <p class="sub">
+    Open each prototype in your browser. Pick the style you like, then tell us
+    <strong>Prototype A, B, C, or D</strong> and we will apply it to the React app.
+  </p>
+
+  <div class="grid">
+    <div class="card current">
+      <div class="preview" style="background: linear-gradient(135deg,#eef2ff,#f5f7fb); display:flex; align-items:center; justify-content:center;">
+        <div style="width:80px;height:80px;background:#4f46e5;border-radius:20px;"></div>
+      </div>
+      <h2>Prototype A — Classic Indigo</h2>
+      <div class="tags">
+        <span class="tag highlight">Current style</span>
+        <span class="tag">Light</span>
+        <span class="tag">Clean cards</span>
+      </div>
+      <p>White panels, indigo accents, soft gray background. Familiar ChatGPT-style layout with sidebar.</p>
+      <a class="btn" href="prototype-a-classic.html" target="_blank">Open prototype A</a>
+    </div>
+
+    <div class="card">
+      <div class="preview" style="background: linear-gradient(135deg,#0f172a,#1e293b); display:flex; align-items:center; justify-content:center;">
+        <div style="width:80px;height:80px;background:#22d3ee;border-radius:20px; box-shadow:0 0 40px #22d3ee44;"></div>
+      </div>
+      <h2>Prototype B — Dark Pro</h2>
+      <div class="tags">
+        <span class="tag">Dark mode</span>
+        <span class="tag">Cyan glow</span>
+        <span class="tag">Tech / night study</span>
+      </div>
+      <p>Dark slate UI with cyan highlights, glass panels, reduced eye strain for long sessions.</p>
+      <a class="btn" href="prototype-b-dark.html" target="_blank">Open prototype B</a>
+    </div>
+
+    <div class="card">
+      <div class="preview" style="background: linear-gradient(135deg,#fef3e2,#fff7ed); display:flex; align-items:center; justify-content:center;">
+        <div style="width:80px;height:80px;background:#f97316;border-radius:50%;"></div>
+      </div>
+      <h2>Prototype C — Soft Campus</h2>
+      <div class="tags">
+        <span class="tag">Warm tones</span>
+        <span class="tag">Friendly</span>
+        <span class="tag">Rounded</span>
+      </div>
+      <p>Cream and coral palette, bubbly shapes, welcoming feel for new students.</p>
+      <a class="btn" href="prototype-c-soft.html" target="_blank">Open prototype C</a>
+    </div>
+
+    <div class="card">
+      <div class="preview" style="background: linear-gradient(135deg,#1e3a5f,#0c1929); display:flex; align-items:center; justify-content:center;">
+        <div style="width:80px;height:80px;background:#f59e0b;border-radius:8px;"></div>
+      </div>
+      <h2>Prototype D — ITM Official</h2>
+      <div class="tags">
+        <span class="tag">Navy + gold</span>
+        <span class="tag">University</span>
+        <span class="tag">Formal</span>
+      </div>
+      <p>Institutional navy header, gold accents — matches university / portal branding.</p>
+      <a class="btn" href="prototype-d-campus.html" target="_blank">Open prototype D</a>
+    </div>
+  </div>
+
+  <p style="margin-top:48px;color:#8b98a5;font-size:14px;">
+    How to view: double-click <code style="background:#1a2332;padding:2px 8px;border-radius:6px;">index.html</code>
+    or open from browser File → Open. Path:
+    <code style="background:#1a2332;padding:2px 8px;border-radius:6px;">F:\chatbot-for-student-support\prototypes\index.html</code>
+  </p>
+</body>
+</html>

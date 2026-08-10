@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype B — Dark Pro</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: #0b0f14; color: #e2e8f0; }
+    .bar { background: #0f172a; border-bottom: 1px solid #1e293b; padding: 12px 24px; font-size: 14px; }
+    .bar a { color: #22d3ee; }
+    .views { display: flex; gap: 24px; padding: 24px; flex-wrap: wrap; justify-content: center; }
+    .panel { border-radius: 16px; overflow: hidden; border: 1px solid #1e293b; }
+    .label { text-align: center; padding: 12px; font-weight: 600; color: #64748b; font-size: 13px; background: #0f172a; }
+    .login-wrap { width: 380px; padding: 40px; background: linear-gradient(160deg,#0f172a,#1e293b); }
+    .icon { width: 64px; height: 64px; background: #22d3ee22; border: 1px solid #22d3ee44; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; box-shadow: 0 0 30px #22d3ee33; }
+    h1 { text-align: center; font-size: 24px; margin-bottom: 4px; }
+    .hint { text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 28px; }
+    input { width: 100%; padding: 14px 16px; border: 1px solid #334155; background: #0f172a; color: white; border-radius: 12px; margin-bottom: 14px; font-size: 15px; }
+    .btn { width: 100%; padding: 14px; background: linear-gradient(135deg,#06b6d4,#22d3ee); color: #0f172a; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; }
+    .chat { width: 900px; height: 520px; display: flex; background: #0b0f14; }
+    .side { width: 260px; background: #0f172a; margin: 12px; border-radius: 20px; padding: 16px; border: 1px solid #1e293b; }
+    .new { background: linear-gradient(135deg,#06b6d4,#22d3ee); color: #0f172a; border: none; width: 100%; padding: 12px; border-radius: 14px; font-weight: 700; margin-bottom: 16px; cursor: pointer; }
+    .chat-item { padding: 10px 12px; border-radius: 12px; background: #22d3ee18; color: #22d3ee; font-size: 13px; margin-bottom: 6px; border: 1px solid #22d3ee33; }
+    .main { flex: 1; margin: 12px 12px 12px 0; display: flex; flex-direction: column; }
+    .bubble-area { flex: 1; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .big { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+    .sub { color: #64748b; margin-bottom: 24px; font-size: 14px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .chip { padding: 12px 20px; background: #1e293b; border: 1px solid #334155; border-radius: 12px; font-size: 14px; color: #cbd5e1; }
+    .input-row { padding: 16px; background: #0f172a; border: 1px solid #1e293b; border-radius: 20px; margin: 0 0 12px 0; display: flex; gap: 12px; }
+    .input-row input { flex: 1; border: none; background: #1e293b; color: white; border-radius: 12px; padding: 14px; }
+    .send { background: #22d3ee; color: #0f172a; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="bar">Prototype B — Dark Pro · <a href="index.html">← Back</a></div>
+  <div class="views">
+    <div>
+      <div class="label">Login screen</div>
+      <div class="panel login-wrap">
+        <div class="icon">⚡</div>
+        <h1>Student AI</h1>
+        <p class="hint">Sign in to continue</p>
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button class="btn">Sign in</button>
+      </div>
+    </div>
+    <div>
+      <div class="label">Chat screen</div>
+      <div class="panel chat">
+        <div class="side">
+          <h3 style="margin-bottom:12px;">Student AI</h3>
+          <button class="new">+ New chat</button>
+          <div class="chat-item">Exam schedule</div>
+        </div>
+        <div class="main">
+          <div class="bubble-area">
+            <div class="big">Ask anything about ITM</div>
+            <p class="sub">Powered by RAG + Groq</p>
+            <div class="chips">
+              <span class="chip">Hostel rules</span>
+              <span class="chip">Library hours</span>
+            </div>
+          </div>
+          <div class="input-row">
+            <input placeholder="Type your question..." />
+            <button class="send">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
