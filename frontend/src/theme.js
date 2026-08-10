@@ -11,6 +11,3 @@ export const ITM = {
   border: "#cbd5e1",
   white: "#ffffff",
 };
-
-export const ITM_LOGO_VERTICAL_SRC = "/itm-university-logo-vertical.svg";
-export const ITM_LOGO_BANNER_SRC = "/itm-university-logo.png";

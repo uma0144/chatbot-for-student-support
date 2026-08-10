@@ -1,4 +1,3 @@
-import ITMLogo from "./ITMLogo";
 import { ITM } from "../theme";
 
 export default function AuthLayout({ title, subtitle, children, footer }) {
@@ -18,33 +17,36 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
         >
           <div
             style={{
-              background: ITM.white,
-              padding: "32px 32px 20px",
+              background: ITM.navy,
+              padding: "28px 32px 24px",
               textAlign: "center",
-              borderBottom: `1px solid ${ITM.border}`,
+              color: ITM.white,
             }}
           >
-            <ITMLogo variant="vertical" height={120} className="mx-auto" />
+            <div style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>
+              ITM University
+            </div>
+            <div style={{ fontSize: "12px", opacity: 0.85, marginBottom: "16px" }}>
+              Gwalior • MP • India
+            </div>
             <h1
               style={{
-                fontSize: "20px",
-                fontWeight: 700,
-                color: ITM.navy,
-                marginTop: "20px",
-                marginBottom: "4px",
+                fontSize: "18px",
+                fontWeight: 600,
+                marginBottom: subtitle ? "4px" : 0,
               }}
             >
               {title}
             </h1>
             {subtitle && (
-              <p style={{ fontSize: "13px", color: ITM.muted }}>{subtitle}</p>
+              <p style={{ fontSize: "13px", opacity: 0.85 }}>{subtitle}</p>
             )}
           </div>
 
           <div
             style={{
               height: "4px",
-              background: `linear-gradient(90deg, ${ITM.maroon}, ${ITM.gold})`,
+              background: `linear-gradient(90deg, ${ITM.gold}, ${ITM.goldLight})`,
             }}
           />
 

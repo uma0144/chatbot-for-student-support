@@ -7,7 +7,6 @@ import {
   Ticket,
   User,
 } from "lucide-react";
-import ITMLogo from "./ITMLogo";
 import { ITM } from "../theme";
 
 const NAV_ITEMS = [
@@ -42,13 +41,14 @@ export default function Sidebar({
       <div style={{ padding: "20px 16px", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
         <div
           style={{
-            background: ITM.white,
-            padding: "8px 10px",
-            borderRadius: "6px",
+            fontSize: "15px",
+            fontWeight: 700,
+            color: ITM.goldLight,
             marginBottom: "12px",
+            lineHeight: 1.3,
           }}
         >
-          <ITMLogo variant="vertical" height={48} />
+          ITM Student Support
         </div>
         <button
           type="button"

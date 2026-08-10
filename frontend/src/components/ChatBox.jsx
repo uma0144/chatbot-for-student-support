@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import Message from "./Message";
-import ITMLogo from "./ITMLogo";
+import BotAvatar from "./BotAvatar";
 import { ITM } from "../theme";
 
 const SUGGESTIONS = [
@@ -13,22 +13,7 @@ const SUGGESTIONS = [
 function TypingRow() {
   return (
     <div style={{ display: "flex", gap: "12px" }}>
-      <div
-        style={{
-          width: "36px",
-          height: "36px",
-          borderRadius: "6px",
-          background: ITM.white,
-          border: `1px solid ${ITM.border}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: 0,
-          padding: "4px",
-        }}
-      >
-        <ITMLogo variant="vertical" height={28} />
-      </div>
+      <BotAvatar iconSize={16} />
       <div
         style={{
           background: "#f8fafc",
@@ -60,7 +45,6 @@ function EmptyState({ onSuggestion }) {
         padding: "24px",
       }}
     >
-      <ITMLogo variant="vertical" height={100} style={{ marginBottom: "20px" }} />
       <h1 style={{ fontSize: "26px", fontWeight: 700, color: ITM.navy, marginBottom: "8px" }}>
         Student Support Chatbot
       </h1>

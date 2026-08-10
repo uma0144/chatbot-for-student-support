@@ -1,4 +1,4 @@
-import ITMLogo from "./ITMLogo";
+import BotAvatar from "./BotAvatar";
 import { ITM } from "../theme";
 
 export default function Message({ message }) {
@@ -27,22 +27,7 @@ export default function Message({ message }) {
 
   return (
     <div style={{ display: "flex", gap: "12px" }}>
-      <div
-        style={{
-          width: "36px",
-          height: "36px",
-          borderRadius: "6px",
-          background: ITM.white,
-          border: `1px solid ${ITM.border}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: 0,
-          padding: "4px",
-        }}
-      >
-        <ITMLogo variant="vertical" height={32} />
-      </div>
+      <BotAvatar />
       <div
         style={{
           maxWidth: "75%",
