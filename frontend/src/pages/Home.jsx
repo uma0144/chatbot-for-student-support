@@ -83,7 +83,15 @@ export default function Home({ user, onLogout }) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <ITMLogo height={40} />
+          <div
+            style={{
+              background: ITM.white,
+              padding: "6px 12px",
+              borderRadius: "6px",
+            }}
+          >
+            <ITMLogo variant="vertical" height={44} />
+          </div>
           <div>
             <div style={{ fontWeight: 700, fontSize: "15px" }}>ITM Student Support</div>
             <div style={{ fontSize: "12px", color: ITM.goldLight }}>AI Assistant</div>

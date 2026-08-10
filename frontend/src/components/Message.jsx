@@ -32,7 +32,8 @@ export default function Message({ message }) {
           width: "36px",
           height: "36px",
           borderRadius: "6px",
-          background: ITM.navy,
+          background: ITM.white,
+          border: `1px solid ${ITM.border}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -40,7 +41,7 @@ export default function Message({ message }) {
           padding: "4px",
         }}
       >
-        <ITMLogo height={28} />
+        <ITMLogo variant="vertical" height={32} />
       </div>
       <div
         style={{

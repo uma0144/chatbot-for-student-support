@@ -4,6 +4,7 @@ export const ITM = {
   navyDark: "#152a45",
   gold: "#f59e0b",
   goldLight: "#fbbf24",
+  maroon: "#9B1B30",
   bg: "#f0f4f8",
   text: "#334155",
   muted: "#64748b",
@@ -11,4 +12,5 @@ export const ITM = {
   white: "#ffffff",
 };
 
-export const ITM_LOGO_SRC = "/itm-university-logo.png";
+export const ITM_LOGO_VERTICAL_SRC = "/itm-university-logo-vertical.svg";
+export const ITM_LOGO_BANNER_SRC = "/itm-university-logo.png";

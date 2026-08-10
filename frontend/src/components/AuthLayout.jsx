@@ -18,27 +18,33 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
         >
           <div
             style={{
-              background: ITM.navy,
-              color: ITM.white,
-              padding: "28px 32px 24px",
+              background: ITM.white,
+              padding: "32px 32px 20px",
               textAlign: "center",
+              borderBottom: `1px solid ${ITM.border}`,
             }}
           >
-            <div style={{ marginBottom: "16px" }}>
-              <ITMLogo height={52} className="mx-auto" />
-            </div>
-            <h1 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>
+            <ITMLogo variant="vertical" height={120} className="mx-auto" />
+            <h1
+              style={{
+                fontSize: "20px",
+                fontWeight: 700,
+                color: ITM.navy,
+                marginTop: "20px",
+                marginBottom: "4px",
+              }}
+            >
               {title}
             </h1>
             {subtitle && (
-              <p style={{ fontSize: "13px", opacity: 0.9 }}>{subtitle}</p>
+              <p style={{ fontSize: "13px", color: ITM.muted }}>{subtitle}</p>
             )}
           </div>
 
           <div
             style={{
               height: "4px",
-              background: `linear-gradient(90deg, ${ITM.gold}, ${ITM.goldLight})`,
+              background: `linear-gradient(90deg, ${ITM.maroon}, ${ITM.gold})`,
             }}
           />
 
