@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype A — Classic Indigo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: #eef1f6; }
+    .bar { background: #4f46e5; color: white; padding: 12px 24px; font-size: 14px; }
+    .bar a { color: #c7d2fe; }
+    .views { display: flex; gap: 24px; padding: 24px; flex-wrap: wrap; justify-content: center; }
+    .panel { background: white; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.06); overflow: hidden; }
+    .label { text-align: center; padding: 12px; font-weight: 600; color: #64748b; font-size: 13px; background: #f8fafc; }
+    /* Login */
+    .login-wrap { width: 380px; padding: 40px; }
+    .icon { width: 64px; height: 64px; background: #eef2ff; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: #4f46e5; font-size: 28px; }
+    h1 { text-align: center; font-size: 24px; color: #1e293b; margin-bottom: 4px; }
+    .hint { text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 28px; }
+    input { width: 100%; padding: 14px 16px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 14px; font-size: 15px; }
+    .btn { width: 100%; padding: 14px; background: #4f46e5; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; }
+    /* Chat */
+    .chat { width: 900px; height: 520px; display: flex; background: #eef1f6; }
+    .side { width: 260px; background: white; margin: 12px; border-radius: 20px; padding: 16px; }
+    .side h3 { font-size: 15px; margin-bottom: 12px; }
+    .new { background: #4f46e5; color: white; border: none; width: 100%; padding: 12px; border-radius: 14px; font-weight: 600; margin-bottom: 16px; cursor: pointer; }
+    .chat-item { padding: 10px 12px; border-radius: 12px; background: #eef2ff; color: #4f46e5; font-size: 13px; margin-bottom: 6px; }
+    .main { flex: 1; margin: 12px 12px 12px 0; display: flex; flex-direction: column; }
+    .main-top { padding: 16px 24px; }
+    .bubble-area { flex: 1; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .big { font-size: 32px; font-weight: 700; color: #1e293b; margin-bottom: 24px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .chip { padding: 12px 20px; background: white; border: 1px solid #e2e8f0; border-radius: 999px; font-size: 14px; color: #475569; }
+    .input-row { padding: 16px 24px; background: white; border-radius: 20px; margin: 0 0 12px 0; display: flex; gap: 12px; }
+    .input-row input { flex: 1; border: none; background: #f1f5f9; border-radius: 12px; padding: 14px; }
+    .send { background: #4f46e5; color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="bar">Prototype A — Classic Indigo · <a href="index.html">← Back to all prototypes</a></div>
+  <div class="views">
+    <div>
+      <div class="label">Login screen</div>
+      <div class="panel login-wrap">
+        <div class="icon">🎓</div>
+        <h1>Welcome back</h1>
+        <p class="hint">Log in to Student AI</p>
+        <input type="email" placeholder="Email address" value="student@itm.edu" />
+        <input type="password" placeholder="Password" value="••••••••" />
+        <button class="btn">Log in</button>
+      </div>
+    </div>
+    <div>
+      <div class="label">Chat screen</div>
+      <div class="panel chat">
+        <div class="side">
+          <h3>🎓 Student AI</h3>
+          <button class="new">+ New chat</button>
+          <div class="chat-item">Admission requirements</div>
+          <div style="padding:10px;color:#94a3b8;font-size:13px;">Fee structure</div>
+        </div>
+        <div class="main">
+          <div class="main-top"><strong>Student AI</strong></div>
+          <div class="bubble-area">
+            <div class="big">What can I help with?</div>
+            <div class="chips">
+              <span class="chip">What is the fee structure?</span>
+              <span class="chip">Attendance policy</span>
+              <span class="chip">Scholarship info</span>
+            </div>
+          </div>
+          <div class="input-row">
+            <input placeholder="Ask about admissions, fees, exams..." />
+            <button class="send">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

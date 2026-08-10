@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype D — ITM Official</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: #f0f4f8; }
+    .bar { background: #1e3a5f; color: white; padding: 12px 24px; font-size: 14px; }
+    .bar a { color: #fbbf24; }
+    .views { display: flex; gap: 24px; padding: 24px; flex-wrap: wrap; justify-content: center; }
+    .panel { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+    .label { text-align: center; padding: 12px; font-weight: 600; color: #1e3a5f; font-size: 13px; background: #e2e8f0; }
+    .login-wrap { width: 400px; background: white; }
+    .login-header { background: #1e3a5f; color: white; padding: 28px 40px; text-align: center; }
+    .login-header h1 { font-size: 22px; margin-bottom: 4px; }
+    .login-header p { font-size: 13px; opacity: .85; }
+    .login-body { padding: 32px 40px; }
+    .gold-line { height: 4px; background: linear-gradient(90deg,#f59e0b,#fbbf24); }
+    input { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 14px; font-size: 14px; }
+    label { font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 6px; }
+    .btn { width: 100%; padding: 14px; background: #1e3a5f; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; border-bottom: 3px solid #f59e0b; }
+    .chat { width: 920px; height: 520px; display: flex; flex-direction: column; background: #f0f4f8; }
+    .top-nav { background: #1e3a5f; color: white; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .top-nav span { font-weight: 700; }
+    .top-nav small { color: #fbbf24; font-size: 12px; }
+    .chat-body { flex: 1; display: flex; padding: 12px; gap: 12px; }
+    .side { width: 240px; background: white; border-radius: 6px; padding: 16px; border-top: 3px solid #f59e0b; }
+    .new { background: #1e3a5f; color: white; border: none; width: 100%; padding: 11px; border-radius: 6px; font-weight: 600; margin-bottom: 12px; cursor: pointer; }
+    .chat-item { padding: 10px; border-left: 3px solid #f59e0b; background: #f8fafc; font-size: 13px; margin-bottom: 6px; color: #334155; }
+    .main { flex: 1; background: white; border-radius: 6px; display: flex; flex-direction: column; border-top: 3px solid #1e3a5f; }
+    .bubble-area { flex: 1; padding: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .big { font-size: 26px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; }
+    .sub { color: #64748b; font-size: 13px; margin-bottom: 20px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .chip { padding: 10px 16px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 13px; color: #1e3a5f; }
+    .input-row { padding: 16px; border-top: 1px solid #e2e8f0; display: flex; gap: 10px; }
+    .input-row input { flex: 1; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; }
+    .send { background: #f59e0b; color: #1e3a5f; border: none; padding: 12px 20px; border-radius: 6px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="bar">Prototype D — ITM Official · <a href="index.html">← Back</a></div>
+  <div class="views">
+    <div>
+      <div class="label">Login screen</div>
+      <div class="panel login-wrap">
+        <div class="login-header">
+          <h1>ITM University</h1>
+          <p>Student Support Portal</p>
+        </div>
+        <div class="gold-line"></div>
+        <div class="login-body">
+          <label>Email ID</label>
+          <input type="email" placeholder="student@itmuniversity.ac.in" />
+          <label>Password</label>
+          <input type="password" placeholder="Enter password" />
+          <button class="btn">Login to Portal</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="label">Chat screen</div>
+      <div class="panel chat">
+        <div class="top-nav">
+          <span>ITM Student Support</span>
+          <small>AI Assistant</small>
+        </div>
+        <div class="chat-body">
+          <div class="side">
+            <button class="new">+ New session</button>
+            <div class="chat-item">Admission query</div>
+          </div>
+          <div class="main">
+            <div class="bubble-area">
+              <div class="big">Student Support Chatbot</div>
+              <p class="sub">Official information from knowledge base</p>
+              <div class="chips">
+                <span class="chip">Eligibility</span>
+                <span class="chip">Fee structure</span>
+                <span class="chip">Notices</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input placeholder="Enter your query..." />
+              <button class="send">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
