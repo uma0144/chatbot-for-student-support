@@ -2,9 +2,10 @@ import os
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 
+from backend.core.env import PROJECT_ROOT  # loads repo-root .env
 from backend.core.groq_config import require_groq_api_key
 
-load_dotenv()
+load_dotenv(PROJECT_ROOT / ".env")
 
 
 class LLMModel:

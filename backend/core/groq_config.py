@@ -1,8 +1,6 @@
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv()
+from backend.core.env import PROJECT_ROOT  # loads repo-root .env on import
 
 
 def get_groq_api_key() -> str | None:
@@ -16,7 +14,7 @@ def require_groq_api_key() -> str:
     key = get_groq_api_key()
     if not key:
         raise RuntimeError(
-            "GROQ_API_KEY is not set. Add it to the project .env file "
-            "(get a free key at https://console.groq.com/)."
+            "GROQ_API_KEY is not set. Create "
+            f"{PROJECT_ROOT / '.env'} with your key from https://console.groq.com/"
         )
     return key

@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+# Load .env from repo root before other backend imports use os.getenv
+from backend.core.env import PROJECT_ROOT  # noqa: F401
+
 # ==========================
 # Database
 # ==========================
