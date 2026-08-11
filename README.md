@@ -1,13 +1,13 @@
 # 🎓 Student Support Chatbot
 
-> An AI-powered Student Support Chatbot that answers university-related questions using **Retrieval-Augmented Generation (RAG)**, **LangChain**, **FAISS**, **Ollama**, **FastAPI**, and **React**.
+> An AI-powered Student Support Chatbot that answers university-related questions using **Retrieval-Augmented Generation (RAG)**, **LangChain**, **FAISS**, **Groq**, **FastAPI**, and **React**.
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
 ![React](https://img.shields.io/badge/React-Frontend-61DAFB)
 ![LangChain](https://img.shields.io/badge/LangChain-RAG-orange)
 ![FAISS](https://img.shields.io/badge/VectorDB-FAISS-red)
-![Ollama](https://img.shields.io/badge/LLM-Llama3.2-purple)
+![Groq](https://img.shields.io/badge/LLM-Groq-purple)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ---
@@ -22,7 +22,7 @@ Instead of searching through multiple documents, students can ask questions in n
 
 # ✨ Features
 
-* 🤖 AI-powered chatbot using **Llama 3.2**
+* 🤖 AI-powered chatbot using **Groq (Llama 3.3 70B)**
 * 📚 Retrieval-Augmented Generation (RAG)
 * 🔎 Semantic search with FAISS Vector Database
 * ⚡ FastAPI REST API
@@ -61,7 +61,7 @@ Instead of searching through multiple documents, students can ask questions in n
          Retrieved Context
                    │
                    ▼
-           (Llama 3.2 Model)
+       Groq (Llama 3.3 70B)
                    │
          AI Generated Response
                    │
@@ -89,7 +89,7 @@ Relevant Context
 LangChain Prompt
         │
         ▼
-   Llama 3.2 
+Llama 3.3 70B (Groq)
         │
         ▼
 Final Answer
@@ -118,8 +118,8 @@ Final Answer
 ## Artificial Intelligence
 
 * LangChain
-* Ollama
-* Llama 3.2
+* Groq
+* Llama 3.3 70B
 * HuggingFace Embeddings
 * FAISS
 
@@ -307,22 +307,22 @@ pip install -r requirements.txt
 
 ---
 
-# 🤖 Install Ollama
+# 🤖 Configure Groq API
 
-Download Ollama
+Get a free API key from [Groq Console](https://console.groq.com).
 
-https://ollama.com
-
-Pull the model
+Copy the environment file and add your key:
 
 ```bash
-ollama pull llama3.2
+cp .env.example .env
 ```
 
-Verify
+Set in `.env`:
 
 ```bash
-ollama list
+GROQ_API_KEY=your_groq_api_key_here
+LLM_MODEL=llama-3.3-70b-versatile
+TEMPERATURE=0.2
 ```
 
 ---
@@ -453,7 +453,7 @@ docs/
 
 ✔ Retrieval-Augmented Generation (RAG)
 
-✔ Local Large Language Model
+✔ Groq Cloud LLM (Llama 3.3 70B)
 
 ✔ Semantic Search
 
