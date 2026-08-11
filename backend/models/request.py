@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class ChatRequest(BaseModel):
@@ -6,5 +6,14 @@ class ChatRequest(BaseModel):
         ...,
         min_length=1,
         max_length=1000,
-        description="Student's question"
+        description="Student's question (single line in JSON — no raw line breaks inside quotes)",
+        json_schema_extra={"example": "Give detailed information about ITM University"},
     )
+
+    @field_validator("question")
+    @classmethod
+    def normalize_question(cls, value: str) -> str:
+        cleaned = " ".join(value.split())
+        if not cleaned:
+            raise ValueError("Question cannot be empty")
+        return cleaned

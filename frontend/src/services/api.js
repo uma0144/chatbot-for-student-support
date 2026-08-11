@@ -17,7 +17,26 @@ export async function sendMessage(question) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Server Error ${response.status}: ${errorText}`);
+      let message = `Server error (${response.status})`;
+      try {
+        const errorData = JSON.parse(errorText);
+        if (response.status === 422 && errorData.detail) {
+          const detail = errorData.detail;
+          if (Array.isArray(detail) && detail[0]?.type === "json_invalid") {
+            message =
+              "Invalid request format. In Swagger, keep the question on one line inside the JSON quotes.";
+          } else if (Array.isArray(detail)) {
+            message = detail.map((d) => d.msg || String(d)).join("; ");
+          } else if (typeof detail === "string") {
+            message = detail;
+          }
+        } else if (typeof errorData.detail === "string") {
+          message = errorData.detail;
+        }
+      } catch {
+        if (errorText) message = errorText;
+      }
+      throw new Error(message);
     }
 
     return await response.json();
