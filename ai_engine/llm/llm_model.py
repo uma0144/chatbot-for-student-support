@@ -30,5 +30,15 @@ class LLMModel:
         """
         Generate a response from the LLM.
         """
-        response = self._get_llm().invoke(prompt)
-        return response.content
+        try:
+            response = self._get_llm().invoke(prompt)
+            return response.content
+        except Exception as exc:
+            err = str(exc)
+            if "AuthenticationError" in type(exc).__name__ or "invalid_api_key" in err:
+                raise RuntimeError(
+                    "Invalid GROQ_API_KEY. Your key may be revoked or wrong. "
+                    "Create a new key at https://console.groq.com/, set it in "
+                    f"{PROJECT_ROOT / '.env'}, then restart the backend."
+                ) from exc
+            raise
