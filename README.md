@@ -212,6 +212,12 @@ Student-Support-Chatbot/
 │   │   ├── itm_chatbot_chunks.csv
 │   │   └── *.csv
 │   │
+│   ├── md/
+│   │   ├── 01_about.md
+│   │   ├── 02_graduate_programmes.md
+│   │   ├── 03_admissions_faq.md
+│   │   └── *.md
+│   │
 │   └── json/
 │       ├── faqs.json
 │       ├── notices.json
@@ -252,7 +258,7 @@ Student-Support-Chatbot/
 | **ai_engine/**         | Contains the RAG pipeline, embeddings, retriever, prompt templates, and LLM integration.    |
 | **backend/**           | FastAPI backend including APIs, authentication, database operations, and chatbot services.  |
 | **frontend/**          | React application providing the user interface for students.                                |
-| **knowledge-base/**    | CSV and JSON files containing university information, FAQs, notices, and chatbot knowledge. |
+| **knowledge-base/**    | CSV, JSON, and Markdown files containing university information, FAQs, notices, and chatbot knowledge. |
 | **scripts/**           | Utility scripts for ingestion, training, evaluation, and running the chatbot.               |
 | **storage/**           | Stores FAISS vector database, uploaded files, trained models, and chat history.             |
 | **tests/**             | Unit and integration tests for the API, chatbot, and RAG pipeline.                          |
