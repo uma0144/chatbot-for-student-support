@@ -67,8 +67,11 @@ async def root():
 
 @app.get("/health")
 async def health():
+    from backend.core.groq_config import get_groq_api_key
+
     return {
-        "status": "healthy"
+        "status": "healthy",
+        "groq_configured": bool(get_groq_api_key()),
     }
 
 # ==========================

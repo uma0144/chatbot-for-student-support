@@ -1,9 +1,23 @@
 import { API_BASE_URL } from "../config";
 
-export async function sendMessage(question) {
-  try {
-    const token = localStorage.getItem("access_token");
+function chatErrorMessage(error) {
+  if (error instanceof TypeError && error.message === "Failed to fetch") {
+    return (
+      "Cannot reach the server. Is the backend running on port 8080? " +
+      "Run: uv run uvicorn backend.main:app --host 127.0.0.1 --port 8080 --reload"
+    );
+  }
+  return error?.message || "Something went wrong. Please try again.";
+}
 
+export async function sendMessage(question) {
+  const token = localStorage.getItem("access_token");
+
+  if (!token) {
+    throw new Error("Session expired. Please log out and sign in again.");
+  }
+
+  try {
     const response = await fetch(`${API_BASE_URL}/api/chat/`, {
       method: "POST",
       headers: {
@@ -20,7 +34,9 @@ export async function sendMessage(question) {
       let message = `Server error (${response.status})`;
       try {
         const errorData = JSON.parse(errorText);
-        if (response.status === 422 && errorData.detail) {
+        if (response.status === 401) {
+          message = "Session expired. Please log out and sign in again.";
+        } else if (response.status === 422 && errorData.detail) {
           const detail = errorData.detail;
           if (Array.isArray(detail) && detail[0]?.type === "json_invalid") {
             message =
@@ -42,6 +58,9 @@ export async function sendMessage(question) {
     return await response.json();
   } catch (error) {
     console.error("API Error:", error);
-    throw error;
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(chatErrorMessage(error));
   }
 }
