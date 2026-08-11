@@ -367,28 +367,63 @@ http://localhost:5173
 
 # 🐳 Run with Docker
 
-Requires [Docker](https://docs.docker.com/get-docker/) and Docker Compose.
+Requires [Docker Desktop](https://docs.docker.com/get-docker/) (Windows: enable WSL2).
+
+### 1. Clone and configure
 
 ```bash
+git clone https://github.com/uma0144/chatbot-for-student-support.git
+cd chatbot-for-student-support
 cp .env.example .env
-# Edit .env and set GROQ_API_KEY
+```
 
+Edit `.env` and set:
+
+- `GROQ_API_KEY` — required for chat (https://console.groq.com/)
+- `SECRET_KEY` — use a long random string for production
+
+### 2. Build and run
+
+```bash
 docker compose up --build
 ```
 
+First start may take several minutes (embeddings model + FAISS index build).
+
 | Service | URL |
 | --- | --- |
-| Frontend | http://localhost:5173 |
-| Backend API | http://localhost:8000 |
-| Health check | http://localhost:8000/health |
+| **App (login + chat)** | http://localhost:5173 |
+| **API / Swagger** | http://localhost:8000/docs |
+| **Health** | http://localhost:8000/health |
 
-Stop containers:
+The frontend is a **production build** served by nginx. API calls use `/api` on the same port (proxied to the backend).
+
+### 3. Stop
 
 ```bash
 docker compose down
 ```
 
-Data is persisted in Docker volumes (`chatbot-data` for SQLite, `vector-db` for FAISS).
+Data persists in Docker volumes: `chatbot-data` (SQLite), `vector-db` (FAISS).
+
+### 4. Rebuild after knowledge-base changes
+
+```bash
+docker compose down
+docker volume rm chatbot-for-student-support_vector-db
+docker compose up --build
+```
+
+### Windows (PowerShell)
+
+```powershell
+cd F:\chatbot-for-student-support
+copy .env.example .env
+notepad .env
+docker compose up --build
+```
+
+Open http://localhost:5173
 
 ---
 

@@ -12,3 +12,4 @@ storage/vector_db
 .vscode
 *.md
 !README.md
+!knowledge-base/md/*.md
