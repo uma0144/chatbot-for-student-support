@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from backend.database.database import get_db
@@ -28,19 +28,31 @@ def chat(
     print("=" * 80)
     print("Question:", request.question)
 
-    response = chat_service.get_response(request)
+    try:
+        response = chat_service.get_response(request)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:
+        print(f"Chat error: {exc}")
+        raise HTTPException(
+            status_code=500,
+            detail="The chat service encountered an error. Check the backend logs.",
+        ) from exc
 
     print("\n" + "=" * 80)
     print("CHAT RESPONSE")
     print("=" * 80)
     print(response.answer)
 
-    crud.save_chat(
-        db=db,
-        user_id=current_user["id"],
-        question=request.question,
-        answer=response.answer,
-    )
+    try:
+        crud.save_chat(
+            db=db,
+            user_id=current_user["id"],
+            question=request.question,
+            answer=response.answer,
+        )
+    except Exception as exc:
+        print(f"Warning: failed to save chat history: {exc}")
 
     return response
 

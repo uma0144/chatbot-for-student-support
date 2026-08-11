@@ -56,10 +56,12 @@ export default function Home({ user, onLogout }) {
       );
     } catch (error) {
       console.error(error);
+      const detail =
+        error instanceof Error ? error.message : "Something went wrong. Please try again.";
       const botMessage = {
         id: nextId(),
         sender: "bot",
-        text: "Unable to connect to the server. Please try again.",
+        text: detail,
         time: formatMessageTime(),
       };
       setChats((prev) =>
