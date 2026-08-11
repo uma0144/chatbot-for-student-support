@@ -61,7 +61,7 @@ Instead of searching through multiple documents, students can ask questions in n
          Retrieved Context
                    │
                    ▼
-       Ollama (Llama 3.2 Model)
+           (Llama 3.2 Model)
                    │
          AI Generated Response
                    │
@@ -89,7 +89,7 @@ Relevant Context
 LangChain Prompt
         │
         ▼
-Llama 3.2 (Ollama)
+   Llama 3.2 
         │
         ▼
 Final Answer
