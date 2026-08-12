@@ -16,7 +16,7 @@ COPY backend ./backend
 COPY ai_engine ./ai_engine
 COPY config ./config
 COPY knowledge-base ./knowledge-base
-COPY .cursor/scripts ./.cursor/scripts
+COPY scripts ./scripts
 
 RUN mkdir -p storage/vector_db data
 
