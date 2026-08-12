@@ -13,9 +13,9 @@ ENV UV_LINK_MODE=copy
 RUN uv venv /app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
 
-# CPU-only PyTorch — avoids multi-GB NVIDIA/CUDA wheels that break Docker builds
-RUN uv pip install torch --index-url https://download.pytorch.org/whl/cpu \
-    && uv sync --frozen --no-dev
+# Install deps first, then force CPU-only torch (uv sync may pull CUDA torch via sentence-transformers)
+RUN uv sync --frozen --no-dev \
+    && uv pip install --force-reinstall torch --index-url https://download.pytorch.org/whl/cpu
 
 COPY backend ./backend
 COPY ai_engine ./ai_engine
