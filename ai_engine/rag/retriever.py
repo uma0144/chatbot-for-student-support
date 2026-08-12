@@ -1,6 +1,8 @@
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
+from .query_preprocessor import search_queries
+
 
 class Retriever:
     """
@@ -30,18 +32,33 @@ class Retriever:
     def search(self, query: str, k: int = 5):
         """
         Search the FAISS database using Max Marginal Relevance (MMR).
-        Returns diverse and relevant documents.
+        Runs original and typo-normalized queries, then merges unique hits.
         """
 
-        print("\nSearching for:", query)
+        queries = search_queries(query)
+        print("\nSearching for:", queries)
 
-        results = self.vector_db.max_marginal_relevance_search(
-            query=query,
-            k=k,
-            fetch_k=20,
-        )
+        seen_content: set[str] = set()
+        merged = []
 
-        return results
+        per_query_k = max(k, 4)
+        for q in queries:
+            batch = self.vector_db.max_marginal_relevance_search(
+                query=q,
+                k=per_query_k,
+                fetch_k=25,
+            )
+            for doc in batch:
+                key = doc.page_content[:200]
+                if key not in seen_content:
+                    seen_content.add(key)
+                    merged.append(doc)
+                if len(merged) >= k:
+                    break
+            if len(merged) >= k:
+                break
+
+        return merged[:k]
 
 
 if __name__ == "__main__":

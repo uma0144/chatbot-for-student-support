@@ -1,3 +1,4 @@
+from .query_preprocessor import normalize_query
 from .retriever import Retriever
 from ..llm.llm_model import LLMModel
 
@@ -41,6 +42,11 @@ class RAGChain:
         print("=" * 80)
         print(context)
 
+        normalized = normalize_query(question)
+        question_note = ""
+        if normalized.lower() != question.strip().lower():
+            question_note = f"\n(Normalized intent: {normalized})\n"
+
         prompt = f"""
 You are an AI Student Support Assistant for ITM University.
 
@@ -49,7 +55,11 @@ You must answer ONLY from the CONTEXT below.
 Rules:
 - Use ONLY the information in the context.
 - Do not use outside knowledge.
-- If the answer is not available in the context, reply:
+- The student question may have spelling mistakes or abbreviations (e.g. "btech", "aiml", "stuature").
+  Infer the intended meaning and answer from context when it clearly matches.
+- Treat programme synonyms as the same (e.g. B.Tech AI/ML, AI & Machine Learning, CSE AI-ML).
+- If the context has related fee/eligibility/admission info for that programme or school, use it.
+- Only if nothing in the context answers the intended question, reply exactly:
   "I couldn't find that information in the knowledge base."
 - Give complete and well-formatted answers whenever possible.
 
@@ -63,8 +73,7 @@ CONTEXT
 QUESTION
 ==========================
 
-{question}
-
+{question}{question_note}
 ==========================
 ANSWER
 ==========================

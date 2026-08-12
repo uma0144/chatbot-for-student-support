@@ -28,6 +28,7 @@ Source: https://www.itmuniversity.ac.in/admission/fee-structure and https://www.
 | Programme | Indicative Fee |
 |-----------|----------------|
 | B.Tech (all branches) | ₹4.04 L – ₹14 L (full 4-year) |
+| B.Tech CSE / AI & ML / Data Science / Cyber Security / IT | Same B.Tech fee band; exact branch fee in official PDF |
 | BCA | ₹2.1 L – ₹5.6 L |
 | MCA | ~₹3.2 L |
 | BBA | ~₹16,000/year onward |
