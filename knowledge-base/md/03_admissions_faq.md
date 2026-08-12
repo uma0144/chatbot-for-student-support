@@ -1,94 +1,82 @@
-# ITM University Gwalior — Admissions FAQ
+# ITM University Gwalior — Admissions FAQ (Comprehensive)
 
-Source: ITM University official admission FAQ. Admission open 2026-27.
+Source: https://www.itmuniversity.ac.in/admission/faq  
+Admission open **2026-27** | Early bird scholarship: **7773005063** | **admission@itmuniversity.ac.in**
 
-## General Admission Queries
+## General Admission
 
-**What programs are offered at ITM University Gwalior?**
-ITM University offers UG, PG, Diploma, and Ph.D. programs across Engineering, Management, Computer Applications, Science, Agriculture, Pharmacy, Nursing, Law, Humanities, Fine Arts, and Design.
+**What programs are offered?**  
+UG, PG, Diploma, Ph.D. across Engineering, Management, Computer Applications, Science, Agriculture, Pharmacy, Nursing, Law, Humanities, Fine Arts, Design, Education, Journalism, Medical & Allied Healthcare, and more.
 
-**What is the mode of admission?**
-Admissions are granted through in-house ITM NEST, national-level exams (JEE, CAT, CMAT, NEET), and merit-based admission for selected programs.
+**Mode of admission?**  
+ITM NEST (in-house), national exams (JEE, CAT, CMAT, NEET, GATE, CUET), and merit-based admission for selected programs.
 
-**How can I apply for admission?**
-Visit the official website, fill out the application form, upload documents, appear for entrance test (if applicable), attend counselling/interview, and confirm admission via fee payment. Online apply: https://www.itmuniversity.ac.in/admission/onlineapply
+**How to apply?**  
+1. Visit www.itmuniversity.ac.in  
+2. Fill online application: https://www.itmuniversity.ac.in/admission/onlineapply  
+3. Upload documents  
+4. Appear for entrance test if required  
+5. Attend counselling/interview if shortlisted  
+6. Pay fees and confirm admission  
 
-**Application fee (2026 indicative)**
-Application fee is typically ₹1,100 for all categories. Application period for 2026-27 is commonly February–June. Verify dates on the official website.
+**Application fee?** Typically ₹1,100 (all categories). Verify on official site.
 
-**Entrance exams accepted**
-Primary: ITM NEST / ITM CET. Also accepted where applicable: JEE Main, NEET UG, GATE, CAT, CMAT, CUET UG/PG.
+**Is ITM NEST mandatory?** Not always — national exam scores or merit may be accepted.
 
-## Eligibility & Courses
+**Lateral entry?** Yes, for programs like B.Tech.
 
-**Basic eligibility for undergraduate programs**
-10+2 with a minimum of 45%–60%, depending on the course.
+**Documents required?** 10th, 12th, graduation marksheets, scorecards, ID proof, photos.
 
-**Eligibility for B.Tech programs**
-10+2 with Physics, Mathematics, English and minimum 50% marks (45% for reserved categories).
+**Interview/counselling?** Yes, for selected programs.
 
-**Eligibility for management programs (BBA/MBA)**
-BBA: 10+2 with approximately 50%. MBA: Graduation with minimum 50% (some programmes require 55–60%).
+**Capitation fee?** No — only declared fee structure; take official receipt.
 
-**Eligibility for postgraduate programs**
-Bachelor's degree in relevant field with 50% marks.
+## Eligibility Quick Reference
 
-**Are Honours programs available?**
-Yes, with higher eligibility (typically 55% or above).
+| Level | Typical requirement |
+|-------|---------------------|
+| UG general | 10+2, 45%–60% by course |
+| B.Tech | 10+2 PCM + English, 50% (45% reserved) |
+| BBA | 10+2 ~50% |
+| BBA Honours | 10+2 ~55% |
+| MBA | Graduation 50%+ (some 55–60%) |
+| PG general | Bachelor's 50% in relevant field |
+| Honours | Typically 55%+ |
+| IPM | 10+2 60% |
+| B.Arch | 10+2 PCM 50% + NATA/JEE Paper II |
+| B.Pharm | 10+2 PCB/PCM 50% |
+| B.Sc Nursing | 10+2 PCB & English 45% |
+| Ph.D. | PG 55–60% |
 
-**Are integrated programs available?**
-Yes, including IPM (Integrated Program in Management).
+Full table: https://www.itmuniversity.ac.in/admission/eligibility
 
-## Admission Process Details
+## Program Duration
 
-**Is ITM NEST mandatory?**
-Not always; alternatives include national exams or merit-based admission.
+- UG: 3–4 years (Law integrated up to 5 years; B.Arch 5 years)
+- PG: 1–2 years (LLM 1 year)
+- Integrated: up to 5 years
 
-**Is lateral entry available?**
-Yes, for programs such as B.Tech.
+## Campus & Schools
 
-**What documents are required?**
-10th, 12th, graduation marksheets, scorecards, ID proof, photographs.
+Schools include Engineering, Management, Computer Application, Science, Agriculture, Pharmacy, Nursing, Law, Fine Arts, Design, Education, Journalism, Sports, Medical & Allied Healthcare, Library Science, Architecture.
 
-**Is there an interview or counselling process?**
-Yes, for selected programs.
+## Hostels & Scholarships
 
-**Capitation fees**
-ITM University Gwalior does not ask for capitation fees beyond the fee structure declared on the website. Candidates should take receipt of fees deposited.
+**Hostels?** Yes — AC/non-AC, mess, security.  
+**Scholarships?** Yes — merit and policy-based. https://www.itmuniversity.ac.in/scholarship/scholarship_2026
 
-## Campus & Academic Structure
+## Affiliation & International
 
-**What schools/faculties are available?**
-Engineering, Management, Science, Agriculture, Pharmacy, Nursing, Law, Fine Arts, and more.
+**Affiliated?** No — independent private university.  
+**International students?** Yes — contact admissions.
 
-**What is the duration of programs?**
-UG: 3–4 years; PG: 2 years; Integrated programmes: up to 5 years.
+## Placements & Training
 
-## Career & Placement
+**Internships?** Yes — industry exposure; 400+ hours training with partners.  
+**Recruiters (examples):** TCS, Infosys, Wipro, HCL, IBM, L&T, Tech Mahindra, Persistent, and others.
 
-**Does the university support internships?**
-Yes, with industry exposure and training. Students undergo rigorous training (400+ hours) with partners such as HPES Gurgaon, CISCO Networking Academy, ThinkLabs, Rockwell Automation India, and others.
+## Contact
 
-**Placement companies (examples)**
-TCS, Infosys, Wipro, L&T, L&T Infotech, HCL, IBM, Tech Mahindra, Persistent, Cadbury, Intex, and others.
-
-## Student Life
-
-**Are hostel facilities available?**
-Yes, with AC/non-AC options, mess, and security.
-
-**Are scholarships available?**
-Yes, based on merit and institutional policies. Scholarships 2026: https://www.itmuniversity.ac.in/scholarship/scholarship_2026
-
-Early bird scholarship: call 7773005063 or email admission@itmuniversity.ac.in
-
-## Miscellaneous
-
-**Is ITM University affiliated?**
-No, it is an independent private university.
-
-**Can international students apply?**
-Yes.
-
-**Where can I get more details?**
-www.itmuniversity.ac.in | admissions@itmuniversity.ac.in | Toll-free 1800-270-0031
+- Toll-free: **1800-270-0031**
+- Email: **admission@itmuniversity.ac.in**
+- Website: **www.itmuniversity.ac.in**

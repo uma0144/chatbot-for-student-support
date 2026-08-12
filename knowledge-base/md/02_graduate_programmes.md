@@ -1,138 +1,118 @@
-# Graduate and Postgraduate Programmes at ITM University Gwalior
+# Undergraduate (Graduate) Programmes — ITM University Gwalior
 
-Source: ITM University official programmes pages. Undergraduate (graduate programmes) and postgraduate (PG) offerings.
+Source: https://www.itmuniversity.ac.in/programmes/graduate-programs  
+Admission open 2026-27.
 
-## Undergraduate Programmes (Graduate Programmes)
+## Centre of Excellence
 
-ITM University offers undergraduate courses across multiple schools. Typical duration: 3–4 years (integrated law programmes up to 5 years).
+- **B.Tech** — Specialization in AI & Machine Learning / Data Science — **4 Years**
 
-### Centre of Excellence
+## School of Engineering & Technology
 
-- B.Tech with specialization in AI & ML / Data Science — 4 Years
+- **B.Tech (Honors/Research)** — Civil Engineering — 4 Years
+- **B.Tech (Honors/Research)** — Mechanical Engineering (Robotics & Automation) — 4 Years
+- **B.Tech (Honors/Research)** — Electronics & Communication (IoT & Sensors / VLSI Design & Technology) — 4 Years
+- **B.Tech (Honors/Research)** — Electrical Engineering (Electric Vehicle Technology / AI Applications) — 4 Years
+- **B.Tech IT** — 4 Years
+- **B.Tech CSE** — Data Science — 4 Years
+- **B.Tech CSE** — AI and Machine Learning — 4 Years
+- **B.Tech CSE** — Cyber Security — 4 Years
+- **B.Tech CSE** — Computer Science & Engineering — 4 Years
+- **BCA (Honours/Research)** — 3/4 Years
 
-### School of Engineering & Technology
+**B.Tech eligibility (general):** 10+2 with Physics, Mathematics, English; minimum 50% (45% reserved categories). Selection via JEE Main, ITM NEST, or merit.
 
-- B.Tech (Honors/Research): Civil Engineering — 4 Years
-- B.Tech (Honors/Research): Mechanical Engineering (Robotics & Automation) — 4 Years
-- B.Tech (Honors/Research): Electronics & Communication Engineering (IoT & Sensors / VLSI Design & Technology) — 4 Years
-- B.Tech (Honors/Research): Electrical Engineering (Electric Vehicle Technology / AI Applications) — 4 Years
-- B.Tech IT — 4 Years
-- B.Tech Computer Science & Engineering (Data Science) — 4 Years
-- B.Tech Computer Science & Engineering (AI and Machine Learning) — 4 Years
-- B.Tech Computer Science & Engineering (Cyber Security) — 4 Years
-- B.Tech Computer Science & Engineering — 4 Years
-- BCA (Honours/Research) — 3/4 Years
+## School of Business
 
-### School of Business
+- **BBA (Honours/Research)** — 3/4 Years — 10+2 ~50% (Honours ~55%)
+- **B.Com (Honours/Research)** — 3/4 Years
+- **B.Com** — Digital Sales and Marketing (Apprenticeship) — 3 Years
+- **B.Com** — Real Estate and Property Management (Apprenticeship) — 3 Years
+- **BBA (Honours)** — Financial Markets with NSE — 3 Years
+- **BBA (Honours)** — Business Analytics — 3 Years
+- **B.Com (Honours)** — Pursuing CA, CS & CMA — 3 Years
+- **IPM** — Integrated Program in Management — 5 Years — 10+2 minimum 60%
 
-- BBA (Honours/Research) — 3/4 Years
-- B.Com (Honours/Research) — 3/4 Years
-- B.Com (Digital Sales and Marketing) [Apprenticeship based] — 3 Years
-- B.Com (Real Estate and Property Management) [Apprenticeship based] — 3 Years
+## School of Pharmacy
 
-### School of Pharmacy
+- **B.Pharm** — 4 Years — 10+2 PCB/PCM minimum 50%
+- **D.Pharm** — 2 Years
 
-- B.Pharm — 4 Years
+## School of Nursing Sciences
 
-### School of Nursing Sciences
+- **B.Sc. Nursing** — 4 Years — 10+2 PCB & English minimum 45%
+- **Post Basic B.Sc. Nursing** — 2 Years (after GNM with RN & RM)
+- **B.Optometry** — 4 Years
 
-- B.Sc. Nursing — 4 Years
+## School of Agriculture
 
-### School of Agriculture
+- **B.Sc. (Honours) Agriculture** — 4 Years — 10+2 Science/Agriculture minimum 50%
 
-- B.Sc. (Honours) Agriculture — 4 Years
+## School of Sciences
 
-### School of Sciences
+- **B.Sc. (Hons.) Forensic Science** — 3/4 Years
+- **B.Sc. (Hons.) Biotechnology** — 3/4 Years
+- **B.Sc. (Hons.) Microbiology** — 3/4 Years
+- **B.Sc. (Hons.) Food Technology** — 3/4 Years
+- **B.Sc. (Hons.) (CS)/PCM** — 3/4 Years
+- **B.Sc. Biomedical Science** — 3 Years
 
-- B.Sc.(Hons.) Forensic Science — 3/4 Years
-- B.Sc.(Hons.) Biotechnology — 3/4 Years
-- B.Sc.(Hons.) Microbiology — 3/4 Years
-- B.Sc.(Hons.) Food Technology — 3/4 Years
-- B.Sc.(Hons.) (CS)/PCM — 3/4 Years
+## School of Arts & Design
 
-### School of Arts & Design
+- **B.Sc. Interior Design** — 3 Years
+- **B.Sc. Fashion Design** — 3 Years
+- **Diploma Interior Design** — 1 Year
+- **Diploma Fashion Design** — 1 Year
 
-- B.Sc. (Interior Design / Fashion Design) — 3 Years
+## School of Architecture & Design
 
-### School of Sports Education
+- **B.Arch** — 5 Years — 10+2 PCM 50% + valid NATA or JEE Paper II
 
-- B.P.E.S — 3 Years
-- B.P.Ed. — 2 Years
+## School of Sports Education
 
-### School of Education
+- **B.P.E.S** — 3 Years
+- **B.P.Ed.** — 2 Years
 
-- B.Ed — 2 Years
+## School of Education
 
-### School of Law
+- **B.Ed** — 2 Years — UG/PG minimum 50%
+- **B.A B.Ed.** — 4 Years
+- **B.Sc. B.Ed.** — 4 Years
 
-- B.A LLB (Honours) — 5 Years
-- BBA LLB (Honours) — 5 Years
+## School of Law
 
-### School of Journalism & Mass Communication
+- **B.A LLB (Honours)** — 5 Years — 10+2 minimum 45%
+- **BBA LLB (Honours)** — 5 Years
+- **B.Com LLB (Honours)** — 5 Years
+- **LLB** — 3 Years (after graduation 45%)
 
-- B.A.JMC — 3 Years
+## School of Journalism & Mass Communication / Humanities
 
-### School of Medical & Allied Healthcare
+- **B.A.JMC / BJMC** — 3 Years — 10+2 minimum 50%
+- **B.A. / B.A. (Honours) India & South Asia Studies** — 3 Years
+- **Certificate Course in Journalism** — 6 Months
 
-- Bachelor in Physiotherapy (BPT) — 4½ Years
-- BMLT (Bachelor in Medical Lab Technology) — 3 Years
+## School of Fine Arts
 
-## Postgraduate Programmes (PG)
+- **BFA (Painting & Sculpture)** — 3 Years
+- **B.A. (Acting)** — 3 Years
+- **B.A. (Music)** — 3 Years
 
-Typical PG duration: 2 years (LLM: 1 year).
+## School of Medical & Allied Healthcare
 
-### School of Engineering & Technology
+- **Bachelor in Physiotherapy (BPT)** — 4½ Years — 10+2 PCB 50%
+- **BMLT** — Bachelor in Medical Lab Technology — 3 Years
+- **Certificate in Operation Theatre Technician** — 1 Year
+- **Diploma in Anesthesia Technician** — 2 Years
+- **Diploma in Optometrist Refractions** — 2 Years
 
-- M.Tech: Production and Industrial Engineering — 2 Years
-- M.Tech: Communication System — 2 Years
-- M.Tech: Computer Science — 2 Years
-- M.Tech: VLSI Design — 2 Years
-- M.Tech: Structural Engineering — 2 Years
-- MCA — 2 Years
+## School of Library and Information Science
 
-### School of Business
+- **B.Lib. I.Sc.** — 1 Year — UG/PG minimum 50%
 
-- MBA (Dual Specialization) — 2 Years
-- MBA (Event Management) — 2 Years
-- MBA (Agri Business) — 2 Years
-- MBA (Hospital & Healthcare Management) — 2 Years
+## General UG Notes
 
-### School of Pharmacy
-
-- M.Pharm specialization in Pharmaceutics — 2 Years
-
-### School of Nursing Sciences
-
-- M.Sc. Nursing — 2 Years
-
-### School of Agriculture
-
-- M.Sc. Ag. (Agronomy, GPB, Horticulture Vegetable Science) — 2 Years
-
-### School of Sciences
-
-- M.Sc. Food Technology — 2 Years
-- M.Sc. Biotechnology — 2 Years
-- M.Sc. Maths — 2 Years
-- M.Sc. Physics — 2 Years
-- M.Sc. Chemistry — 2 Years
-- M.Sc. Forensic Science — 2 Years
-
-### School of Sports Education
-
-- M.P.E.S — 2 Years
-
-### School of Law
-
-- LLM (Criminal & Security Law; Constitutional & Administrative Law; Corporate and Commercial Laws) — 1 Year
-
-## Eligibility Summary
-
-- **Undergraduate (general)**: 10+2 with minimum 45%–60% depending on course.
-- **B.Tech**: 10+2 with Physics, Mathematics, English; minimum 50% (45% for reserved categories). Selection via JEE Main, ITM NEST, or merit.
-- **BBA**: 10+2 with approximately 50%.
-- **MBA**: Bachelor's degree with minimum 50% marks (some MBA programmes require 55–60%).
-- **Postgraduate (general)**: Bachelor's degree in relevant field with 50% marks.
-- **Honours programmes**: Typically 55% or above.
-
-More details: https://www.itmuniversity.ac.in/programmes/graduate-programs and https://www.itmuniversity.ac.in/programmes/pg-programs
+- Program duration: typically 3–5 years depending on course.
+- Honours programs usually require ~55% in 10+2.
+- Lateral entry available for some programs (e.g. B.Tech).
+- Verify exact eligibility: https://www.itmuniversity.ac.in/admission/eligibility

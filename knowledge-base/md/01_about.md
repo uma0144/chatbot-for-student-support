@@ -1,45 +1,76 @@
 # About ITM University Gwalior
 
-Source: ITM University official website (about page). Last updated for knowledge base ingestion.
+Source: https://www.itmuniversity.ac.in/about  
+Official website: https://www.itmuniversity.ac.in  
+Location: Gwalior, Madhya Pradesh, India  
+Motto: **Celebrating Dreams**
 
 ## Overview
 
-ITM University Gwalior has cultivated a reputation for exceptional education. The university boasts a strong academic reputation, attracting talented faculty and fostering a rigorous learning environment. It embraces innovation, promoting cutting-edge teaching-learning processes that prepare students for the ever-evolving world. Nestled amidst lush greenery, the university provides a peaceful and inspiring ambiance conducive to learning and growth.
+ITM University Gwalior is a private multidisciplinary university known for strong academics, innovative teaching, and a green campus environment. It attracts talented faculty and prepares students for industry and research through rigorous programs across engineering, management, sciences, law, pharmacy, nursing, agriculture, and more.
 
-ITM University Gwalior is an independent private university located in Gwalior, Madhya Pradesh, India. Official website: https://www.itmuniversity.ac.in
+ITM University Gwalior is an **independent private university** (not affiliated to another university). Recognitions and approvals: https://www.itmuniversity.ac.in/about/recognitions-and-approvals
 
 ## Vision
 
-To be a leading global multidisciplinary university that makes a transformative impact on society through excellence in teaching, research, creativity, outreach, and entrepreneurship, and remains firm in its pursuit of students' dreams, aligned with the motto of ITM University Gwalior — **Celebrating Dreams**.
+To be a leading global multidisciplinary university that makes a transformative impact on society through excellence in teaching, research, creativity, outreach, and entrepreneurship.
 
 ## Mission
 
-- To develop a transformative learning experience for students focused on in-depth disciplinary learning; problem solving; leadership, communication, and interpersonal skills focused on developing socially and ethically correct citizens.
-- To develop a conducive environment encouraging (a) free exchange of ideas, where research, creativity, innovation, and entrepreneurship can flourish (b) attracting and retaining best talent.
-- To impact society through regional, national, and global collaborations by engaging with partners outside the university campus.
-- To develop multidisciplinary culture through collaborative multidisciplinary projects.
+- Transformative learning: disciplinary depth, problem solving, leadership, communication, ethics.
+- Environment for research, creativity, innovation, and entrepreneurship; attract and retain talent.
+- Regional, national, and global collaborations beyond campus.
+- Multidisciplinary culture through collaborative projects.
 
 ## Core Values
 
-- **Transparency**: Reflected in all operations from admission to placements and for employees from recruitment to separation.
-- **Shared Governance**: Reflected in the governing structure and autonomy provided to officials at all levels.
-- **Inclusivity and diversity**: Welcoming talented minds from diverse backgrounds as employees and students.
-- **Sustainable Development**: Green lush campus, bio-fertiliser and bio-gas plants, use of solar energy, responsible financial planning.
-- **Academic freedom**: Curriculum and syllabus processes; freedom for teachers in pedagogical tools.
-- **Empathy and compassion**: Care during Covid; concessions via ITM Hospital; education concessions for employees and their wards.
-- **Integrity**: Highest ethical standards in personal and professional behaviour; transparency and accountability in governance.
+Transparency, shared governance, inclusivity and diversity, sustainable development (green campus, bio-fertiliser, bio-gas, solar energy), academic freedom, empathy and compassion (ITM Hospital concessions for staff/families), integrity.
 
-## Schools and Faculties
+## Schools and Academic Areas
 
-Engineering, Management, Computer Applications, Science, Agriculture, Pharmacy, Nursing, Law, Humanities, Fine Arts, Design, Education, Journalism, Sports, and Medical & Allied Healthcare.
+ITM University comprises multiple schools including:
 
-## Contact and Admissions
+- Centre of Excellence (AI & ML / Data Science)
+- School of Engineering & Technology
+- School of Computer Application
+- School of Business (Management)
+- School of Pharmacy
+- School of Nursing Sciences
+- School of Agriculture
+- School of Sciences
+- School of Arts & Design
+- School of Architecture & Design
+- School of Sports Education / Physical Education & Sports
+- School of Education
+- School of Law
+- School of Journalism & Mass Communication / Humanities
+- School of Fine Arts
+- School of Library and Information Science
+- School of Medical & Allied Healthcare / Paramedical Sciences
 
-- Toll-free: 1800-270-0031
-- Email: admission@itmuniversity.ac.in
-- Early bird scholarship enquiries: 7773005063
-- Admission open 2026-27
+## Campus Life Highlights
 
-## Affiliation
+- Lush green campus conducive to learning
+- Hostel facilities (AC and non-AC), mess, security
+- Sports and physical education programs
+- Industry training (400+ hours for many programs)
+- Scholarships based on merit and institutional policy
 
-ITM University Gwalior is not affiliated to another university; it is an independent private university. Recognitions and approvals: https://www.itmuniversity.ac.in/about/recognitions-and-approvals
+## Contact and Admissions (2026-27)
+
+- **Website:** www.itmuniversity.ac.in
+- **Toll-free:** 1800-270-0031
+- **Email:** admission@itmuniversity.ac.in
+- **Early bird scholarship:** 7773005063
+- **Online application:** https://www.itmuniversity.ac.in/admission/onlineapply
+- **Admission status:** Open 2026-27
+
+## Important Official Links
+
+- About: https://www.itmuniversity.ac.in/about
+- Graduate programmes: https://www.itmuniversity.ac.in/programmes/graduate-programs
+- PG programmes: https://www.itmuniversity.ac.in/programmes/pg-programs
+- Eligibility: https://www.itmuniversity.ac.in/admission/eligibility
+- Admission FAQ: https://www.itmuniversity.ac.in/admission/faq
+- Fee structure: https://www.itmuniversity.ac.in/admission/fee-structure
+- Scholarships 2026: https://www.itmuniversity.ac.in/scholarship/scholarship_2026
