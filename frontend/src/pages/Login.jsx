@@ -32,7 +32,21 @@ export default function Login({ onLogin, onGoToRegister }) {
         }),
       });
 
-      const data = await response.json();
+      const raw = await response.text();
+      let data = {};
+      if (raw) {
+        try {
+          data = JSON.parse(raw);
+        } catch {
+          throw new Error(
+            "Backend returned an invalid response. Is the API running on port 8080?"
+          );
+        }
+      } else if (!response.ok) {
+        throw new Error(
+          `Cannot reach the API (HTTP ${response.status}). Start the backend: uv run uvicorn backend.main:app --host 127.0.0.1 --port 8080 --reload`
+        );
+      }
 
       if (!response.ok) {
         throw new Error(data.detail || "Invalid email or password");

@@ -7,7 +7,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+
+# CPU-only PyTorch — avoids multi-GB NVIDIA/CUDA wheels that break Docker builds
+RUN uv pip install torch --index-url https://download.pytorch.org/whl/cpu \
+    && uv sync --frozen --no-dev
 
 COPY backend ./backend
 COPY ai_engine ./ai_engine
@@ -24,7 +27,8 @@ ENV PYTHONUNBUFFERED=1 \
     PORT=8000 \
     DATABASE_URL=sqlite:///data/student_chatbot.db \
     FAISS_PATH=storage/vector_db \
-    DATA_PATH=knowledge-base
+    DATA_PATH=knowledge-base \
+    HF_HOME=/app/.cache/huggingface
 
 EXPOSE 8000
 
