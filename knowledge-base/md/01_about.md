@@ -11,6 +11,20 @@ ITM University Gwalior is a private multidisciplinary university known for stron
 
 ITM University Gwalior is an **independent private university** (not affiliated to another university). Recognitions and approvals: https://www.itmuniversity.ac.in/about/recognitions-and-approvals
 
+## History & Legacy
+
+- The ITM Group has **25+ years** of conception, development, and innovation across campuses in **Gwalior** and **Vadodara** (Gujarat).
+- **Founder Chancellor:** Shri Ramashankar Singh — established ITM campuses with focus on holistic learning, arts, culture, and ethical citizenship.
+- **More than 20,000 students** have completed higher education through the ITM group since inception.
+- **15,000+ alumni** work with leading global organizations and institutes worldwide.
+- Business incubator **Idea-Pad** has converted **20+ student ideas** into successful companies over six years.
+- ITM University Gwalior integrates **Indian Knowledge Systems (IKS)** with cutting-edge fields (AI, Blockchain, Robotics, Nanotechnology).
+- Pedagogy includes PBL, flipped classrooms, industry immersion, ABCA, NPTEL/MOOCs, and blended learning.
+
+**Leadership page:** https://www.itmuniversity.ac.in/about/leadership  
+**Officials page:** https://www.itmuniversity.ac.in/about/officials  
+**NIRF ranking:** https://www.itmuniversity.ac.in/iqacnaacnew2/nirf
+
 ## Vision
 
 To be a leading global multidisciplinary university that makes a transformative impact on society through excellence in teaching, research, creativity, outreach, and entrepreneurship.

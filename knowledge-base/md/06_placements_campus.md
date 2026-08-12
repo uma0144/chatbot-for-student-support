@@ -1,12 +1,32 @@
-# Placements, Training, Campus & Student Life — ITM University Gwalior
+# Placements & Training — ITM University Gwalior
 
-Source: https://www.itmuniversity.ac.in/admission/faq and official communications.
+Source: https://www.itmuniversity.ac.in/tap-cell/about-tapcell
 
-## Internships and Industry Training
+## Placement Statistics (Official Headlines)
 
-ITM University supports internships and industry exposure. Students undergo rigorous training — **400+ hours** in many programs — with industry partners.
+| Metric | Figure |
+|--------|--------|
+| Placement opportunities (last 3 years) | **16,000+** |
+| Highest package | **45 LPA** |
+| Average package | **6 LPA** |
+| Recruiting companies | **800+** |
+| Industry training | **400+ hours** in many programmes |
 
-### Training Partners (examples)
+*Figures updated periodically — check live pages for latest.*
+
+**Recent placements:** https://www.itmuniversity.ac.in/tap-cell/recent-placement  
+**Placed students:** https://www.itmuniversity.ac.in/tap-cell/placed-students
+
+## TAP Cell (Training & Placement)
+
+- **TAP Cell** manages campus placements and industry training
+- **XpertQuest** — leadership development programme: https://www.itmuniversity.ac.in/tap-cell/xpertquest
+- **Industry Speaks / Corporate testimonials:** https://www.itmuniversity.ac.in/tap-cell/industry-speaks
+- **MOUs & collaborations:** https://www.itmuniversity.ac.in/research/mous-and-collaborations
+- **Alumni network:** https://www.itmuniversity.ac.in/research/alumni
+- **Placement contact:** +91-9691973919
+
+## Training & Internship Partners
 
 - Hewlett Packard Educational Services (HPES), Gurgaon
 - CISCO Networking Academy
@@ -17,68 +37,31 @@ ITM University supports internships and industry exposure. Students undergo rigo
 - IFS Academy
 - Neon Infotech
 
-## Placement Recruiters (examples)
+Students undergo **400+ hours** of industry training in many programmes.
 
-- TCS
-- Infosys
-- Wipro Technologies
-- L&T
-- L&T Infotech
-- HCL Infosystem / HCL Technologies
-- Persistent
-- IBM
-- Cadbury
-- Tech Mahindra
-- Intex
+## Major Recruiting Companies
 
-Placement figures vary by year and programme — contact the placement cell or visit the official website for current statistics.
+| Sector | Companies |
+|--------|-----------|
+| IT / Software | TCS, Infosys, Wipro, HCL Technologies, IBM, Tech Mahindra, Persistent, L&T Infotech |
+| Core / Manufacturing | L&T, Rockwell Automation |
+| FMCG / Others | Cadbury, Intex |
 
-## Campus Facilities
+*List is illustrative — 800+ companies have recruited from ITM.*
 
-- Green lush campus in Gwalior, MP
-- Hostels: AC and non-AC, mess, security
-- Sports education and physical education programs
-- ITM Hospital (staff/family concessions mentioned in university values)
-- Bio-fertiliser and bio-gas plants; solar energy initiatives
-- Library and information science programs
+## Career Preparation
 
-## Student Life
+- Industry experts collaborate on syllabus and classroom instruction
+- Mandatory AI and IKS courses for future-ready graduates
+- NPTEL/SWAYAM courses for additional skills and credits
+- Idea-Pad incubator for entrepreneurship
+- National-level sports achievements enhance student profile
 
-- Multidisciplinary campus with engineering, management, law, pharmacy, nursing, agriculture, design, fine arts, journalism
-- Scholarships for meritorious students
-- International students may apply
-- Cultural and academic activities across schools
+## How to Contact Placements
 
-## Admission Support Contacts
+- **Phone:** +91-9691973919
+- **TAP Cell page:** https://www.itmuniversity.ac.in/tap-cell/about-tapcell
+- **Admission (general):** admission@itmuniversity.ac.in | 1800-270-0031
 
-- **Toll-free:** 1800-270-0031
-- **Email:** admission@itmuniversity.ac.in
-- **Website:** www.itmuniversity.ac.in
-- **Early bird scholarship:** 7773005063
-- **Online apply:** https://www.itmuniversity.ac.in/admission/onlineapply
-
-## Entrance Exams Accepted
-
-- **Primary:** ITM NEST / ITM CET
-- **Also accepted (program-dependent):** JEE Main, NEET UG, GATE, CAT, CMAT, CUET UG/PG, NATA (Architecture), merit-based admission for selected programs
-
-## Documents Typically Required for Admission
-
-- 10th marksheet
-- 12th marksheet
-- Graduation marksheet (for PG)
-- Entrance exam scorecard (if applicable)
-- ID proof
-- Photographs
-
-## Counselling and Interview
-
-Counselling and/or personal interview may be required for selected programmes (especially MBA and some professional courses).
-
-## Lateral Entry
-
-Lateral entry is available for programmes such as B.Tech (subject to university rules).
-
-## International Students
-
-International students can apply — contact admissions for specific requirements.
+For campus facilities, see `14_campus_infrastructure.md`.  
+For student services, see `15_student_services.md`.
