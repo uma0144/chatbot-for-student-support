@@ -8,6 +8,11 @@ RUN apt-get update \
 
 COPY pyproject.toml uv.lock ./
 
+# Create venv first — uv pip/sync require it in the slim image
+ENV UV_LINK_MODE=copy
+RUN uv venv /app/.venv
+ENV PATH="/app/.venv/bin:$PATH"
+
 # CPU-only PyTorch — avoids multi-GB NVIDIA/CUDA wheels that break Docker builds
 RUN uv pip install torch --index-url https://download.pytorch.org/whl/cpu \
     && uv sync --frozen --no-dev
