@@ -13,9 +13,9 @@ ENV UV_LINK_MODE=copy
 RUN uv venv /app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Install deps first, then force CPU-only torch (uv sync may pull CUDA torch via sentence-transformers)
-RUN uv sync --frozen --no-dev \
-    && uv pip install --force-reinstall torch --index-url https://download.pytorch.org/whl/cpu
+# CPU torch FIRST (~180MB), then sync other deps without re-installing CUDA torch from PyPI
+RUN uv pip install torch --index-url https://download.pytorch.org/whl/cpu \
+    && uv sync --frozen --no-dev --no-install-package torch
 
 COPY backend ./backend
 COPY ai_engine ./ai_engine
