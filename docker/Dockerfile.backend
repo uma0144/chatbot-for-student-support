@@ -7,15 +7,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml uv.lock ./
+COPY docker/filter_requirements.py docker/install-backend-deps.sh /docker/
 
-# Create venv first — uv pip/sync require it in the slim image
-ENV UV_LINK_MODE=copy
-RUN uv venv /app/.venv
-ENV PATH="/app/.venv/bin:$PATH"
-
-# CPU torch FIRST (~180MB), then sync other deps without re-installing CUDA torch from PyPI
-RUN uv pip install torch --index-url https://download.pytorch.org/whl/cpu \
-    && uv sync --frozen --no-dev --no-install-package torch
+RUN chmod +x /docker/install-backend-deps.sh \
+    && /docker/install-backend-deps.sh
 
 COPY backend ./backend
 COPY ai_engine ./ai_engine
@@ -29,6 +24,7 @@ COPY docker/backend-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENV PYTHONUNBUFFERED=1 \
+    PATH="/app/.venv/bin:$PATH" \
     PORT=8000 \
     DATABASE_URL=sqlite:///data/student_chatbot.db \
     FAISS_PATH=storage/vector_db \
