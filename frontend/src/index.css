@@ -242,6 +242,115 @@ body {
   }
 }
 
+/* ChatGPT-style conversation layout */
+.itm-chat-main {
+  background: #ffffff;
+}
+
+.itm-chat-scroll {
+  flex: 1;
+  overflow-y: auto;
+  background: #ffffff;
+}
+
+.itm-chat-thread {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.itm-user-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.itm-user-bubble {
+  max-width: 85%;
+  padding: 0.75rem 1rem;
+  border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+  background: var(--itm-navy);
+  color: #fff;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  box-shadow: 0 1px 2px rgba(30, 58, 95, 0.15);
+}
+
+.itm-user-bubble p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.itm-assistant-row {
+  display: flex;
+  gap: 0.875rem;
+  align-items: flex-start;
+  width: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.itm-assistant-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 0.125rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.itm-msg-time {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.6875rem;
+  color: var(--itm-muted);
+}
+
+.itm-msg-time--user {
+  padding-right: 0.25rem;
+}
+
+.itm-typing-dots {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.itm-typing-dots span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--itm-gold);
+  animation: itm-typing-bounce 1.2s ease-in-out infinite;
+}
+
+.itm-typing-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.itm-typing-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes itm-typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
 .itm-stream-cursor {
   display: inline-block;
   width: 2px;
@@ -253,11 +362,10 @@ body {
   animation: itm-blink-cursor 1s step-end infinite;
 }
 
-/* ChatGPT-style bot message — open layout, not a heavy box */
-.itm-bot-message {
-  padding: 4px 0 8px;
-  font-size: 15px;
-  line-height: 1.7;
+/* Assistant markdown — open text, no box */
+.itm-markdown {
+  font-size: 0.9375rem;
+  line-height: 1.75;
   color: var(--itm-text);
 }
 
@@ -314,7 +422,7 @@ body {
 }
 
 .itm-markdown a {
-  color: var(--itm-navy-mid, #234b73);
+  color: var(--itm-navy);
   text-decoration: underline;
   text-underline-offset: 2px;
   word-break: break-word;
@@ -350,17 +458,19 @@ body {
   border-collapse: collapse;
   margin: 0.75em 0;
   font-size: 0.92em;
+  border: none;
 }
 
 .itm-markdown th,
 .itm-markdown td {
-  border: 1px solid var(--itm-border);
-  padding: 0.45em 0.65em;
+  border: none;
+  border-bottom: 1px solid var(--itm-border);
+  padding: 0.45em 0.65em 0.45em 0;
   text-align: left;
 }
 
 .itm-markdown th {
-  background: var(--itm-surface);
+  background: transparent;
   color: var(--itm-navy);
   font-weight: 600;
 }

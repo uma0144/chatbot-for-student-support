@@ -15,32 +15,12 @@ const SUGGESTIONS = [
 
 function TypingRow() {
   return (
-    <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
-      <BotAvatar iconSize={16} />
-      <div
-        style={{
-          background: ITM.white,
-          border: `1px solid ${ITM.border}`,
-          borderRadius: "4px 16px 16px 16px",
-          padding: "14px 18px",
-          display: "flex",
-          gap: "6px",
-          alignItems: "center",
-          boxShadow: ITM.shadowSm,
-        }}
-      >
-        <span
-          className="rounded-full animate-bounce"
-          style={{ width: "8px", height: "8px", background: ITM.gold }}
-        />
-        <span
-          className="rounded-full animate-bounce"
-          style={{ width: "8px", height: "8px", background: ITM.gold, animationDelay: "0.15s" }}
-        />
-        <span
-          className="rounded-full animate-bounce"
-          style={{ width: "8px", height: "8px", background: ITM.gold, animationDelay: "0.3s" }}
-        />
+    <div className="itm-assistant-row itm-assistant-row--typing">
+      <BotAvatar />
+      <div className="itm-typing-dots" aria-label="Assistant is typing">
+        <span />
+        <span />
+        <span />
       </div>
     </div>
   );
@@ -133,17 +113,8 @@ export default function ChatBox({ messages, isTyping, onSuggestion }) {
   }
 
   return (
-    <div style={{ flex: 1, overflowY: "auto" }}>
-      <div
-        style={{
-          maxWidth: "800px",
-          margin: "0 auto",
-          padding: "28px 24px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-        }}
-      >
+    <div className="itm-chat-scroll">
+      <div className="itm-chat-thread">
         {messages.map((msg) => (
           <Message key={msg.id} message={msg} />
         ))}

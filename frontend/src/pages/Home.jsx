@@ -173,10 +173,7 @@ export default function Home({ user, onLogout }) {
           </div>
         </header>
 
-        <main
-          className="flex flex-col flex-1 min-h-0"
-          style={{ background: ITM.surface }}
-        >
+        <main className="flex flex-col flex-1 min-h-0 itm-chat-main">
           <ChatBox
             messages={activeChat?.messages ?? []}
             isTyping={isTyping}

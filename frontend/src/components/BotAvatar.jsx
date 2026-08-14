@@ -1,21 +1,21 @@
 import { Bot } from "lucide-react";
 import { ITM } from "../theme";
 
-/** Assistant avatar for chat messages. */
-export default function BotAvatar({ size = 36, iconSize = 18 }) {
+/** Minimal round assistant avatar (ChatGPT-style). */
+export default function BotAvatar({ size = 28, iconSize = 16 }) {
   return (
     <div
+      className="itm-bot-avatar"
       style={{
         width: size,
         height: size,
-        borderRadius: ITM.radiusSm,
-        background: `linear-gradient(145deg, ${ITM.navy} 0%, ${ITM.navyDark} 100%)`,
-        border: "1px solid rgba(245, 158, 11, 0.25)",
+        borderRadius: "50%",
+        background: ITM.navy,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         flexShrink: 0,
-        boxShadow: ITM.shadowSm,
+        marginTop: "2px",
       }}
     >
       <Bot size={iconSize} style={{ color: ITM.gold }} strokeWidth={2.25} />

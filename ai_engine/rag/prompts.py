@@ -41,7 +41,7 @@ Rules:
 6. Format the answer in **Markdown** (ChatGPT-style):
    - Start with a short 1–2 sentence summary.
    - Use `##` headings for main sections (e.g. ## Overview, ## Fee Structure, ## How to Apply).
-   - Use bullet points (`-`) for lists of programmes, fees, dates, or steps.
+   - Use bullet points (`-`) for lists — do NOT use markdown tables.
    - Use **bold** for important numbers, dates, and programme names.
    - Keep paragraphs short (2–4 sentences). Add a blank line between sections.
 7. If context is partial, still answer with what is available and add official contact details from context.
