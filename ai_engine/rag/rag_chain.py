@@ -1,3 +1,5 @@
+from collections.abc import Iterator
+
 from .query_preprocessor import normalize_query
 from .retriever import Retriever
 from .keyword_fallback import keyword_search, topic_snippets, merge_documents
@@ -62,6 +64,46 @@ class RAGChain:
             answer = self._minimal_helpful_answer(question, context)
 
         return answer.strip()
+
+    def _build_question_prompt(self, question: str, context: str) -> str:
+        normalized = normalize_query(question)
+        question_note = ""
+        if normalized.lower() != question.strip().lower():
+            question_note = f"\n(Intended meaning: {normalized})"
+        return build_answer_prompt(context, question, question_note)
+
+    def stream_ask(self, question: str) -> Iterator[tuple[str, str]]:
+        """
+        Retrieve context, then stream the LLM answer token-by-token.
+        Yields (event_type, payload) where event_type is "token" or "replace".
+        """
+        context, docs = self._gather_context(question)
+
+        print("\n" + "=" * 80)
+        print(f"STREAM — RETRIEVED {len(docs)} DOCUMENT(S)")
+        print("=" * 80)
+
+        prompt = self._build_question_prompt(question, context)
+        parts: list[str] = []
+
+        for token in self.llm.stream(prompt):
+            parts.append(token)
+            yield ("token", token)
+
+        answer = "".join(parts).strip()
+
+        if is_refusal(answer):
+            print("\n[Stream retry] First answer looked like a refusal — replacing")
+            normalized = normalize_query(question)
+            question_note = ""
+            if normalized.lower() != question.strip().lower():
+                question_note = f"\n(Intended meaning: {normalized})"
+            retry_prompt = build_retry_prompt(context, question, question_note)
+            answer = self.llm.generate(retry_prompt)
+
+        if is_refusal(answer) or len(answer) < 20:
+            answer = self._minimal_helpful_answer(question, context)
+            yield ("replace", answer)
 
     def _minimal_helpful_answer(self, question: str, context: str) -> str:
         """Last resort: surface context snippets + contacts instead of a refusal."""

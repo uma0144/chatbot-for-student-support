@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
+import json
 
 from backend.database.database import get_db
 from backend.core.auth import get_current_user
@@ -55,6 +57,63 @@ def chat(
         print(f"Warning: failed to save chat history: {exc}")
 
     return response
+
+
+@router.post("/stream")
+def chat_stream(
+    request: ChatRequest,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    """
+    Stream chat response token-by-token (ChatGPT-style SSE).
+    """
+
+    print("\n" + "=" * 80)
+    print("CHAT STREAM REQUEST")
+    print("=" * 80)
+    print("Question:", request.question)
+
+    def event_stream():
+        try:
+            stream, answer_holder = chat_service.stream_answer_text(request.question)
+            for event_type, payload in stream:
+                if event_type == "token":
+                    yield f"data: {json.dumps({'type': 'token', 'content': payload})}\n\n"
+                elif event_type == "replace":
+                    yield f"data: {json.dumps({'type': 'replace', 'content': payload})}\n\n"
+
+            answer = answer_holder[0]
+            yield f"data: {json.dumps({'type': 'done', 'answer': answer})}\n\n"
+        except RuntimeError as exc:
+            yield f"data: {json.dumps({'type': 'error', 'detail': str(exc)})}\n\n"
+            return
+        except Exception as exc:
+            print(f"Chat stream error: {exc}")
+            yield f"data: {json.dumps({'type': 'error', 'detail': 'The chat service encountered an error. Check the backend logs.'})}\n\n"
+            return
+
+        answer = answer_holder[0]
+        if answer:
+            try:
+                crud.save_chat(
+                    db=db,
+                    user_id=current_user["id"],
+                    question=request.question,
+                    answer=answer,
+                )
+            except Exception as exc:
+                print(f"Warning: failed to save chat history: {exc}")
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
 
 
 @router.get("/history")

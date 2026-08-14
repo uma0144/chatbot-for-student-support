@@ -2,7 +2,7 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import ChatBox from "../components/ChatBox";
 import MessageInput from "../components/MessageInput";
-import { sendMessage } from "../services/api";
+import { sendMessageStream } from "../services/api";
 import { ITM, formatMessageTime } from "../theme";
 
 let idCounter = 100;
@@ -14,6 +14,19 @@ export default function Home({ user, onLogout }) {
   const [isTyping, setIsTyping] = useState(false);
 
   const activeChat = chats.find((c) => c.id === activeChatId) ?? null;
+
+  const appendToBotMessage = (chatId, botId, updater) => {
+    setChats((prev) =>
+      prev.map((c) =>
+        c.id === chatId
+          ? {
+              ...c,
+              messages: c.messages.map((m) => (m.id === botId ? { ...m, ...updater(m) } : m)),
+            }
+          : c
+      )
+    );
+  };
 
   const handleNewChat = () => setActiveChatId(null);
   const handleSelectChat = (chatId) => setActiveChatId(chatId);
@@ -41,34 +54,63 @@ export default function Home({ user, onLogout }) {
     setActiveChatId(chatId);
     setIsTyping(true);
 
-    try {
-      const response = await sendMessage(text);
+    const botId = nextId();
+    let streamStarted = false;
+
+    const ensureBotMessage = () => {
+      if (streamStarted) return;
+      streamStarted = true;
+      setIsTyping(false);
       const botMessage = {
-        id: nextId(),
+        id: botId,
         sender: "bot",
-        text: response.answer,
+        text: "",
         time: formatMessageTime(),
+        streaming: true,
       };
       setChats((prev) =>
-        prev.map((c) =>
-          c.id === chatId ? { ...c, messages: [...c.messages, botMessage] } : c
-        )
+        prev.map((c) => (c.id === chatId ? { ...c, messages: [...c.messages, botMessage] } : c))
       );
+    };
+
+    try {
+      await sendMessageStream(text, {
+        onToken: (chunk) => {
+          ensureBotMessage();
+          appendToBotMessage(chatId, botId, (m) => ({ text: m.text + chunk }));
+        },
+        onReplace: (content) => {
+          ensureBotMessage();
+          appendToBotMessage(chatId, botId, () => ({ text: content }));
+        },
+        onDone: () => {
+          ensureBotMessage();
+          appendToBotMessage(chatId, botId, () => ({ streaming: false }));
+        },
+      });
     } catch (error) {
       console.error(error);
       const detail =
         error instanceof Error ? error.message : "Something went wrong. Please try again.";
-      const botMessage = {
-        id: nextId(),
-        sender: "bot",
-        text: detail,
-        time: formatMessageTime(),
-      };
-      setChats((prev) =>
-        prev.map((c) =>
-          c.id === chatId ? { ...c, messages: [...c.messages, botMessage] } : c
-        )
-      );
+
+      if (streamStarted) {
+        appendToBotMessage(chatId, botId, () => ({
+          text: detail,
+          streaming: false,
+        }));
+      } else {
+        const botMessage = {
+          id: botId,
+          sender: "bot",
+          text: detail,
+          time: formatMessageTime(),
+        };
+        setChats((prev) =>
+          prev.map((c) =>
+            c.id === chatId ? { ...c, messages: [...c.messages, botMessage] } : c
+          )
+        );
+      }
     } finally {
       setIsTyping(false);
     }

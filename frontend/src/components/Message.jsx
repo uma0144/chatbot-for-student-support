@@ -48,6 +48,20 @@ export default function Message({ message }) {
           }}
         >
           {message.text}
+          {message.streaming && (
+            <span
+              className="itm-stream-cursor"
+              style={{
+                display: "inline-block",
+                width: "2px",
+                height: "1em",
+                marginLeft: "2px",
+                verticalAlign: "text-bottom",
+                background: ITM.navy,
+                opacity: 0.7,
+              }}
+            />
+          )}
         </div>
         {time && <span style={{ fontSize: "11px", color: ITM.muted }}>{time}</span>}
       </div>
