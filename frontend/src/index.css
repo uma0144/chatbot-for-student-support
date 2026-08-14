@@ -26,6 +26,7 @@ body,
 #root {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -244,22 +245,48 @@ body {
 
 /* ChatGPT-style conversation layout */
 .itm-chat-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
   background: #ffffff;
+}
+
+.itm-chat-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .itm-chat-scroll {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
   background: #ffffff;
+  -webkit-overflow-scrolling: touch;
 }
 
 .itm-chat-thread {
   max-width: 48rem;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 2rem;
+  padding: 1.5rem 1.25rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+}
+
+.itm-dashboard-header {
+  flex-shrink: 0;
+}
+
+.itm-chat-input {
+  flex-shrink: 0;
+  padding: 16px 24px 24px;
 }
 
 .itm-user-row {
@@ -479,6 +506,8 @@ body {
 .itm-dashboard-main {
   background: #ffffff;
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .itm-panel-pad {

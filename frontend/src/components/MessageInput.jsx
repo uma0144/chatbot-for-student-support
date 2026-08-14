@@ -25,13 +25,7 @@ export default function MessageInput({ onSend, disabled }) {
   };
 
   return (
-    <div
-      style={{
-        padding: "16px 24px 24px",
-        background: ITM.white,
-        borderTop: `1px solid ${ITM.border}`,
-      }}
-    >
+    <div className="itm-chat-input" style={{ background: ITM.white, borderTop: `1px solid ${ITM.border}` }}>
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
         <div
           style={{

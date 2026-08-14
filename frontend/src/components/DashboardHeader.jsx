@@ -13,6 +13,7 @@ export default function DashboardHeader({ activeView }) {
 
   return (
     <header
+      className="itm-dashboard-header"
       style={{
         background: ITM.white,
         borderBottom: `1px solid ${ITM.border}`,

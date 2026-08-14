@@ -154,20 +154,20 @@ export default function Home({ user, onLogout }) {
         return <Profile user={user} />;
       default:
         return (
-          <>
+          <div className="itm-chat-layout">
             <ChatBox
               messages={activeChat?.messages ?? []}
               isTyping={isTyping}
               onSuggestion={handleSend}
             />
             <MessageInput onSend={handleSend} disabled={isTyping} />
-          </>
+          </div>
         );
     }
   };
 
   return (
-    <div className="flex h-screen w-full" style={{ background: ITM.bg }}>
+    <div className="flex h-screen w-full overflow-hidden" style={{ background: ITM.bg }}>
       <Sidebar
         chats={chats}
         activeChatId={activeChatId}
@@ -180,7 +180,7 @@ export default function Home({ user, onLogout }) {
         onLogout={onLogout}
       />
 
-      <div className="flex flex-col flex-1 min-w-0">
+      <div className="flex flex-col flex-1 min-w-0 min-h-0 overflow-hidden">
         <DashboardHeader activeView={activeView} />
         <main
           className={`flex flex-col flex-1 min-h-0${activeView === "chat" ? " itm-chat-main" : " itm-dashboard-main"}`}

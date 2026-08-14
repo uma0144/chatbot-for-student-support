@@ -98,28 +98,31 @@ function EmptyState({ onSuggestion }) {
 }
 
 export default function ChatBox({ messages, isTyping, onSuggestion }) {
-  const bottomRef = useRef(null);
+  const scrollRef = useRef(null);
+  const isStreaming = messages.some((m) => m.streaming);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping]);
+    const el = scrollRef.current;
+    if (!el) return;
+    // Keep view pinned to latest message while streaming
+    el.scrollTop = el.scrollHeight;
+  }, [messages, isTyping, isStreaming]);
 
   if (messages.length === 0) {
     return (
-      <div style={{ flex: 1, overflowY: "auto" }}>
+      <div ref={scrollRef} className="itm-chat-scroll">
         <EmptyState onSuggestion={onSuggestion} />
       </div>
     );
   }
 
   return (
-    <div className="itm-chat-scroll">
+    <div ref={scrollRef} className="itm-chat-scroll">
       <div className="itm-chat-thread">
         {messages.map((msg) => (
           <Message key={msg.id} message={msg} />
         ))}
         {isTyping && <TypingRow />}
-        <div ref={bottomRef} />
       </div>
     </div>
   );
