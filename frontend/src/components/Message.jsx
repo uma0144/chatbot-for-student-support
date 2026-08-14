@@ -1,4 +1,5 @@
 import BotAvatar from "./BotAvatar";
+import MarkdownContent from "./MarkdownContent";
 import { ITM } from "../theme";
 
 export default function Message({ message }) {
@@ -10,7 +11,7 @@ export default function Message({ message }) {
       <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "4px" }}>
         <div
           style={{
-            maxWidth: "78%",
+            maxWidth: "85%",
             borderRadius: "16px 16px 4px 16px",
             padding: "12px 16px",
             fontSize: "14px",
@@ -31,39 +32,24 @@ export default function Message({ message }) {
   }
 
   return (
-    <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
+    <div style={{ display: "flex", gap: "12px", alignItems: "flex-start", width: "100%" }}>
       <BotAvatar />
-      <div style={{ maxWidth: "78%", display: "flex", flexDirection: "column", gap: "4px" }}>
-        <div
-          style={{
-            borderRadius: "4px 16px 16px 16px",
-            padding: "12px 16px",
-            fontSize: "14px",
-            lineHeight: 1.65,
-            whiteSpace: "pre-wrap",
-            background: ITM.white,
-            border: `1px solid ${ITM.border}`,
-            color: ITM.text,
-            boxShadow: ITM.shadowSm,
-          }}
-        >
-          {message.text}
-          {message.streaming && (
-            <span
-              className="itm-stream-cursor"
-              style={{
-                display: "inline-block",
-                width: "2px",
-                height: "1em",
-                marginLeft: "2px",
-                verticalAlign: "text-bottom",
-                background: ITM.navy,
-                opacity: 0.7,
-              }}
-            />
-          )}
+      <div
+        style={{
+          flex: 1,
+          minWidth: 0,
+          maxWidth: "min(100%, 720px)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4px",
+        }}
+      >
+        <div className="itm-bot-message">
+          <MarkdownContent text={message.text || ""} streaming={message.streaming} />
         </div>
-        {time && <span style={{ fontSize: "11px", color: ITM.muted }}>{time}</span>}
+        {time && !message.streaming && (
+          <span style={{ fontSize: "11px", color: ITM.muted }}>{time}</span>
+        )}
       </div>
     </div>
   );

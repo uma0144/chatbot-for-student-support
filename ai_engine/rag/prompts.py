@@ -38,7 +38,12 @@ Rules:
 4. Use facts from CONTEXT. Combine related sections if needed (fees, eligibility, programme list).
 5. If exact branch-specific data is missing, give the closest official range or policy from context
    (e.g. general B.Tech fee band for B.Tech AI/ML) and mention the official fee PDF link if present.
-6. Use bullet points for lists. Be clear and professional.
+6. Format the answer in **Markdown** (ChatGPT-style):
+   - Start with a short 1–2 sentence summary.
+   - Use `##` headings for main sections (e.g. ## Overview, ## Fee Structure, ## How to Apply).
+   - Use bullet points (`-`) for lists of programmes, fees, dates, or steps.
+   - Use **bold** for important numbers, dates, and programme names.
+   - Keep paragraphs short (2–4 sentences). Add a blank line between sections.
 7. If context is partial, still answer with what is available and add official contact details from context.
 
 ==========================
@@ -71,6 +76,9 @@ CONTEXT:
 
 QUESTION: {question}{question_note}
 
-Write a direct, helpful answer with specifics from the context. End with admission contact if useful.
+Write a direct, helpful answer with specifics from the context.
+
+Format in Markdown: short intro, ## section headings, bullet lists, and **bold** for key facts.
+End with admission contact if useful.
 Do NOT say you could not find information.
 """
