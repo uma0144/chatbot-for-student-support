@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import { API_BASE_URL } from "./config";
+import { clearSession, setOnUnauthorized } from "./services/session";
 
 function readStoredUser() {
   const email = localStorage.getItem("user_email");
@@ -17,25 +19,61 @@ function readStoredUser() {
 function App() {
   const [user, setUser] = useState(null);
   const [view, setView] = useState("login");
+  const [booting, setBooting] = useState(true);
+
+  const handleLogout = useCallback(() => {
+    clearSession();
+    setUser(null);
+    setView("login");
+  }, []);
+
+  useEffect(() => {
+    setOnUnauthorized(handleLogout);
+    return () => setOnUnauthorized(null);
+  }, [handleLogout]);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     const stored = readStoredUser();
-    if (token && stored?.email) {
-      setUser(stored);
+
+    if (!token || !stored?.email) {
+      setBooting(false);
+      return;
     }
+
+    fetch(`${API_BASE_URL}/api/portal/profile`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        if (response.ok) {
+          setUser(stored);
+        } else {
+          clearSession();
+        }
+      })
+      .catch(() => {
+        // Backend down — still show UI; chat will show connection errors
+        setUser(stored);
+      })
+      .finally(() => setBooting(false));
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("token_type");
-    localStorage.removeItem("user_email");
-    localStorage.removeItem("user_name");
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("user_role");
-    setUser(null);
-    setView("login");
-  };
+  if (booting) {
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#64748b",
+          fontFamily: "system-ui, sans-serif",
+        }}
+      >
+        Loading…
+      </div>
+    );
+  }
 
   // Step 2: chatbot only after successful login/register
   if (user) {

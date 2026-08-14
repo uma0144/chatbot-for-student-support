@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../config";
+import { notifyUnauthorized } from "./session";
 
 function chatErrorMessage(error) {
   if (error instanceof TypeError && error.message === "Failed to fetch") {
@@ -27,7 +28,8 @@ async function parseErrorResponse(response) {
   try {
     const errorData = JSON.parse(errorText);
     if (response.status === 401) {
-      message = "Session expired. Please log out and sign in again.";
+      notifyUnauthorized();
+      message = "Session expired. Please log in again.";
     } else if (response.status === 422 && errorData.detail) {
       const detail = errorData.detail;
       if (Array.isArray(detail) && detail[0]?.type === "json_invalid") {

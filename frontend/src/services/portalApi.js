@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../config";
+import { notifyUnauthorized } from "./session";
 
 function authHeaders() {
   const token = localStorage.getItem("access_token");
@@ -17,7 +18,8 @@ async function parseErrorResponse(response) {
   try {
     const errorData = JSON.parse(errorText);
     if (response.status === 401) {
-      message = "Session expired. Please log out and sign in again.";
+      notifyUnauthorized();
+      message = "Session expired. Please log in again.";
     } else if (typeof errorData.detail === "string") {
       message = errorData.detail;
     }
