@@ -54,8 +54,10 @@ export default function Login({ onLogin, onGoToRegister }) {
 
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("token_type", data.token_type);
-      localStorage.setItem("user_email", email.trim());
+      localStorage.setItem("user_email", data.email || email.trim());
       localStorage.setItem("user_name", data.name || "");
+      localStorage.setItem("user_id", String(data.id ?? ""));
+      localStorage.setItem("user_role", data.role || "student");
       onLogin({
         id: data.id,
         name: data.name,

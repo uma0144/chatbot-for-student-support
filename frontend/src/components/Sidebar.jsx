@@ -162,7 +162,7 @@ export default function Sidebar({
           background: "rgba(0,0,0,0.12)",
         }}
       >
-        {user?.email && (
+        {user?.email && typeof user.email === "string" && (
           <div
             style={{
               display: "flex",
