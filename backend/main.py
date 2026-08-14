@@ -18,6 +18,7 @@ import backend.database.models
 from backend.api.routes.chat import router as chat_router
 from backend.api.routes.auth import router as auth_router
 from backend.api.routes.admin import router as admin_router
+from backend.api.routes.portal import router as portal_router
 
 # ==========================
 # Create Database Tables
@@ -93,4 +94,10 @@ app.include_router(
     admin_router,
     prefix="/api/admin",
     tags=["Admin"]
+)
+
+app.include_router(
+    portal_router,
+    prefix="/api/portal",
+    tags=["Portal"]
 )

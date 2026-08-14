@@ -20,6 +20,8 @@ const NAV_ITEMS = [
 export default function Sidebar({
   chats,
   activeChatId,
+  activeView,
+  onNavigate,
   onNewChat,
   onSelectChat,
   onClearChats,
@@ -88,13 +90,12 @@ export default function Sidebar({
       <nav style={{ padding: "16px 12px", flex: 1, overflowY: "auto" }}>
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
-          const isActive = item.id === "chat";
+          const isActive = activeView === item.id;
           return (
             <button
               key={item.id}
               type="button"
-              onClick={item.id === "chat" ? onNewChat : undefined}
-              disabled={item.id !== "chat"}
+              onClick={() => onNavigate(item.id)}
               className={`itm-nav-btn${isActive ? " itm-nav-btn--active" : ""}`}
             >
               <Icon
@@ -107,7 +108,7 @@ export default function Sidebar({
           );
         })}
 
-        {chats.length > 0 && (
+        {activeView === "chat" && chats.length > 0 && (
           <div style={{ marginTop: "20px" }}>
             <p
               style={{
@@ -184,7 +185,7 @@ export default function Sidebar({
                 fontSize: "13px",
                 fontWeight: 700,
                 flexShrink: 0,
-            }}
+              }}
             >
               {user.email.charAt(0).toUpperCase()}
             </div>

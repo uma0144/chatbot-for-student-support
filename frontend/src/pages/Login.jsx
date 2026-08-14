@@ -55,7 +55,13 @@ export default function Login({ onLogin, onGoToRegister }) {
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("token_type", data.token_type);
       localStorage.setItem("user_email", email.trim());
-      onLogin(email.trim());
+      localStorage.setItem("user_name", data.name || "");
+      onLogin({
+        id: data.id,
+        name: data.name,
+        email: data.email || email.trim(),
+        role: data.role,
+      });
     } catch (err) {
       console.error("Login error:", err);
       setError(err.message || "Unable to connect to the server.");

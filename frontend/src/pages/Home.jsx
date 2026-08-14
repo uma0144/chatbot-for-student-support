@@ -2,6 +2,11 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import ChatBox from "../components/ChatBox";
 import MessageInput from "../components/MessageInput";
+import DashboardHeader from "../components/DashboardHeader";
+import KnowledgeBase from "./KnowledgeBase";
+import FAQs from "./FAQs";
+import Tickets from "./Tickets";
+import Profile from "./Profile";
 import { sendMessageStream } from "../services/api";
 import { ITM, formatMessageTime } from "../theme";
 
@@ -9,6 +14,7 @@ let idCounter = 100;
 const nextId = () => idCounter++;
 
 export default function Home({ user, onLogout }) {
+  const [activeView, setActiveView] = useState("chat");
   const [chats, setChats] = useState([]);
   const [activeChatId, setActiveChatId] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
@@ -28,11 +34,31 @@ export default function Home({ user, onLogout }) {
     );
   };
 
-  const handleNewChat = () => setActiveChatId(null);
-  const handleSelectChat = (chatId) => setActiveChatId(chatId);
+  const handleNavigate = (view) => {
+    setActiveView(view);
+    if (view === "chat") {
+      setActiveChatId(null);
+    }
+  };
+
+  const handleNewChat = () => {
+    setActiveView("chat");
+    setActiveChatId(null);
+  };
+
+  const handleSelectChat = (chatId) => {
+    setActiveView("chat");
+    setActiveChatId(chatId);
+  };
+
   const handleClearChats = () => {
     setChats([]);
     setActiveChatId(null);
+  };
+
+  const handleAskInChat = (question) => {
+    setActiveView("chat");
+    handleSend(question);
   };
 
   const handleSend = async (text) => {
@@ -116,11 +142,37 @@ export default function Home({ user, onLogout }) {
     }
   };
 
+  const renderMain = () => {
+    switch (activeView) {
+      case "kb":
+        return <KnowledgeBase onAskChat={handleAskInChat} />;
+      case "faqs":
+        return <FAQs onAskChat={handleAskInChat} />;
+      case "tickets":
+        return <Tickets />;
+      case "profile":
+        return <Profile user={user} />;
+      default:
+        return (
+          <>
+            <ChatBox
+              messages={activeChat?.messages ?? []}
+              isTyping={isTyping}
+              onSuggestion={handleSend}
+            />
+            <MessageInput onSend={handleSend} disabled={isTyping} />
+          </>
+        );
+    }
+  };
+
   return (
     <div className="flex h-screen w-full" style={{ background: ITM.bg }}>
       <Sidebar
         chats={chats}
         activeChatId={activeChatId}
+        activeView={activeView}
+        onNavigate={handleNavigate}
         onNewChat={handleNewChat}
         onSelectChat={handleSelectChat}
         onClearChats={handleClearChats}
@@ -129,57 +181,11 @@ export default function Home({ user, onLogout }) {
       />
 
       <div className="flex flex-col flex-1 min-w-0">
-        <header
-          style={{
-            background: ITM.white,
-            borderBottom: `1px solid ${ITM.border}`,
-            padding: "16px 28px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexShrink: 0,
-            boxShadow: ITM.shadowSm,
-          }}
+        <DashboardHeader activeView={activeView} />
+        <main
+          className={`flex flex-col flex-1 min-h-0${activeView === "chat" ? " itm-chat-main" : " itm-dashboard-main"}`}
         >
-          <div>
-            <div style={{ fontWeight: 800, fontSize: "17px", color: ITM.navy }}>
-              ITM Student Support
-            </div>
-            <div style={{ fontSize: "13px", color: ITM.muted, marginTop: "2px" }}>
-              AI-powered student assistant
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "8px 14px",
-              borderRadius: ITM.radiusFull,
-              background: ITM.surface,
-              border: `1px solid ${ITM.border}`,
-            }}
-          >
-            <span
-              className="itm-online-dot"
-              style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: ITM.success,
-              }}
-            />
-            <span style={{ fontSize: "13px", color: ITM.text, fontWeight: 600 }}>Online</span>
-          </div>
-        </header>
-
-        <main className="flex flex-col flex-1 min-h-0 itm-chat-main">
-          <ChatBox
-            messages={activeChat?.messages ?? []}
-            isTyping={isTyping}
-            onSuggestion={handleSend}
-          />
-          <MessageInput onSend={handleSend} disabled={isTyping} />
+          {renderMain()}
         </main>
       </div>
     </div>

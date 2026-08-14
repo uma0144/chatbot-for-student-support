@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from backend.database.models import User, ChatHistory
+from backend.database.models import User, ChatHistory, SupportTicket
 from backend.core.security import hash_password
 
 
@@ -160,3 +160,45 @@ def delete_all_user_chats(
     db.commit()
 
     return len(chats)
+
+
+# ==========================
+# Support Ticket CRUD
+# ==========================
+
+def _ticket_to_dict(ticket: SupportTicket) -> dict:
+    return {
+        "id": ticket.id,
+        "subject": ticket.subject,
+        "description": ticket.description,
+        "status": ticket.status,
+        "created_at": ticket.created_at.isoformat() if ticket.created_at else None,
+    }
+
+
+def create_ticket(
+    db: Session,
+    user_id: int,
+    subject: str,
+    description: str,
+):
+    ticket = SupportTicket(
+        user_id=user_id,
+        subject=subject,
+        description=description,
+        status="open",
+    )
+    db.add(ticket)
+    db.commit()
+    db.refresh(ticket)
+    return _ticket_to_dict(ticket)
+
+
+def get_user_tickets(db: Session, user_id: int) -> list[dict]:
+    tickets = (
+        db.query(SupportTicket)
+        .filter(SupportTicket.user_id == user_id)
+        .order_by(SupportTicket.id.desc())
+        .all()
+    )
+    return [_ticket_to_dict(t) for t in tickets]
