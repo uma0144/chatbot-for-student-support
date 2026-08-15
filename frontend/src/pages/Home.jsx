@@ -11,7 +11,6 @@ import Profile from "./Profile";
 import ChatHistory from "./ChatHistory";
 import AdminDashboard from "./AdminDashboard";
 import { clearChatHistory, sendMessageStream } from "../services/api";
-import { useIsMobile } from "../hooks/useIsMobile";
 import { ITM, formatMessageTime } from "../theme";
 
 let idCounter = 100;
@@ -24,7 +23,6 @@ export default function Home({ user, onLogout }) {
   const [isTyping, setIsTyping] = useState(false);
   const [language, setLanguage] = useState("en");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const isMobile = useIsMobile();
 
   const isAdmin = user?.role === "admin";
   const activeChat = chats.find((c) => c.id === activeChatId) ?? null;
@@ -32,19 +30,13 @@ export default function Home({ user, onLogout }) {
   const closeMobileNav = () => setMobileNavOpen(false);
 
   useEffect(() => {
-    if (!isMobile) {
-      setMobileNavOpen(false);
-    }
-  }, [isMobile]);
-
-  useEffect(() => {
-    if (!isMobile || !mobileNavOpen) return;
+    if (!mobileNavOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
     };
-  }, [isMobile, mobileNavOpen]);
+  }, [mobileNavOpen]);
 
   const appendToBotMessage = (chatId, botId, updater) => {
     setChats((prev) =>
@@ -208,10 +200,10 @@ export default function Home({ user, onLogout }) {
 
   return (
     <div
-      className={`itm-app-shell${isMobile ? " itm-app-shell--mobile" : ""}${mobileNavOpen ? " itm-app-shell--nav-open" : ""}`}
+      className={`itm-app-shell${mobileNavOpen ? " itm-app-shell--nav-open" : ""}`}
       style={{ background: ITM.bg }}
     >
-      {isMobile && mobileNavOpen && (
+      {mobileNavOpen && (
         <button
           type="button"
           className="itm-sidebar-overlay"
@@ -220,43 +212,37 @@ export default function Home({ user, onLogout }) {
         />
       )}
 
-      {(!isMobile || mobileNavOpen) && (
-        <Sidebar
-          chats={chats}
-          activeChatId={activeChatId}
-          activeView={activeView}
-          onNavigate={handleNavigate}
-          onNewChat={handleNewChat}
-          onSelectChat={handleSelectChat}
-          onClearChats={handleClearChats}
-          user={user}
-          onLogout={onLogout}
-          isAdmin={isAdmin}
-          isMobileOpen={mobileNavOpen}
-          onClose={closeMobileNav}
-          isMobile={isMobile}
-        />
-      )}
+      <Sidebar
+        chats={chats}
+        activeChatId={activeChatId}
+        activeView={activeView}
+        onNavigate={handleNavigate}
+        onNewChat={handleNewChat}
+        onSelectChat={handleSelectChat}
+        onClearChats={handleClearChats}
+        user={user}
+        onLogout={onLogout}
+        isAdmin={isAdmin}
+        onClose={closeMobileNav}
+      />
 
       <div className="itm-main-column">
         <DashboardHeader
           activeView={activeView}
           language={language}
           onLanguageChange={setLanguage}
-          onMenuClick={isMobile ? () => setMobileNavOpen(true) : undefined}
+          onMenuClick={() => setMobileNavOpen(true)}
         />
         <main
           className={`itm-main-content${activeView === "chat" ? " itm-chat-main" : " itm-dashboard-main"}`}
         >
           {renderMain()}
         </main>
-        {isMobile && (
-          <MobileNavBar
-            activeView={activeView}
-            onOpenMenu={() => setMobileNavOpen(true)}
-            onNavigate={handleNavigate}
-          />
-        )}
+        <MobileNavBar
+          activeView={activeView}
+          onOpenMenu={() => setMobileNavOpen(true)}
+          onNavigate={handleNavigate}
+        />
       </div>
     </div>
   );

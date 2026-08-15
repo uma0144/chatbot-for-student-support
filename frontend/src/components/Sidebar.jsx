@@ -31,18 +31,14 @@ export default function Sidebar({
   user,
   onLogout,
   isAdmin,
-  isMobileOpen,
   onClose,
-  isMobile,
 }) {
   const navItems = isAdmin
     ? [...NAV_ITEMS, { id: "admin", label: "Admin", icon: LayoutDashboard }]
     : NAV_ITEMS;
 
   return (
-    <aside
-      className={`itm-sidebar${isMobile ? " itm-sidebar--mobile itm-sidebar--open" : isMobileOpen ? " itm-sidebar--open" : ""}`}
-    >
+    <aside className="itm-sidebar">
       <div className="itm-sidebar-head">
         <div className="itm-sidebar-brand">
           <div className="itm-sidebar-logo">ITM</div>
