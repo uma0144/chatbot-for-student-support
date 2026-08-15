@@ -16,13 +16,15 @@ class ChatService:
         Get answer from RAG system
         """
 
-        answer = self.rag.ask(request.question)
+        answer = self.rag.ask(request.question, language=request.language)
 
         return ChatResponse(
             answer=answer
         )
 
-    def stream_answer_text(self, question: str) -> tuple[Iterator[tuple[str, str]], list[str]]:
+    def stream_answer_text(
+        self, question: str, language: str = "en"
+    ) -> tuple[Iterator[tuple[str, str]], list[str]]:
         """
         Returns the RAG stream iterator and a mutable list that will hold the final answer.
         """
@@ -30,7 +32,7 @@ class ChatService:
 
         def tracked_stream() -> Iterator[tuple[str, str]]:
             parts: list[str] = []
-            for event_type, payload in self.rag.stream_ask(question):
+            for event_type, payload in self.rag.stream_ask(question, language=language):
                 if event_type == "token":
                     parts.append(payload)
                 elif event_type == "replace":

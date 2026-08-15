@@ -24,7 +24,13 @@ def is_refusal(answer: str) -> bool:
     return any(phrase in lower for phrase in REFUSAL_PHRASES)
 
 
-def build_answer_prompt(context: str, question: str, question_note: str = "") -> str:
+def language_instruction(language: str = "en") -> str:
+    if language.lower().startswith("hi"):
+        return "\n8. Write the entire answer in **Hindi** (Devanagari script). Keep proper nouns like ITM University as needed."
+    return ""
+
+
+def build_answer_prompt(context: str, question: str, question_note: str = "", language: str = "en") -> str:
     return f"""
 You are the AI Student Support Assistant for ITM University Gwalior.
 
@@ -45,6 +51,7 @@ Rules:
    - Use **bold** for important numbers, dates, and programme names.
    - Keep paragraphs short (2–4 sentences). Add a blank line between sections.
 7. If context is partial, still answer with what is available and add official contact details from context.
+{language_instruction(language)}
 
 ==========================
 CONTEXT

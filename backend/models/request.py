@@ -9,6 +9,10 @@ class ChatRequest(BaseModel):
         description="Student's question (single line in JSON — no raw line breaks inside quotes)",
         json_schema_extra={"example": "Give detailed information about ITM University"},
     )
+    language: str = Field(
+        default="en",
+        description="Response language code: en (English) or hi (Hindi)",
+    )
 
     @field_validator("question")
     @classmethod

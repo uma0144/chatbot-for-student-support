@@ -162,6 +162,23 @@ def delete_all_user_chats(
     return len(chats)
 
 
+def clear_chat_history(db: Session, user_id: int) -> int:
+    """Alias used by chat routes."""
+    return delete_all_user_chats(db, user_id)
+
+
+def count_users(db: Session) -> int:
+    return db.query(User).count()
+
+
+def count_all_chats(db: Session) -> int:
+    return db.query(ChatHistory).count()
+
+
+def count_all_tickets(db: Session) -> int:
+    return db.query(SupportTicket).count()
+
+
 # ==========================
 # Support Ticket CRUD
 # ==========================

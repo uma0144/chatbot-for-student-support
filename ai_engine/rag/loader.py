@@ -16,6 +16,42 @@ class DocumentLoader:
         self.csv_path = os.path.join(data_path, "csv")
         self.json_path = os.path.join(data_path, "json")
         self.md_path = os.path.join(data_path, "md")
+        self.pdf_path = os.path.join(data_path, "pdf")
+
+    def _load_pdf_files(self, documents):
+        if not os.path.exists(self.pdf_path):
+            return
+
+        try:
+            from pypdf import PdfReader
+        except ImportError:
+            print("pypdf not installed — skip PDF knowledge base.")
+            return
+
+        pdf_files = sorted(f for f in os.listdir(self.pdf_path) if f.lower().endswith(".pdf"))
+        print(f"\nFound {len(pdf_files)} PDF file(s)")
+
+        for file in pdf_files:
+            file_path = os.path.join(self.pdf_path, file)
+            try:
+                reader = PdfReader(file_path)
+                pages = []
+                for page in reader.pages:
+                    text = page.extract_text() or ""
+                    if text.strip():
+                        pages.append(text.strip())
+                if not pages:
+                    continue
+                content = "\n\n".join(pages)
+                documents.append(
+                    Document(
+                        page_content=content,
+                        metadata={"source": file, "type": "pdf"},
+                    )
+                )
+                print(f"Loaded PDF -> {file}")
+            except Exception as e:
+                print(f"Error loading PDF {file}: {e}")
 
     def _load_markdown_files(self, documents):
         if not os.path.exists(self.md_path):
@@ -167,6 +203,7 @@ class DocumentLoader:
             print("JSON folder not found.")
 
         self._load_markdown_files(documents)
+        self._load_pdf_files(documents)
 
         print("\n==============================")
         print(f"Total Documents : {len(documents)}")

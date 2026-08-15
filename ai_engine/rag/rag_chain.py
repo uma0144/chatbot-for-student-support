@@ -34,7 +34,7 @@ class RAGChain:
 
         return "\n\n---\n\n".join(parts), docs
 
-    def ask(self, question: str) -> str:
+    def ask(self, question: str, language: str = "en") -> str:
         """
         Retrieve relevant documents and generate an answer.
         """
@@ -52,7 +52,7 @@ class RAGChain:
         if normalized.lower() != question.strip().lower():
             question_note = f"\n(Intended meaning: {normalized})"
 
-        prompt = build_answer_prompt(context, question, question_note)
+        prompt = build_answer_prompt(context, question, question_note, language)
         answer = self.llm.generate(prompt)
 
         if is_refusal(answer):
@@ -65,14 +65,14 @@ class RAGChain:
 
         return answer.strip()
 
-    def _build_question_prompt(self, question: str, context: str) -> str:
+    def _build_question_prompt(self, question: str, context: str, language: str = "en") -> str:
         normalized = normalize_query(question)
         question_note = ""
         if normalized.lower() != question.strip().lower():
             question_note = f"\n(Intended meaning: {normalized})"
-        return build_answer_prompt(context, question, question_note)
+        return build_answer_prompt(context, question, question_note, language)
 
-    def stream_ask(self, question: str) -> Iterator[tuple[str, str]]:
+    def stream_ask(self, question: str, language: str = "en") -> Iterator[tuple[str, str]]:
         """
         Retrieve context, then stream the LLM answer token-by-token.
         Yields (event_type, payload) where event_type is "token" or "replace".
@@ -83,7 +83,7 @@ class RAGChain:
         print(f"STREAM — RETRIEVED {len(docs)} DOCUMENT(S)")
         print("=" * 80)
 
-        prompt = self._build_question_prompt(question, context)
+        prompt = self._build_question_prompt(question, context, language)
         parts: list[str] = []
 
         for token in self.llm.stream(prompt):

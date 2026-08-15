@@ -76,7 +76,9 @@ def chat_stream(
 
     def event_stream():
         try:
-            stream, answer_holder = chat_service.stream_answer_text(request.question)
+            stream, answer_holder = chat_service.stream_answer_text(
+                request.question, language=request.language
+            )
             for event_type, payload in stream:
                 if event_type == "token":
                     yield f"data: {json.dumps({'type': 'token', 'content': payload})}\n\n"
@@ -121,10 +123,15 @@ def history(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):
-    return crud.get_chat_history(
-        db,
-        current_user["id"],
-    )
+    rows = crud.get_chat_history(db, current_user["id"])
+    return [
+        {
+            "id": row.id,
+            "question": row.question,
+            "answer": row.answer,
+        }
+        for row in rows
+    ]
 
 
 @router.delete("/history")

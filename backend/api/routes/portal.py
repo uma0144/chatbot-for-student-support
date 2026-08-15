@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from backend.core.auth import get_current_user
 from backend.database.database import get_db
 from backend.database import crud
+from backend.services.email_service import notify_ticket_created
 from backend.services.knowledge_service import (
     get_topic,
     list_topics,
@@ -74,6 +75,9 @@ def create_ticket(
         subject=payload.subject.strip(),
         description=payload.description.strip(),
     )
+    user = crud.get_user_by_id(db, current_user["id"])
+    if user:
+        notify_ticket_created(user.email, payload.subject, ticket["id"])
     return ticket
 
 

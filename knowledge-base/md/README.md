@@ -34,7 +34,7 @@ Official content for the RAG student-support chatbot. Files in `knowledge-base/m
 
 ```powershell
 cd F:\chatbot-for-student-support
-uv run python .cursor/scripts/build_vectorstore.py
+uv run python scripts/build_vectorstore.py
 ```
 
 Restart backend after rebuild. For Docker, delete the `vector-db` volume and rebuild images.
