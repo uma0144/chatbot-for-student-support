@@ -425,6 +425,14 @@ docker compose up --build
 
 Open http://localhost:5173
 
+### 5. Deploy for everyone (public / LAN)
+
+See **[docs/DEPLOY.md](docs/DEPLOY.md)** for:
+
+- Docker on a cloud server (recommended)
+- Sharing on the same Wi‑Fi / campus network
+- Temporary public link with ngrok
+
 ---
 
 # 📚 Knowledge Base

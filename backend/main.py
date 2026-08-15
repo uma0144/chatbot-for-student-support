@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Load .env from repo root before other backend imports use os.getenv
 from backend.core.env import PROJECT_ROOT  # noqa: F401
+from backend.core.cors_config import get_cors_origin_regex, get_cors_origins
 
 # ==========================
 # Database
@@ -42,12 +43,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
-    # Any localhost port (Vite picks 5173+ when ports are in use)
-    allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
+    allow_origins=get_cors_origins(),
+    allow_origin_regex=get_cors_origin_regex(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
