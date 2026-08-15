@@ -7,7 +7,9 @@ import KnowledgeBase from "./KnowledgeBase";
 import FAQs from "./FAQs";
 import Tickets from "./Tickets";
 import Profile from "./Profile";
-import { sendMessageStream } from "../services/api";
+import ChatHistory from "./ChatHistory";
+import AdminDashboard from "./AdminDashboard";
+import { clearChatHistory, sendMessageStream } from "../services/api";
 import { ITM, formatMessageTime } from "../theme";
 
 let idCounter = 100;
@@ -18,7 +20,9 @@ export default function Home({ user, onLogout }) {
   const [chats, setChats] = useState([]);
   const [activeChatId, setActiveChatId] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
+  const [language, setLanguage] = useState("en");
 
+  const isAdmin = user?.role === "admin";
   const activeChat = chats.find((c) => c.id === activeChatId) ?? null;
 
   const appendToBotMessage = (chatId, botId, updater) => {
@@ -51,9 +55,14 @@ export default function Home({ user, onLogout }) {
     setActiveChatId(chatId);
   };
 
-  const handleClearChats = () => {
+  const handleClearChats = async () => {
     setChats([]);
     setActiveChatId(null);
+    try {
+      await clearChatHistory();
+    } catch (err) {
+      console.warn("Could not clear server history:", err);
+    }
   };
 
   const handleAskInChat = (question) => {
@@ -101,6 +110,7 @@ export default function Home({ user, onLogout }) {
 
     try {
       await sendMessageStream(text, {
+        language,
         onToken: (chunk) => {
           ensureBotMessage();
           appendToBotMessage(chatId, botId, (m) => ({ text: m.text + chunk }));
@@ -152,6 +162,10 @@ export default function Home({ user, onLogout }) {
         return <Tickets />;
       case "profile":
         return <Profile user={user} />;
+      case "history":
+        return <ChatHistory onAskChat={handleAskInChat} />;
+      case "admin":
+        return isAdmin ? <AdminDashboard /> : <Profile user={user} />;
       default:
         return (
           <div className="itm-chat-layout">
@@ -159,8 +173,9 @@ export default function Home({ user, onLogout }) {
               messages={activeChat?.messages ?? []}
               isTyping={isTyping}
               onSuggestion={handleSend}
+              language={language}
             />
-            <MessageInput onSend={handleSend} disabled={isTyping} />
+            <MessageInput onSend={handleSend} disabled={isTyping} language={language} />
           </div>
         );
     }
@@ -178,10 +193,15 @@ export default function Home({ user, onLogout }) {
         onClearChats={handleClearChats}
         user={user}
         onLogout={onLogout}
+        isAdmin={isAdmin}
       />
 
       <div className="flex flex-col flex-1 min-w-0 min-h-0 overflow-hidden">
-        <DashboardHeader activeView={activeView} />
+        <DashboardHeader
+          activeView={activeView}
+          language={language}
+          onLanguageChange={setLanguage}
+        />
         <main
           className={`flex flex-col flex-1 min-h-0${activeView === "chat" ? " itm-chat-main" : " itm-dashboard-main"}`}
         >

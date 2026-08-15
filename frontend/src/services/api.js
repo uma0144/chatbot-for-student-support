@@ -76,12 +76,34 @@ export async function sendMessage(question) {
 /**
  * Stream a chat response token-by-token (ChatGPT-style).
  */
-export async function sendMessageStream(question, { onToken, onReplace, onDone, onError } = {}) {
+export function fetchChatHistory() {
+  return fetch(`${API_BASE_URL}/api/chat/history`, {
+    headers: authHeaders(),
+  }).then(async (response) => {
+    if (!response.ok) throw new Error(await parseErrorResponse(response));
+    return response.json();
+  });
+}
+
+export function clearChatHistory() {
+  return fetch(`${API_BASE_URL}/api/chat/history`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  }).then(async (response) => {
+    if (!response.ok) throw new Error(await parseErrorResponse(response));
+    return response.json();
+  });
+}
+
+export async function sendMessageStream(
+  question,
+  { language = "en", onToken, onReplace, onDone, onError } = {}
+) {
   try {
     const response = await fetch(`${API_BASE_URL}/api/chat/stream`, {
       method: "POST",
       headers: authHeaders(),
-      body: JSON.stringify({ question }),
+      body: JSON.stringify({ question, language }),
     });
 
     if (!response.ok) {

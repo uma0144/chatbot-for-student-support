@@ -1,6 +1,8 @@
 import {
   BookOpen,
+  Clock,
   HelpCircle,
+  LayoutDashboard,
   LogOut,
   MessageSquare,
   Plus,
@@ -11,6 +13,7 @@ import { ITM } from "../theme";
 
 const NAV_ITEMS = [
   { id: "chat", label: "Chat", icon: MessageSquare },
+  { id: "history", label: "Chat History", icon: Clock },
   { id: "kb", label: "Knowledge Base", icon: BookOpen },
   { id: "faqs", label: "FAQs", icon: HelpCircle },
   { id: "tickets", label: "My Tickets", icon: Ticket },
@@ -27,7 +30,12 @@ export default function Sidebar({
   onClearChats,
   user,
   onLogout,
+  isAdmin,
 }) {
+  const navItems = isAdmin
+    ? [...NAV_ITEMS, { id: "admin", label: "Admin", icon: LayoutDashboard }]
+    : NAV_ITEMS;
+
   return (
     <aside
       style={{
@@ -88,7 +96,7 @@ export default function Sidebar({
       </div>
 
       <nav style={{ padding: "16px 12px", flex: 1, overflowY: "auto" }}>
-        {NAV_ITEMS.map((item) => {
+        {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeView === item.id;
           return (

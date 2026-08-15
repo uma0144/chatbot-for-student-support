@@ -97,7 +97,7 @@ function EmptyState({ onSuggestion }) {
   );
 }
 
-export default function ChatBox({ messages, isTyping, onSuggestion }) {
+export default function ChatBox({ messages, isTyping, onSuggestion, language = "en" }) {
   const scrollRef = useRef(null);
   const isStreaming = messages.some((m) => m.streaming);
 
@@ -120,7 +120,7 @@ export default function ChatBox({ messages, isTyping, onSuggestion }) {
     <div ref={scrollRef} className="itm-chat-scroll">
       <div className="itm-chat-thread">
         {messages.map((msg) => (
-          <Message key={msg.id} message={msg} />
+          <Message key={msg.id} message={msg} language={language} />
         ))}
         {isTyping && <TypingRow />}
       </div>
