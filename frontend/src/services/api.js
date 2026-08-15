@@ -4,8 +4,8 @@ import { notifyUnauthorized } from "./session";
 function chatErrorMessage(error) {
   if (error instanceof TypeError && error.message === "Failed to fetch") {
     return (
-      "Cannot reach the server. Is the backend running on port 8080? " +
-      "Run: uv run uvicorn backend.main:app --host 127.0.0.1 --port 8080 --reload"
+      "Cannot reach the server. Is the backend running on port 8081? " +
+      "Run: uv run uvicorn backend.main:app --host 127.0.0.1 --port 8081 --reload"
     );
   }
   return error?.message || "Something went wrong. Please try again.";
