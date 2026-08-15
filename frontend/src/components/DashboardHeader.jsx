@@ -16,14 +16,16 @@ export default function DashboardHeader({ activeView, language, onLanguageChange
   return (
     <header className="itm-dashboard-header">
       <div className="itm-header-left">
-        <button
-          type="button"
-          className="itm-header-menu-btn"
-          onClick={onMenuClick}
-          aria-label="Open menu"
-        >
-          <Menu size={22} strokeWidth={2.25} />
-        </button>
+        {onMenuClick && (
+          <button
+            type="button"
+            className="itm-header-menu-btn"
+            onClick={onMenuClick}
+            aria-label="Open menu"
+          >
+            <Menu size={22} strokeWidth={2.25} />
+          </button>
+        )}
         <div className="itm-header-titles">
           <div className="itm-header-title">{meta.title}</div>
           <div className="itm-header-subtitle">{meta.subtitle}</div>
