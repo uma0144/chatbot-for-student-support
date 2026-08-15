@@ -30,6 +30,12 @@ export default function MessageInput({ onSend, disabled, language = "en" }) {
   };
 
   const handleVoice = () => {
+    if (!window.isSecureContext) {
+      setVoiceError(
+        "Voice mic needs HTTPS or localhost. On your PC use http://localhost:5173 — phone voice won't work on http://10.x.x.x."
+      );
+      return;
+    }
     setVoiceError("");
     toggle(
       (transcript) => {
@@ -55,14 +61,20 @@ export default function MessageInput({ onSend, disabled, language = "en" }) {
             transition: "border-color 0.2s, box-shadow 0.2s",
           }}
         >
-          {supported && (
+          {(supported || typeof window !== "undefined") && (
             <button
               type="button"
               onClick={handleVoice}
               disabled={disabled}
-              className={`itm-voice-btn${listening ? " itm-voice-btn--active" : ""}`}
+              className={`itm-voice-btn${listening ? " itm-voice-btn--active" : ""}${!supported ? " itm-voice-btn--muted" : ""}`}
               aria-label={listening ? "Stop listening" : "Start voice input"}
-              title={listening ? "Listening…" : "Voice input"}
+              title={
+                supported
+                  ? listening
+                    ? "Listening…"
+                    : "Voice input"
+                  : "Voice needs localhost or HTTPS"
+              }
             >
               {listening ? <MicOff size={18} /> : <Mic size={18} />}
             </button>

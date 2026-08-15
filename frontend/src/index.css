@@ -998,6 +998,10 @@ body {
   color: #dc2626;
 }
 
+.itm-voice-btn--muted {
+  opacity: 0.45;
+}
+
 .itm-voice-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;

@@ -5,13 +5,36 @@ function getSpeechRecognition() {
   return window.SpeechRecognition || window.webkitSpeechRecognition || null;
 }
 
+/** Browsers only allow mic access on HTTPS or localhost — not on http://192.168.x.x */
+export function isVoiceInputAvailable() {
+  if (typeof window === "undefined") return false;
+  return Boolean(getSpeechRecognition()) && window.isSecureContext;
+}
+
+function friendlySpeechError(code) {
+  switch (code) {
+    case "not-allowed":
+      return "Microphone blocked. Use https:// or open http://localhost:5173 on your PC, then allow mic in the browser.";
+    case "service-not-allowed":
+      return "Voice input is not allowed on this connection. Use localhost on PC or HTTPS.";
+    case "no-speech":
+      return "No speech detected. Try again and speak clearly.";
+    case "network":
+      return "Voice service needs internet. Check your connection.";
+    case "aborted":
+      return "";
+    default:
+      return code ? `Voice error: ${code}` : "Speech recognition failed.";
+  }
+}
+
 export function useSpeechToText({ language = "en-IN" } = {}) {
   const [listening, setListening] = useState(false);
   const [supported, setSupported] = useState(false);
   const recognitionRef = useRef(null);
 
   useEffect(() => {
-    setSupported(Boolean(getSpeechRecognition()));
+    setSupported(isVoiceInputAvailable());
   }, []);
 
   const stop = useCallback(() => {
@@ -39,7 +62,8 @@ export function useSpeechToText({ language = "en-IN" } = {}) {
 
       recognition.onerror = (event) => {
         setListening(false);
-        onError?.(new Error(event.error || "Speech recognition failed."));
+        const message = friendlySpeechError(event.error);
+        if (message) onError?.(new Error(message));
       };
 
       recognition.onend = () => setListening(false);
