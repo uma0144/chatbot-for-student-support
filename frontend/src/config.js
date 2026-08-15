@@ -1,7 +1,7 @@
 /**
  * API base URL for fetch calls.
- * - Dev (unset): same origin — Vite proxies /api → http://127.0.0.1:8080 (no CORS issues).
- * - Prod / Docker: set VITE_API_BASE_URL (e.g. http://127.0.0.1:8080).
+ * - Dev (unset): same origin — Vite proxies /api → backend (default 8081 in vite.config.js).
+ * - Dev/prod: set VITE_API_BASE_URL in .env.local (UTF-8), e.g. http://127.0.0.1:8081
  */
 const envUrl = import.meta.env.VITE_API_BASE_URL;
 
