@@ -124,18 +124,13 @@ export default function MessageInput({ onSend, disabled, language = "en" }) {
           </p>
         )}
 
-        <p
-          style={{
-            textAlign: "center",
-            fontSize: "11px",
-            color: ITM.muted,
-            marginTop: "12px",
-            lineHeight: 1.4,
-          }}
-        >
+        <p className="itm-message-input-hint itm-message-input-hint--desktop">
           AI-generated answers from the ITM knowledge base. Verify important details with official
           notices.
           {supported && " Use the mic for voice input."}
+        </p>
+        <p className="itm-message-input-hint itm-message-input-hint--mobile">
+          AI answers from ITM knowledge base — verify with official notices.
         </p>
       </div>
     </div>

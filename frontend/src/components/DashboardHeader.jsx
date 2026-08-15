@@ -1,4 +1,4 @@
-import { ITM } from "../theme";
+import { Menu } from "lucide-react";
 
 const VIEW_META = {
   chat: { title: "ITM Student Support", subtitle: "AI-powered student assistant" },
@@ -10,29 +10,27 @@ const VIEW_META = {
   admin: { title: "Admin Dashboard", subtitle: "Users, stats, and PDF uploads" },
 };
 
-export default function DashboardHeader({ activeView, language, onLanguageChange }) {
+export default function DashboardHeader({ activeView, language, onLanguageChange, onMenuClick }) {
   const meta = VIEW_META[activeView] || VIEW_META.chat;
 
   return (
-    <header
-      className="itm-dashboard-header"
-      style={{
-        background: ITM.white,
-        borderBottom: `1px solid ${ITM.border}`,
-        padding: "16px 28px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexShrink: 0,
-        boxShadow: ITM.shadowSm,
-      }}
-    >
-      <div>
-        <div style={{ fontWeight: 800, fontSize: "17px", color: ITM.navy }}>{meta.title}</div>
-        <div style={{ fontSize: "13px", color: ITM.muted, marginTop: "2px" }}>{meta.subtitle}</div>
+    <header className="itm-dashboard-header">
+      <div className="itm-header-left">
+        <button
+          type="button"
+          className="itm-header-menu-btn"
+          onClick={onMenuClick}
+          aria-label="Open menu"
+        >
+          <Menu size={22} strokeWidth={2.25} />
+        </button>
+        <div className="itm-header-titles">
+          <div className="itm-header-title">{meta.title}</div>
+          <div className="itm-header-subtitle">{meta.subtitle}</div>
+        </div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+      <div className="itm-header-actions">
         {(activeView === "chat" || activeView === "history") && onLanguageChange && (
           <select
             className="itm-lang-select"
@@ -41,32 +39,14 @@ export default function DashboardHeader({ activeView, language, onLanguageChange
             aria-label="Response language"
           >
             <option value="en">English</option>
-            <option value="hi">हिंदी (Hindi)</option>
+            <option value="hi">हिंदी</option>
           </select>
         )}
 
         {activeView === "chat" && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "8px 14px",
-              borderRadius: ITM.radiusFull,
-              background: ITM.surface,
-              border: `1px solid ${ITM.border}`,
-            }}
-          >
-            <span
-              className="itm-online-dot"
-              style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: ITM.success,
-              }}
-            />
-            <span style={{ fontSize: "13px", color: ITM.text, fontWeight: 600 }}>Online</span>
+          <div className="itm-header-online">
+            <span className="itm-online-dot" />
+            <span>Online</span>
           </div>
         )}
       </div>

@@ -21,9 +21,12 @@ export default function Home({ user, onLogout }) {
   const [activeChatId, setActiveChatId] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
   const [language, setLanguage] = useState("en");
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const isAdmin = user?.role === "admin";
   const activeChat = chats.find((c) => c.id === activeChatId) ?? null;
+
+  const closeMobileNav = () => setMobileNavOpen(false);
 
   const appendToBotMessage = (chatId, botId, updater) => {
     setChats((prev) =>
@@ -43,16 +46,19 @@ export default function Home({ user, onLogout }) {
     if (view === "chat") {
       setActiveChatId(null);
     }
+    closeMobileNav();
   };
 
   const handleNewChat = () => {
     setActiveView("chat");
     setActiveChatId(null);
+    closeMobileNav();
   };
 
   const handleSelectChat = (chatId) => {
     setActiveView("chat");
     setActiveChatId(chatId);
+    closeMobileNav();
   };
 
   const handleClearChats = async () => {
@@ -67,6 +73,7 @@ export default function Home({ user, onLogout }) {
 
   const handleAskInChat = (question) => {
     setActiveView("chat");
+    closeMobileNav();
     handleSend(question);
   };
 
@@ -182,7 +189,16 @@ export default function Home({ user, onLogout }) {
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden" style={{ background: ITM.bg }}>
+    <div className="itm-app-shell" style={{ background: ITM.bg }}>
+      {mobileNavOpen && (
+        <button
+          type="button"
+          className="itm-sidebar-overlay"
+          aria-label="Close menu"
+          onClick={closeMobileNav}
+        />
+      )}
+
       <Sidebar
         chats={chats}
         activeChatId={activeChatId}
@@ -194,16 +210,19 @@ export default function Home({ user, onLogout }) {
         user={user}
         onLogout={onLogout}
         isAdmin={isAdmin}
+        isMobileOpen={mobileNavOpen}
+        onClose={closeMobileNav}
       />
 
-      <div className="flex flex-col flex-1 min-w-0 min-h-0 overflow-hidden">
+      <div className="itm-main-column">
         <DashboardHeader
           activeView={activeView}
           language={language}
           onLanguageChange={setLanguage}
+          onMenuClick={() => setMobileNavOpen(true)}
         />
         <main
-          className={`flex flex-col flex-1 min-h-0${activeView === "chat" ? " itm-chat-main" : " itm-dashboard-main"}`}
+          className={`itm-main-content${activeView === "chat" ? " itm-chat-main" : " itm-dashboard-main"}`}
         >
           {renderMain()}
         </main>
