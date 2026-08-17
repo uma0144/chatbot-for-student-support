@@ -22,7 +22,7 @@ class LLMModel:
         if self._llm is None:
             api_key = require_groq_api_key()
             self._llm = ChatGroq(
-                model=os.getenv("LLM_MODEL", "llama-3.3-70b-versatile"),
+                model=os.getenv("LLM_MODEL", "openai/gpt-oss-120b"),
                 temperature=float(os.getenv("TEMPERATURE", 0.2)),
                 api_key=api_key,
             )
@@ -35,6 +35,12 @@ class LLMModel:
                 "Invalid GROQ_API_KEY. Your key may be revoked or wrong. "
                 "Create a new key at https://console.groq.com/, set it in "
                 f"{PROJECT_ROOT / '.env'}, then restart the backend."
+            ) from exc
+        if "model_not_found" in err or "does not exist" in err.lower():
+            raise RuntimeError(
+                "Groq model not found or deprecated. Set LLM_MODEL in .env to a current "
+                "model, e.g. openai/gpt-oss-120b (see https://console.groq.com/docs/models), "
+                "then restart the backend."
             ) from exc
         raise exc
 
