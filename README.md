@@ -263,7 +263,116 @@ Student-Support-Chatbot/
 
 ---
 
-# 🚀 Installation
+# ⚡ Quick Start (Local)
+
+You need **two servers** running:
+
+| Part | URL | Command |
+| --- | --- | --- |
+| **Backend** (API) | http://localhost:8000 | `uvicorn backend.main:app --reload` |
+| **Frontend** (UI) | http://localhost:5173 | `cd frontend && npm run dev` |
+
+### One-time setup
+
+```bash
+git clone https://github.com/uma0144/chatbot-for-student-support.git
+cd chatbot-for-student-support
+cp .env.example .env
+# Edit .env → set GROQ_API_KEY from https://console.groq.com
+
+pip install -r requirements.txt
+python .cursor/scripts/build_vectorstore.py
+
+cd frontend && npm install && cd ..
+```
+
+### Run (two terminals)
+
+**Terminal 1 — backend:**
+```bash
+uvicorn backend.main:app --reload
+```
+
+**Terminal 2 — frontend:**
+```bash
+cd frontend
+npm run dev
+```
+
+Open **http://localhost:5173** → Register → Login → Chat.
+
+**Or one command (Linux/macOS):**
+```bash
+chmod +x scripts/run-local.sh
+./scripts/run-local.sh
+```
+
+Test backend: http://localhost:8000/health → `{"status":"healthy"}`
+
+---
+
+# 🆓 Deploy for FREE (Render + Vercel)
+
+| Service | Host | Cost | URL you get |
+| --- | --- | --- | --- |
+| **Backend** | [Render](https://render.com) | Free | `https://your-api.onrender.com` |
+| **Frontend** | [Vercel](https://vercel.com) | Free | `https://your-app.vercel.app` |
+| **AI (Groq)** | [Groq Console](https://console.groq.com) | Free tier | API key only |
+
+### Step 1 — Backend on Render (free)
+
+1. Sign up at https://render.com with GitHub.
+2. **New** → **Web Service** → repo `uma0144/chatbot-for-student-support`.
+3. Settings:
+
+| Field | Value |
+| --- | --- |
+| Build Command | `pip install -r requirements.txt && python .cursor/scripts/build_vectorstore.py` |
+| Start Command | `uvicorn backend.main:app --host 0.0.0.0 --port $PORT` |
+
+4. Environment variables:
+
+| Key | Value |
+| --- | --- |
+| `GROQ_API_KEY` | your Groq key |
+| `SECRET_KEY` | any long random string |
+
+5. Deploy → copy URL e.g. `https://chatbot-for-student-support-2.onrender.com`
+6. Test: `https://YOUR-URL.onrender.com/health`
+
+### Step 2 — Frontend on Vercel (free)
+
+1. Sign up at https://vercel.com with GitHub.
+2. **Add New** → **Project** → import `chatbot-for-student-support`.
+3. Settings:
+
+| Field | Value |
+| --- | --- |
+| Root Directory | `frontend` |
+| Framework | **Vite** (not FastAPI) |
+| Project name | use hyphens only e.g. `itm-student-chatbot` |
+
+4. Environment variable:
+
+| Key | Value |
+| --- | --- |
+| `VITE_API_BASE_URL` | your Render URL (no trailing slash) |
+
+5. **Deploy** → copy Vercel URL.
+
+### Step 3 — Connect them
+
+On Render → **Environment** → add:
+
+```text
+ALLOWED_ORIGINS=https://your-vercel-url.vercel.app
+```
+
+Save (Render redeploys). Open your **Vercel URL** → Register → Login → Chat.
+
+**Share with HOD:** your Vercel URL (the public chatbot link).
+
+---
 
 ## Clone Repository
 
