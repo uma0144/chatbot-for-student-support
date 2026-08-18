@@ -348,7 +348,7 @@ Test backend: http://localhost:8000/health → `{"status":"healthy"}`
 
 | Field | Value |
 | --- | --- |
-| Root Directory | `frontend` |
+| Root Directory | `frontend` **(required — Edit → type `frontend`)** |
 | Framework | **Vite** (not FastAPI) |
 | Project name | use hyphens only e.g. `itm-student-chatbot` |
 
