@@ -1,0 +1,42 @@
+# Production deployment — single URL (nginx on port 80)
+#
+# Usage:
+#   cp .env.example .env   # set GROQ_API_KEY and SECRET_KEY
+#   docker compose -f docker-compose.prod.yml up --build -d
+#
+# Open: http://localhost (or your server IP / domain)
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: sqlite:///data/student_chatbot.db
+      HOST: 0.0.0.0
+      PORT: 8000
+      FAISS_PATH: storage/vector_db
+      DATA_PATH: knowledge-base
+      ALLOWED_ORIGINS: http://localhost,http://127.0.0.1
+    volumes:
+      - chatbot-data:/app/data
+      - vector-db:/app/storage/vector_db
+    restart: unless-stopped
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend.prod
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  chatbot-data:
+  vector-db:
