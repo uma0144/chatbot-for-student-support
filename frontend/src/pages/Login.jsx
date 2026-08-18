@@ -39,12 +39,19 @@ export default function Login({ onLogin, onGoToRegister }) {
           data = JSON.parse(raw);
         } catch {
           throw new Error(
-            "Backend returned an invalid response. Is the API running on port 8081?"
+            "Backend returned an invalid response. Check Render deploy logs."
           );
         }
       } else if (!response.ok) {
+        if (response.status === 405) {
+          throw new Error(
+            "API misconfigured (HTTP 405). Login must call Render, not Vercel. " +
+              "Set VITE_API_BASE_URL=https://chatbot-for-student-support-4.onrender.com on Vercel and redeploy."
+          );
+        }
         throw new Error(
-          `Cannot reach the API (HTTP ${response.status}). Start the backend: uv run uvicorn backend.main:app --host 127.0.0.1 --port 8081 --reload`
+          `Cannot reach the API (HTTP ${response.status}). ` +
+            "Ensure Render backend is Live: https://chatbot-for-student-support-4.onrender.com/health"
         );
       }
 
