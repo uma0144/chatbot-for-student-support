@@ -344,21 +344,20 @@ Test backend: http://localhost:8000/health → `{"status":"healthy"}`
 
 1. Sign up at https://vercel.com with GitHub.
 2. **Add New** → **Project** → import `chatbot-for-student-support`.
-3. Settings:
-
-| Field | Value |
-| --- | --- |
-| Root Directory | `frontend` **(required — Edit → type `frontend`)** |
-| Framework | **Vite** (not FastAPI) |
-| Project name | use hyphens only e.g. `itm-student-chatbot` |
-
-4. Environment variable:
+3. **Before Deploy**, click **Edit** on Root Directory → set to `frontend`.
+4. **Framework Preset** → **Vite**.
+5. **Build & Development Settings** — turn OFF overrides or set exactly:
+   - Install Command: `npm ci`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+   - Do **NOT** use `cd frontend` (Root Directory is already `frontend`).
+6. Environment variable:
 
 | Key | Value |
 | --- | --- |
-| `VITE_API_BASE_URL` | your Render URL (no trailing slash) |
+| `VITE_API_BASE_URL` | `https://chatbot-for-student-support-4.onrender.com` |
 
-5. **Deploy** → copy Vercel URL.
+7. **Deploy** → copy Vercel URL.
 
 ### Step 3 — Connect them
 
