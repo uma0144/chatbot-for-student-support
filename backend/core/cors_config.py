@@ -30,6 +30,17 @@ def get_cors_origins() -> list[str]:
 
 
 def get_cors_origin_regex() -> str | None:
+    """Regex patterns for local dev and Vercel preview/production URLs."""
+    parts: list[str] = []
+
     if os.getenv("CORS_ALLOW_LOCALHOST", "true").lower() in ("1", "true", "yes"):
-        return r"http://(localhost|127\.0\.0\.1):\d+"
-    return None
+        parts.append(r"http://(localhost|127\.0\.0\.1):\d+")
+
+    # Any Vercel deployment (preview URLs change on each deploy)
+    if os.getenv("CORS_ALLOW_VERCEL", "true").lower() in ("1", "true", "yes"):
+        parts.append(r"https://[\w-]+\.vercel\.app")
+
+    if not parts:
+        return None
+
+    return "|".join(parts)
