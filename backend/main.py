@@ -44,29 +44,6 @@ async def lifespan(app: FastAPI):
     yield
 
 
-_DEFAULT_ORIGINS = [
-    "http://localhost",
-    "http://127.0.0.1",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5174",
-    "http://localhost:5175",
-    "http://127.0.0.1:5175",
-    "http://localhost:5176",
-    "http://127.0.0.1:5176",
-    "http://localhost:5177",
-    "http://127.0.0.1:5177",
-]
-
-_extra_origins = os.getenv("ALLOWED_ORIGINS", "")
-ALLOWED_ORIGINS = list(
-    dict.fromkeys(
-        _DEFAULT_ORIGINS
-        + [origin.strip() for origin in _extra_origins.split(",") if origin.strip()]
-    )
-)
-
 # ==========================
 # Create FastAPI App
 # ==========================
@@ -84,12 +61,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-<<<<<<< HEAD
-    allow_origins=ALLOWED_ORIGINS,
-=======
     allow_origins=get_cors_origins(),
     allow_origin_regex=get_cors_origin_regex(),
->>>>>>> cursor/chatgpt-streaming-0ee7
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -99,17 +72,20 @@ app.add_middleware(
 # Root Endpoint
 # ==========================
 
+
 @app.get("/")
 async def root():
     return {
         "message": "Welcome to AI Student Support Chatbot",
         "version": "1.0.0",
-        "status": "Running"
+        "status": "Running",
     }
+
 
 # ==========================
 # Health Check
 # ==========================
+
 
 @app.get("/health")
 async def health():
@@ -120,6 +96,7 @@ async def health():
         "groq_configured": bool(get_groq_api_key()),
     }
 
+
 # ==========================
 # Register Routers
 # ==========================
@@ -129,17 +106,17 @@ app.include_router(auth_router)
 app.include_router(
     chat_router,
     prefix="/api/chat",
-    tags=["Chat"]
+    tags=["Chat"],
 )
 
 app.include_router(
     admin_router,
     prefix="/api/admin",
-    tags=["Admin"]
+    tags=["Admin"],
 )
 
 app.include_router(
     portal_router,
     prefix="/api/portal",
-    tags=["Portal"]
+    tags=["Portal"],
 )

@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-=======
 from collections.abc import Iterator
 
-from ai_engine.rag.rag_chain import RAGChain
-
->>>>>>> cursor/chatgpt-streaming-0ee7
 from backend.models.request import ChatRequest
 from backend.models.response import ChatResponse
 
@@ -25,32 +20,20 @@ def _get_rag_chain():
 
 class ChatService:
     def get_response(self, request: ChatRequest) -> ChatResponse:
-<<<<<<< HEAD
-        answer = _get_rag_chain().ask(request.question)
+        language = getattr(request, "language", "en") or "en"
+        answer = _get_rag_chain().ask(request.question, language=language)
         return ChatResponse(answer=answer)
-=======
-        """
-        Get answer from RAG system
-        """
-
-        answer = self.rag.ask(request.question, language=request.language)
-
-        return ChatResponse(
-            answer=answer
-        )
->>>>>>> cursor/chatgpt-streaming-0ee7
 
     def stream_answer_text(
         self, question: str, language: str = "en"
     ) -> tuple[Iterator[tuple[str, str]], list[str]]:
-        """
-        Returns the RAG stream iterator and a mutable list that will hold the final answer.
-        """
+        """RAG stream iterator plus a mutable list that receives the final answer."""
+        rag = _get_rag_chain()
         final_answer: list[str] = [""]
 
         def tracked_stream() -> Iterator[tuple[str, str]]:
             parts: list[str] = []
-            for event_type, payload in self.rag.stream_ask(question, language=language):
+            for event_type, payload in rag.stream_ask(question, language=language):
                 if event_type == "token":
                     parts.append(payload)
                 elif event_type == "replace":

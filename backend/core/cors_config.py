@@ -3,8 +3,17 @@
 import os
 
 
+def _append_origins(origins: list[str], raw: str) -> None:
+    for item in raw.split(","):
+        origin = item.strip().rstrip("/")
+        if origin and origin not in origins:
+            origins.append(origin)
+
+
 def get_cors_origins() -> list[str]:
     origins: list[str] = [
+        "http://localhost",
+        "http://127.0.0.1",
         "http://localhost:5173",
         "http://127.0.0.1:5173",
     ]
@@ -13,18 +22,14 @@ def get_cors_origins() -> list[str]:
     if frontend_url:
         origins.append(frontend_url.rstrip("/"))
 
-    extra = os.getenv("CORS_ORIGINS", "").strip()
-    if extra:
-        for item in extra.split(","):
-            origin = item.strip().rstrip("/")
-            if origin and origin not in origins:
-                origins.append(origin)
+    # Render docs often use ALLOWED_ORIGINS; app also supports CORS_ORIGINS
+    _append_origins(origins, os.getenv("ALLOWED_ORIGINS", ""))
+    _append_origins(origins, os.getenv("CORS_ORIGINS", ""))
 
-    return origins
+    return list(dict.fromkeys(origins))
 
 
 def get_cors_origin_regex() -> str | None:
-    # Local dev: any localhost port (Vite uses 5173+)
     if os.getenv("CORS_ALLOW_LOCALHOST", "true").lower() in ("1", "true", "yes"):
         return r"http://(localhost|127\.0\.0\.1):\d+"
     return None
