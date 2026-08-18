@@ -1,62 +1,46 @@
-import ITMLogo from "./ITMLogo";
-import { ITM } from "../theme";
+import { Volume2 } from "lucide-react";
+import BotAvatar from "./BotAvatar";
+import MarkdownContent from "./MarkdownContent";
+import { speakText } from "../hooks/useSpeech";
 
-export default function Message({ message }) {
+export default function Message({ message, language = "en" }) {
   const isUser = message.sender === "user";
+  const time = message.time;
+  const speechLang = language === "hi" ? "hi-IN" : "en-IN";
 
   if (isUser) {
     return (
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <div
-          style={{
-            maxWidth: "75%",
-            borderRadius: "6px",
-            padding: "12px 18px",
-            fontSize: "15px",
-            lineHeight: 1.6,
-            whiteSpace: "pre-wrap",
-            background: ITM.navy,
-            color: ITM.white,
-          }}
-        >
-          {message.text}
+      <div className="itm-user-row">
+        <div className="itm-user-bubble">
+          <p>{message.text}</p>
         </div>
+        {time && <span className="itm-msg-time itm-msg-time--user">{time}</span>}
       </div>
     );
   }
 
+  const canSpeak = message.text && !message.streaming && typeof window !== "undefined" && window.speechSynthesis;
+
   return (
-    <div style={{ display: "flex", gap: "12px" }}>
-      <div
-        style={{
-          width: "36px",
-          height: "36px",
-          borderRadius: "6px",
-          background: ITM.white,
-          border: `1px solid ${ITM.border}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: 0,
-          padding: "4px",
-        }}
-      >
-        <ITMLogo variant="vertical" height={32} />
-      </div>
-      <div
-        style={{
-          maxWidth: "75%",
-          borderRadius: "6px",
-          padding: "12px 18px",
-          fontSize: "15px",
-          lineHeight: 1.6,
-          whiteSpace: "pre-wrap",
-          background: "#f8fafc",
-          border: `1px solid ${ITM.border}`,
-          color: ITM.text,
-        }}
-      >
-        {message.text}
+    <div className="itm-assistant-row">
+      <BotAvatar />
+      <div className="itm-assistant-content">
+        <MarkdownContent text={message.text || ""} streaming={message.streaming} />
+        <div className="itm-assistant-actions">
+          {canSpeak && (
+            <button
+              type="button"
+              className="itm-tts-btn"
+              onClick={() => speakText(message.text, { language: speechLang })}
+              aria-label="Read aloud"
+              title="Read aloud"
+            >
+              <Volume2 size={14} />
+              Listen
+            </button>
+          )}
+          {time && !message.streaming && <span className="itm-msg-time">{time}</span>}
+        </div>
       </div>
     </div>
   );

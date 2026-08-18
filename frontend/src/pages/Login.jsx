@@ -32,7 +32,21 @@ export default function Login({ onLogin, onGoToRegister }) {
         }),
       });
 
-      const data = await response.json();
+      const raw = await response.text();
+      let data = {};
+      if (raw) {
+        try {
+          data = JSON.parse(raw);
+        } catch {
+          throw new Error(
+            "Backend returned an invalid response. Is the API running on port 8081?"
+          );
+        }
+      } else if (!response.ok) {
+        throw new Error(
+          `Cannot reach the API (HTTP ${response.status}). Start the backend: uv run uvicorn backend.main:app --host 127.0.0.1 --port 8081 --reload`
+        );
+      }
 
       if (!response.ok) {
         throw new Error(data.detail || "Invalid email or password");
@@ -40,8 +54,16 @@ export default function Login({ onLogin, onGoToRegister }) {
 
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("token_type", data.token_type);
-      localStorage.setItem("user_email", email.trim());
-      onLogin(email.trim());
+      localStorage.setItem("user_email", data.email || email.trim());
+      localStorage.setItem("user_name", data.name || "");
+      localStorage.setItem("user_id", String(data.id ?? ""));
+      localStorage.setItem("user_role", data.role || "student");
+      onLogin({
+        id: data.id,
+        name: data.name,
+        email: data.email || email.trim(),
+        role: data.role,
+      });
     } catch (err) {
       console.error("Login error:", err);
       setError(err.message || "Unable to connect to the server.");
@@ -52,30 +74,20 @@ export default function Login({ onLogin, onGoToRegister }) {
 
   return (
     <AuthLayout
-      title="Student Support Portal"
-      subtitle="Sign in to continue"
+      title="Welcome back"
+      subtitle="Sign in to access student support"
       footer={
         <>
           Don&apos;t have an account?{" "}
-          <button
-            type="button"
-            onClick={onGoToRegister}
-            style={{
-              color: ITM.navy,
-              fontWeight: 600,
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
+          <button type="button" className="itm-link" onClick={onGoToRegister}>
             Sign up
           </button>
         </>
       }
     >
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "16px" }}>
-          <label className="itm-label">Email ID</label>
+        <div style={{ marginBottom: "18px" }}>
+          <label className="itm-label">Username or Email</label>
           <input
             type="email"
             value={email}
@@ -89,7 +101,7 @@ export default function Login({ onLogin, onGoToRegister }) {
           />
         </div>
 
-        <div style={{ marginBottom: "16px" }}>
+        <div style={{ marginBottom: "8px" }}>
           <label className="itm-label">Password</label>
           <div style={{ position: "relative" }}>
             <input
@@ -99,38 +111,56 @@ export default function Login({ onLogin, onGoToRegister }) {
                 setPassword(e.target.value);
                 setError("");
               }}
-              placeholder="Enter password"
+              placeholder="Enter your password"
               autoComplete="current-password"
               className="itm-input"
-              style={{ paddingRight: "44px" }}
+              style={{ paddingRight: "48px" }}
             />
             <button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
               style={{
                 position: "absolute",
-                right: "12px",
+                right: "14px",
                 top: "50%",
                 transform: "translateY(-50%)",
                 background: "none",
                 border: "none",
                 color: ITM.muted,
                 cursor: "pointer",
+                padding: "4px",
               }}
+              aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
         </div>
 
+        <div style={{ marginBottom: "20px", textAlign: "right" }}>
+          <button type="button" className="itm-link" style={{ fontSize: "12px" }}>
+            Forgot password?
+          </button>
+        </div>
+
         {error && (
-          <p style={{ color: "#dc2626", fontSize: "13px", marginBottom: "12px" }}>
+          <p
+            style={{
+              color: ITM.error,
+              fontSize: "13px",
+              marginBottom: "16px",
+              padding: "10px 14px",
+              background: "#fef2f2",
+              borderRadius: ITM.radiusSm,
+              border: "1px solid #fecaca",
+            }}
+          >
             {error}
           </p>
         )}
 
-        <button type="submit" disabled={loading} className="itm-btn-primary">
-          {loading ? "Signing in..." : "Login to Portal"}
+        <button type="submit" disabled={loading} className="itm-btn-gold-login">
+          {loading ? "Signing in..." : "Log In"}
         </button>
       </form>
     </AuthLayout>

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
+import { Sparkles } from "lucide-react";
 import Message from "./Message";
-import ITMLogo from "./ITMLogo";
+import BotAvatar from "./BotAvatar";
 import { ITM } from "../theme";
 
 const SUGGESTIONS = [
@@ -8,41 +9,18 @@ const SUGGESTIONS = [
   "Admission eligibility criteria",
   "Scholarship information",
   "Examination notices",
+  "Registration process",
+  "Important dates",
 ];
 
 function TypingRow() {
   return (
-    <div style={{ display: "flex", gap: "12px" }}>
-      <div
-        style={{
-          width: "36px",
-          height: "36px",
-          borderRadius: "6px",
-          background: ITM.white,
-          border: `1px solid ${ITM.border}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: 0,
-          padding: "4px",
-        }}
-      >
-        <ITMLogo variant="vertical" height={28} />
-      </div>
-      <div
-        style={{
-          background: "#f8fafc",
-          border: `1px solid ${ITM.border}`,
-          borderRadius: "6px",
-          padding: "14px 18px",
-          display: "flex",
-          gap: "6px",
-          alignItems: "center",
-        }}
-      >
-        <span className="bg-gray-300 rounded-full animate-bounce" style={{ width: "8px", height: "8px" }} />
-        <span className="bg-gray-300 rounded-full animate-bounce" style={{ width: "8px", height: "8px", animationDelay: "0.15s" }} />
-        <span className="bg-gray-300 rounded-full animate-bounce" style={{ width: "8px", height: "8px", animationDelay: "0.3s" }} />
+    <div className="itm-assistant-row itm-assistant-row--typing">
+      <BotAvatar />
+      <div className="itm-typing-dots" aria-label="Assistant is typing">
+        <span />
+        <span />
+        <span />
       </div>
     </div>
   );
@@ -57,32 +35,60 @@ function EmptyState({ onSuggestion }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "24px",
+        padding: "32px 24px",
       }}
     >
-      <ITMLogo variant="vertical" height={100} style={{ marginBottom: "20px" }} />
-      <h1 style={{ fontSize: "26px", fontWeight: 700, color: ITM.navy, marginBottom: "8px" }}>
-        Student Support Chatbot
+      <div
+        style={{
+          width: 64,
+          height: 64,
+          borderRadius: "16px",
+          background: `linear-gradient(145deg, ${ITM.navy} 0%, ${ITM.navyDark} 100%)`,
+          border: "2px solid rgba(245, 158, 11, 0.35)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "20px",
+          boxShadow: ITM.shadowMd,
+        }}
+      >
+        <Sparkles size={28} style={{ color: ITM.gold }} />
+      </div>
+      <h1
+        style={{
+          fontSize: "28px",
+          fontWeight: 800,
+          color: ITM.navy,
+          marginBottom: "8px",
+          textAlign: "center",
+        }}
+      >
+        How can we help you today?
       </h1>
-      <p style={{ fontSize: "13px", color: ITM.muted, marginBottom: "28px" }}>
-        Official information from the ITM knowledge base
+      <p
+        style={{
+          fontSize: "14px",
+          color: ITM.muted,
+          marginBottom: "32px",
+          textAlign: "center",
+          maxWidth: "400px",
+          lineHeight: 1.5,
+        }}
+      >
+        Ask about admissions, fees, scholarships, exams, or campus services. Answers come from the
+        official ITM knowledge base.
       </p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", justifyContent: "center", maxWidth: "520px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+          justifyContent: "center",
+          maxWidth: "560px",
+        }}
+      >
         {SUGGESTIONS.map((s) => (
-          <button
-            key={s}
-            type="button"
-            onClick={() => onSuggestion(s)}
-            style={{
-              padding: "10px 16px",
-              background: "#f1f5f9",
-              border: `1px solid ${ITM.border}`,
-              borderRadius: "4px",
-              fontSize: "13px",
-              color: ITM.navy,
-              cursor: "pointer",
-            }}
-          >
+          <button key={s} type="button" onClick={() => onSuggestion(s)} className="itm-chip">
             {s}
           </button>
         ))}
@@ -91,38 +97,32 @@ function EmptyState({ onSuggestion }) {
   );
 }
 
-export default function ChatBox({ messages, isTyping, onSuggestion }) {
-  const bottomRef = useRef(null);
+export default function ChatBox({ messages, isTyping, onSuggestion, language = "en" }) {
+  const scrollRef = useRef(null);
+  const isStreaming = messages.some((m) => m.streaming);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping]);
+    const el = scrollRef.current;
+    if (!el) return;
+    // Keep view pinned to latest message while streaming
+    el.scrollTop = el.scrollHeight;
+  }, [messages, isTyping, isStreaming]);
 
   if (messages.length === 0) {
     return (
-      <div style={{ flex: 1, overflowY: "auto" }}>
+      <div ref={scrollRef} className="itm-chat-scroll">
         <EmptyState onSuggestion={onSuggestion} />
       </div>
     );
   }
 
   return (
-    <div style={{ flex: 1, overflowY: "auto" }}>
-      <div
-        style={{
-          maxWidth: "760px",
-          margin: "0 auto",
-          padding: "28px 24px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-        }}
-      >
+    <div ref={scrollRef} className="itm-chat-scroll">
+      <div className="itm-chat-thread">
         {messages.map((msg) => (
-          <Message key={msg.id} message={msg} />
+          <Message key={msg.id} message={msg} language={language} />
         ))}
         {isTyping && <TypingRow />}
-        <div ref={bottomRef} />
       </div>
     </div>
   );

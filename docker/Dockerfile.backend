@@ -7,13 +7,16 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+COPY docker/filter_requirements.py docker/install-backend-deps.sh /docker/
+
+RUN chmod +x /docker/install-backend-deps.sh \
+    && /docker/install-backend-deps.sh
 
 COPY backend ./backend
 COPY ai_engine ./ai_engine
 COPY config ./config
 COPY knowledge-base ./knowledge-base
-COPY .cursor/scripts ./.cursor/scripts
+COPY scripts ./scripts
 
 RUN mkdir -p storage/vector_db data
 
@@ -24,10 +27,12 @@ COPY docker/backend-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENV PYTHONUNBUFFERED=1 \
+    PATH="/app/.venv/bin:$PATH" \
     PORT=8000 \
     DATABASE_URL=sqlite:///data/student_chatbot.db \
     FAISS_PATH=storage/vector_db \
-    DATA_PATH=knowledge-base
+    DATA_PATH=knowledge-base \
+    HF_HOME=/app/.cache/huggingface
 
 EXPOSE 8000
 

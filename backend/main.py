@@ -3,6 +3,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
+# Load .env from repo root before other backend imports use os.getenv
+from backend.core.env import PROJECT_ROOT  # noqa: F401
+from backend.core.cors_config import get_cors_origin_regex, get_cors_origins
+
 # ==========================
 # Database
 # ==========================
@@ -17,6 +21,7 @@ import backend.database.models
 from backend.api.routes.chat import router as chat_router
 from backend.api.routes.auth import router as auth_router
 from backend.api.routes.admin import router as admin_router
+from backend.api.routes.portal import router as portal_router
 
 
 def _ensure_runtime_directories():
@@ -79,7 +84,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
+<<<<<<< HEAD
     allow_origins=ALLOWED_ORIGINS,
+=======
+    allow_origins=get_cors_origins(),
+    allow_origin_regex=get_cors_origin_regex(),
+>>>>>>> cursor/chatgpt-streaming-0ee7
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -103,8 +113,11 @@ async def root():
 
 @app.get("/health")
 async def health():
+    from backend.core.groq_config import get_groq_api_key
+
     return {
-        "status": "healthy"
+        "status": "healthy",
+        "groq_configured": bool(get_groq_api_key()),
     }
 
 # ==========================
@@ -123,4 +136,10 @@ app.include_router(
     admin_router,
     prefix="/api/admin",
     tags=["Admin"]
+)
+
+app.include_router(
+    portal_router,
+    prefix="/api/portal",
+    tags=["Portal"]
 )
