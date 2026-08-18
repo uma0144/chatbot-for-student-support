@@ -1,0 +1,35 @@
+# Render.com blueprint — backend API (Docker)
+# Docs: https://render.com/docs/blueprint-spec
+#
+# After deploy, set ALLOWED_ORIGINS to your frontend URL (e.g. Vercel).
+# Deploy frontend separately on Vercel with VITE_API_BASE_URL=https://your-backend.onrender.com
+
+services:
+  - type: web
+    name: itm-chatbot-api
+    runtime: docker
+    dockerfilePath: docker/Dockerfile.backend
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        value: llama-3.3-70b-versatile
+      - key: TEMPERATURE
+        value: "0.2"
+      - key: DATABASE_URL
+        value: sqlite:///data/student_chatbot.db
+      - key: FAISS_PATH
+        value: storage/vector_db
+      - key: DATA_PATH
+        value: knowledge-base
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        sync: false
+    disk:
+      name: chatbot-data
+      mountPath: /app/data
+      sizeGB: 1

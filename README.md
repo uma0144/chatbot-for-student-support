@@ -386,6 +386,68 @@ Data is persisted in Docker volumes (`chatbot-data` for SQLite, `vector-db` for 
 
 ---
 
+# 🌐 Deploy to Production
+
+## Option A — One server (Docker, recommended for demo/VPS)
+
+Runs frontend + backend on **one URL** (nginx serves the app and proxies `/api` to FastAPI).
+
+```bash
+cp .env.example .env
+# Set GROQ_API_KEY and a strong SECRET_KEY in .env
+
+docker compose -f docker-compose.prod.yml up --build -d
+```
+
+| Service | URL |
+| --- | --- |
+| App (login + chat) | http://localhost (port 80) |
+| Health check | http://localhost/health |
+
+Stop:
+
+```bash
+docker compose -f docker-compose.prod.yml down
+```
+
+Deploy on a VPS (DigitalOcean, AWS EC2, college server): open port 80, point your domain DNS to the server IP.
+
+---
+
+## Option B — Free cloud (Render + Vercel)
+
+**Backend on Render**
+
+1. Push this repo to GitHub.
+2. Go to [Render](https://render.com) → **New** → **Blueprint** → connect repo (uses `render.yaml`).
+3. Set environment variables:
+   - `GROQ_API_KEY` — your Groq API key
+   - `ALLOWED_ORIGINS` — your Vercel URL, e.g. `https://your-app.vercel.app`
+4. After deploy, copy the backend URL, e.g. `https://itm-chatbot-api.onrender.com`.
+
+**Frontend on Vercel**
+
+1. Go to [Vercel](https://vercel.com) → **Import** → select this repo.
+2. Set **Root Directory** to `frontend`.
+3. Add environment variable:
+   - `VITE_API_BASE_URL` = your Render backend URL (no trailing slash)
+4. Deploy. Your chatbot URL will be e.g. `https://your-app.vercel.app`.
+
+**Test backend:** `https://your-backend.onrender.com/health` should return `{"status":"healthy"}`.
+
+---
+
+## Required environment variables (production)
+
+| Variable | Required | Description |
+| --- | --- | --- |
+| `GROQ_API_KEY` | Yes | Groq API key from [console.groq.com](https://console.groq.com) |
+| `SECRET_KEY` | Yes | Random secret for JWT (change from default) |
+| `ALLOWED_ORIGINS` | For split deploy | Comma-separated frontend URLs for CORS |
+| `VITE_API_BASE_URL` | For Vercel | Backend URL at build time |
+
+---
+
 # 📚 Knowledge Base
 
 The chatbot retrieves information from:

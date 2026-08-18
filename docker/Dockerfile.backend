@@ -17,6 +17,9 @@ COPY .cursor/scripts ./.cursor/scripts
 
 RUN mkdir -p storage/vector_db data
 
+# Bake FAISS index into the image (faster cold starts on cloud deploy)
+RUN uv run python .cursor/scripts/build_vectorstore.py
+
 COPY docker/backend-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
