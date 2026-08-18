@@ -1,0 +1,16 @@
+# Backend runs on Render — deploy only the React frontend from /frontend
+backend/
+ai_engine/
+knowledge-base/
+storage/
+tests/
+scripts/
+docker/
+.cursor/
+*.py
+pyproject.toml
+uv.lock
+requirements.txt
+docker-compose.yml
+docker-compose.prod.yml
+render.yaml
