@@ -1,3 +1,5 @@
+import os
+
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
@@ -9,15 +11,19 @@ class Retriever:
 
     def __init__(
         self,
-        db_path="storage/vector_db",
-        model_name="sentence-transformers/all-MiniLM-L6-v2",
+        db_path=None,
+        model_name=None,
     ):
+        db_path = db_path or os.getenv("FAISS_PATH", "storage/vector_db")
+        model_name = model_name or os.getenv(
+            "MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2"
+        )
 
         self.embedding_model = HuggingFaceEmbeddings(
             model_name=model_name
         )
 
-        print("Loading FAISS Vector Database...")
+        print("Loading FAISS Vector Database from:", db_path)
 
         self.vector_db = FAISS.load_local(
             db_path,
@@ -25,7 +31,7 @@ class Retriever:
             allow_dangerous_deserialization=True,
         )
 
-        print("✅ Vector Database Loaded Successfully")
+        print("Vector database loaded successfully")
 
     def search(self, query: str, k: int = 5):
         """

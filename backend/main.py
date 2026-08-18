@@ -1,11 +1,13 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 # ==========================
 # Database
 # ==========================
 
-from backend.database.database import Base, engine
+from backend.database.database import Base, engine, DATABASE_URL
 import backend.database.models
 
 # ==========================
@@ -16,11 +18,49 @@ from backend.api.routes.chat import router as chat_router
 from backend.api.routes.auth import router as auth_router
 from backend.api.routes.admin import router as admin_router
 
-# ==========================
-# Create Database Tables
-# ==========================
 
-Base.metadata.create_all(bind=engine)
+def _ensure_runtime_directories():
+    """Create SQLite and vector DB parent folders when needed (e.g. Render)."""
+    if DATABASE_URL.startswith("sqlite:///"):
+        db_path = DATABASE_URL.replace("sqlite:///", "", 1)
+        if db_path and db_path != ":memory:":
+            parent = os.path.dirname(db_path)
+            if parent:
+                os.makedirs(parent, exist_ok=True)
+
+    faiss_path = os.getenv("FAISS_PATH", "storage/vector_db")
+    os.makedirs(faiss_path, exist_ok=True)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    _ensure_runtime_directories()
+    Base.metadata.create_all(bind=engine)
+    yield
+
+
+_DEFAULT_ORIGINS = [
+    "http://localhost",
+    "http://127.0.0.1",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5174",
+    "http://localhost:5175",
+    "http://127.0.0.1:5175",
+    "http://localhost:5176",
+    "http://127.0.0.1:5176",
+    "http://localhost:5177",
+    "http://127.0.0.1:5177",
+]
+
+_extra_origins = os.getenv("ALLOWED_ORIGINS", "")
+ALLOWED_ORIGINS = list(
+    dict.fromkeys(
+        _DEFAULT_ORIGINS
+        + [origin.strip() for origin in _extra_origins.split(",") if origin.strip()]
+    )
+)
 
 # ==========================
 # Create FastAPI App
@@ -28,8 +68,9 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="AI Student Support Chatbot",
-    description="AI-powered Student Support System using RAG + FastAPI + Ollama",
+    description="AI-powered Student Support System using RAG + FastAPI + Groq",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 # ==========================
@@ -38,18 +79,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-        "http://localhost:5175",
-        "http://127.0.0.1:5175",
-        "http://localhost:5176",
-        "http://127.0.0.1:5176",
-        "http://localhost:5177",
-        "http://127.0.0.1:5177",
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
